@@ -1,0 +1,11 @@
+coc
+vim-which-key
+fzf fuzzy finder
+nerdtree
+ranger - file finding
+ueberzug ranger - view images in ranger
+colorizer - css colors
+airline - tabs on top
+startify
+undodir update in settings
+
