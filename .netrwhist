@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =2
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/Users/mgokbulut/.vim/undodir'
 let g:netrw_dirhist_2='/Users/mgokbulut/.config/nvim'
 let g:netrw_dirhist_1='/Users/mgokbulut/Documents/TU-Delft/2nd year/Quarter-2/Algorithms and Data Structures'
 let g:netrw_dirhist_0='/Users/mgokbulut/.config/nvim'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_7='/Users/mgokbulut/Documents/TU-Delft/2nd year/Quarter-2/So
 let g:netrw_dirhist_6='/Users/mgokbulut/Documents/TU-Delft/2nd year/Quarter-2/Software Engineering Methods/op30-sem59/src/main/java/nl/tudelft/sem'
 let g:netrw_dirhist_5='/Users/mgokbulut/Documents/TU-Delft/2nd year/Quarter-2/Software Engineering Methods/op30-sem59/src/main/java/nl/tudelft'
 let g:netrw_dirhist_4='/Users/mgokbulut/Documents/TU-Delft/2nd year/Quarter-2/Software Engineering Methods/op30-sem59/src/main/java/nl'
-let g:netrw_dirhist_3='/Users/mgokbulut/Documents/TU-Delft/2nd year/Quarter-2/Software Engineering Methods/op30-sem59/src/main/java'
