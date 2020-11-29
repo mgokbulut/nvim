@@ -2,3 +2,5 @@ autoload/plugged/*
 undodir/*
 !undodir/.gitkeep
 .netrwhist
+todo.txt
+
