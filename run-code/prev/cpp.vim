@@ -33,7 +33,7 @@ endfunction
 
 command! -nargs=0 CompileAndRun call TermWrapper(printf('g++ -std=c++11 %s && ./a.out', expand('%')))
 command! -nargs=1 CompileAndRunWithFile call TermWrapper(printf('g++ -std=c++11 %s && ./a.out < %s', expand('%'), <args>))
-autocmd FileType cpp nnoremap <F6> :CompileAndRun<CR>
+autocmd FileType cpp nnoremap <F6> :RunCpp<CR>
 
 " For those of you that like to use the default ./a.out
 " This C++ toolkit gives you commands to compile and/or run in different types

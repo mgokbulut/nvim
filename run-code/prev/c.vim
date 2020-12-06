@@ -33,7 +33,7 @@ endfunction
 
 command! -nargs=0 RunC call TermWrapper(printf('gcc -std=c99 %s && ./a.out', expand('%')))
 " command! -nargs=1 CompileAndRunWithFile call TermWrapper(printf('g++ -std=c++11 %s && ./a.out < %s', expand('%'), <args>))
-autocmd FileType c nnoremap <F7> :RunC<CR>
+autocmd FileType c nnoremap <F6> :RunC<CR>
 
 
 " options
