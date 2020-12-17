@@ -33,8 +33,10 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'unblevable/quick-scope'
   " Colorizer
   Plug 'norcalli/nvim-colorizer.lua'
-
-
+  " Start Screen
+  Plug 'mhinz/vim-startify'
+ " See what leader mapped keys do 
+  Plug 'liuchengxu/vim-which-key'
 
 
   " Best Color Scheme ever!!!
@@ -44,6 +46,8 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   " Plug 'scrooloose/NERDTree'
   " Rainbow parenthesis 
   " Plug 'junegunn/rainbow_parentheses.vim'
+  " Sneak (remaps s key)
+  " Plug 'justinmk/vim-sneak'
 call plug#end()
 
 " set Color Scheme

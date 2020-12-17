@@ -1,3 +1,6 @@
+" nnoremap j jzz
+" nnoremap k kzz
+
 " Basic Key Mappings 
 imap <C-h> <C-w>h
 imap <C-j> <C-w>j
@@ -87,6 +90,7 @@ endif
 " Better nav for omnicomplete
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")t
+
 
 " Center when searching
 nnoremap n nzz

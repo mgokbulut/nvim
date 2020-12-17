@@ -40,7 +40,7 @@ function! GetCompileScript() abort
 		if &filetype == 'c'
 		 return "gcc -std=c99 %s && time ./a.out"
 		elseif &filetype == 'cpp'
-			return "g++ -std=c++11 %s && time ./a.out"
+			return "g++ %s && time ./a.out"
 		elseif &filetype == 'java'
 			return "javac %s && time java ".expand('%:t:r')
 		else

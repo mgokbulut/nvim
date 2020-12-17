@@ -1,6 +1,8 @@
 autoload/plugged/*
 undodir/*
 !undodir/.gitkeep
+session/*
+!session/.gitkeep
 .netrwhist
 todo.txt
 
