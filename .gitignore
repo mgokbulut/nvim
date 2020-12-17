@@ -5,4 +5,5 @@ session/*
 !session/.gitkeep
 .netrwhist
 todo.txt
+todo.md
 
