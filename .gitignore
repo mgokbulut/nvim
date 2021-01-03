@@ -6,4 +6,5 @@ session/*
 .netrwhist
 todo.txt
 todo.md
+*.DS_STORE
 

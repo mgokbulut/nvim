@@ -10,10 +10,18 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 
   " Surround (ysiw, cs etc.)
   Plug 'tpope/vim-surround'
+  " Easier commenting
+  Plug 'tpope/vim-commentary'
+  " test vim speed
+  Plug 'tweekmonster/startuptime.vim'
+  " Repeating plugin mappings
+  Plug 'tpope/vim-repeat'
   " Better Syntax Support
   Plug 'sheerun/vim-polyglot'
   " Auto pairs for '(' '[' '{'
   Plug 'jiangmiao/auto-pairs'
+  " Auto close tags 
+  Plug 'alvan/vim-closetag'
   " Stable version of coc
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   " Bunch of pre-made snippets
@@ -33,15 +41,53 @@ call plug#begin('~/.config/nvim/autoload/plugged')
   Plug 'unblevable/quick-scope'
   " Colorizer
   Plug 'norcalli/nvim-colorizer.lua'
-  " Start Screen
-  Plug 'mhinz/vim-startify'
- " See what leader mapped keys do 
+  " See what leader mapped keys do 
   Plug 'liuchengxu/vim-which-key'
+  " vim and tmux navigation integration
+  Plug 'christoomey/vim-tmux-navigator'
+  " smooth ctrl-d, ctrl-u
+  Plug 'psliwka/vim-smoothie'
+  " for tsconfig to work properly
+  Plug 'neoclide/jsonc.vim'
+  " JavaScript support
+  Plug 'pangloss/vim-javascript'    
+  " TypeScript syntax
+  Plug 'HerringtonDarkholme/yats.vim' "heavier
+  " Plug 'leafgarland/typescript-vim' "lighter
+  " JS and JSX syntax
+  Plug 'maxmellon/vim-jsx-pretty'   
+  " dev icons
+  Plug 'ryanoasis/vim-devicons'
+  " shows changes of file on left bar
+  Plug 'mhinz/vim-signify'
+  " View and search LSP symbols, tags
+  Plug 'liuchengxu/vista.vim'
+
+  
+  " Debugging
+  " Plug 'puremourning/vimspector'
+  " Plug 'szw/vim-maximizer'
+  
+  " Wait for neovim 0.5 on mac 
+  " lua dev icons
+  " Plug 'kyazdani42/nvim-web-devicons'
+  " better tab bar
+  " Plug 'romgrk/barbar.nvim'
+  " Status Line
+  " Plug 'glepnir/galaxyline.nvim'
+  " GraphQL syntax
+  " Plug 'jparise/vim-graphql'    
+
+
 
 
   " Best Color Scheme ever!!!
   Plug 'morhetz/gruvbox'
+  " vscode Color Scheme
+  Plug 'tomasiser/vim-code-dark'
   
+  " Start Screen
+  " Plug 'mhinz/vim-startify'
   " File Explorer
   " Plug 'scrooloose/NERDTree'
   " Rainbow parenthesis 
@@ -51,7 +97,11 @@ call plug#begin('~/.config/nvim/autoload/plugged')
 call plug#end()
 
 " set Color Scheme
-colorscheme gruvbox
+colorscheme codedark 
+
+" allow nvim to be transparent
+hi! Normal ctermbg=NONE guibg=NONE 
+hi! NonText ctermbg=NONE guibg=NONE guifg=NONE ctermfg=NONE 
 
 " Automatically install missing plugins on startup
 autocmd VimEnter *

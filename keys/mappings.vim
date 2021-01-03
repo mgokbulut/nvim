@@ -2,10 +2,11 @@
 " nnoremap k kzz
 
 " Basic Key Mappings 
-imap <C-h> <C-w>h
-imap <C-j> <C-w>j
-imap <C-k> <C-w>k
-imap <C-l> <C-w>l
+" imap <C-h> <C-w>h
+" imap <C-j> <C-w>j
+" imap <C-k> <C-w>k
+" imap <C-l> <C-w>l
+
 " g Leader key
 let mapleader=" "
 " let localleader=" "
@@ -50,10 +51,11 @@ nnoremap <silent> <C-c> <Esc>
 " inoremap <silent> <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " Better window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+" nnoremap <C-h> <C-w>h
+" nnoremap <C-j> <C-w>j
+" nnoremap <C-k> <C-w>k
+" nnoremap <C-l> <C-w>l
+" -> tmux-navigator config has updated version
 
 " Terminal window navigation
 tnoremap <C-h> <C-\><C-N><C-w>h
@@ -67,17 +69,12 @@ inoremap <C-l> <C-\><C-N><C-w>l
 tnoremap <Esc> <C-\><C-n>
 
 " Use alt + hjkl to resize windows
-nnoremap <silent> <A-j>    :resize -2<CR>
-nnoremap <silent> <A-k>    :resize +2<CR>
-nnoremap <silent> <A-h>    :vertical resize -2<CR>
-nnoremap <silent> <A-l>    :vertical resize +2<CR>
+" nnoremap <silent> <A-j>    :resize -2<CR>
+" nnoremap <silent> <A-k>    :resize +2<CR>
+" nnoremap <silent> <A-h>    :vertical resize -2<CR>
+" nnoremap <silent> <A-l>    :vertical resize +2<CR>
 
-"nnoremap <silent> <C-Up>    :resize -2<CR>
-"nnoremap <silent> <C-Down>  :resize +2<CR>
-"nnoremap <silent> <C-Left>  :vertical resize -2<CR>
-"nnoremap <silent> <C-Right> :vertical resize +2<CR>
-
-let g:elite_mode=0                      " Disable arrows"
+let g:elite_mode=1  " Disable arrows"
 " Disable arrow movement, resize splits instead.
 if get(g:, 'elite_mode')
   nnoremap <C-Up>    :resize -2<CR>
@@ -89,7 +86,8 @@ endif
 
 " Better nav for omnicomplete
 inoremap <expr> <c-j> ("\<C-n>")
-inoremap <expr> <c-k> ("\<C-p>")t
+inoremap <expr> <c-k> ("\<C-p>")
+
 
 
 " Center when searching
@@ -99,3 +97,5 @@ nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
+
+vnoremap v $h

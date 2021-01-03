@@ -14,12 +14,12 @@ vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 " Create map to add keys to
 let g:which_key_map =  {}
 " Define a separator
-let g:which_key_sep = '?'
+let g:which_key_sep = '→'
 " set timeoutlen=100
 
 " Coc Search & refactor
-nnoremap <leader>? CocSearch <C-R>=expand("<cword>")<CR><CR>
-let g:which_key_map['?'] = 'search word'
+" nnoremap <leader>? CocSearch <C-R>=expand("<cword>")<CR><CR>
+" let g:which_key_map['?'] = 'search word'
 
 " Not a fan of floating windows for this
 let g:which_key_use_floating_win = 0
@@ -36,23 +36,51 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
+nnoremap Q :bp<cr>:bd #<cr>
+" nmap <c-s-t> :vs<bar>:b#<CR>
+
+" open last closed buffer
+function! OpenLastClosed()
+    let last_buf = bufname('#')
+
+    if empty(last_buf)
+        echo "No recently closed buffer found"
+        return
+    endif
+    let result = input("Open ". last_buf . " in (n)ormal (v)split, (t)ab or (s)plit ? (n/v/t/s) : ")
+    if empty(result) || (result !=# 'v' && result !=# 't' && result !=# 's' && result !=# 'n')
+        return
+    endif
+    if result ==# 't'
+        execute 'tabnew'
+    elseif result ==# 'v'
+        execute "vsplit"
+    elseif result ==# 's'
+        execute "split"
+    endif
+    execute 'b ' . last_buf
+endfunction
+
+nnoremap <C-t> :call OpenLastClosed() <CR>
 
 " Single mappings
-let g:which_key_map['/'] = [ ':call Comment()'                                 , 'comment' ]
-let g:which_key_map['.'] = [ ':e $MYVIMRC'                                     , 'open init' ]
+let g:which_key_map['/'] = [ 'gc'                                              , 'comment' ]
+" let g:which_key_map['.'] = [ ':e $MYVIMRC'                                     , 'open init' ]
 let g:which_key_map[';'] = [ ':Commands'                                       , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                                          , 'balance windows' ]
+
 let g:which_key_map['e'] = [ ':CocCommand explorer --toggle --sources=file+'   , 'explorer' ]
-let g:which_key_map['h'] = [ '<C-W>s'                                          , 'split below']
-let g:which_key_map['n'] = [ ':let @/ = ""'                                    , 'no highlight' ]
-let g:which_key_map['o'] = [ ':RnvimrToggle'                                   , 'open' ]
-let g:which_key_map['p'] = [ ':Files'                                          , 'search files' ]
+" let g:which_key_map['h'] = [ '<C-W>s'                                          , 'split below']
+" let g:which_key_map['n'] = [ ':let @/ = ""'                                    , 'no highlight' ]
+" let g:which_key_map['o'] = [ ':RnvimrToggle'                                   , 'open' ]
+" let g:which_key_map['p'] = [ ':Rg'                                             , 'search text' ]
 let g:which_key_map['q'] = [ '<Plug>(coc-fix-current)'                         , 'quickfix' ]
-let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
-let g:which_key_map['u'] = [ ':UndotreeToggle'                                 , 'undo tree']
-let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
-let g:which_key_map['W'] = [ ':call WindowSwap#EasyWindowSwap()'               , 'move window' ]
-let g:which_key_map['z'] = [ 'Goyo'                                            , 'zen' ]
+" let g:which_key_map['T'] = [ ':TSHighlightCapturesUnderCursor'                 , 'treesitter highlight' ]
+" let g:which_key_map['u'] = [ ':UndotreeToggle'                                 , 'undo tree']
+" let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
+" let g:which_key_map['W'] = [ ':call WindowSwap#EasyWindowSwap()'               , 'move window' ]
+let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
+let g:which_key_map['v'] = [ ':Vista!!'                                          , 'vista' ]
 
 " Group mappings
 
@@ -67,12 +95,9 @@ let g:which_key_map.a = {
       \ 'm' : [':MarkdownPreview'        , 'markdown preview'],
       \ 'M' : [':MarkdownPreviewStop'    , 'markdown preview stop'],
       \ 'n' : [':set nonumber!'          , 'line-numbers'],
-      \ 's' : [':s/\%V\(.*\)\%V/"\1"/'   , 'surround'],
+      \ 's' : ['ysi'                     , 'surround'],
       \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
-      \ 't' : [':FloatermToggle'         , 'terminal'],
-      \ 'v' : [':Codi'                   , 'virtual repl on'],
-      \ 'V' : [':Codi!'                  , 'virtual repl off'],
-      \ 'w' : [':StripWhitespace'        , 'strip whitespace'],
+      \ 'g' : [':SignifyToggle'          , 'signify'],
       \ }
 
 " b is for buffer
@@ -92,13 +117,12 @@ let g:which_key_map.b = {
       \ '0' : [':BufferGoto 0'          , 'buffer 0'],
       \ 'b' : [':BufferPick'            , 'pick buffer'],
       \ 'd' : [':Bdelete'               , 'delete-buffer'],
-      \ 'D' : [':BufferOrderByDirectory', 'order by directory'],
-      \ 'f' : ['bfirst'                 , 'first-buffer'],
-      \ 'l' : ['blast'                  , 'last buffer'],
-      \ 'L' : [':BufferOrderByLanguage' , 'order by language'],
-      \ 'n' : ['bnext'                  , 'next-buffer'],
       \ 'p' : ['bprevious'              , 'previous-buffer'],
       \ '?' : ['Buffers'                , 'fzf-buffer'],
+      \ 'h' : [':vertical resize -5'    , 'resize ←'],
+      \ 'j' : [':res -5'                , 'resize ↓'],
+      \ 'k' : [':res +5'                , 'resize ↑'],
+      \ 'l' : [':vertical resize +5'    , 'resize →'],
       \ }
 
 " d is for debug
@@ -119,71 +143,41 @@ let g:which_key_map.d = {
       \ }
 
 " f is for find and replace
-let g:which_key_map.f = {
-      \ 'name' : '+find & replace' ,
-      \ 'f' : [':Farr --source=vimgrep'    , 'file'],
-      \ 'p' : [':Farr --source=rgnvim'     , 'project'],
-      \ }
+" let g:which_key_map.f = {
+"       \ 'name' : '+find & replace' ,
+"       \ 'f' : [':Farr --source=vimgrep'    , 'file'],
+"       \ 'p' : [':Farr --source=rgnvim'     , 'project'],
+"       \ }
 
 " k is for task
-let g:which_key_map.k = {
-      \ 'name' : '+task' ,
-      \ 'c' : [':AsyncTask file-compile'      , 'compile file'],
-      \ 'b' : [':AsyncTask project-build'     , 'build project'],
-      \ 'e' : [':AsyncTaskEdit'               , 'edit local tasks'],
-      \ 'f' : [':AsyncTaskFzf'                , 'find task'],
-      \ 'g' : [':AsyncTaskEdit!'              , 'edit global tasks'],
-      \ 'h' : [':AsyncTaskList!'              , 'list hidden tasks'],
-      \ 'l' : [':CocList tasks'               , 'list tasks'],
-      \ 'm' : [':AsyncTaskMacro'              , 'macro help'],
-      \ 'o' : [':copen'                       , 'open task view'],
-      \ 'r' : [':AsyncTask file-run'          , 'run file'],
-      \ 'p' : [':AsyncTask project-run'       , 'run project'],
-      \ 'x' : [':cclose'                      , 'close task view'],
-      \ }
+" let g:which_key_map.k = {
+"       \ 'name' : '+task' ,
+"       \ 'c' : [':AsyncTask file-compile'      , 'compile file'],
+"       \ 'b' : [':AsyncTask project-build'     , 'build project'],
+"       \ 'e' : [':AsyncTaskEdit'               , 'edit local tasks'],
+"       \ 'f' : [':AsyncTaskFzf'                , 'find task'],
+"       \ 'g' : [':AsyncTaskEdit!'              , 'edit global tasks'],
+"       \ 'h' : [':AsyncTaskList!'              , 'list hidden tasks'],
+"       \ 'l' : [':CocList tasks'               , 'list tasks'],
+"       \ 'm' : [':AsyncTaskMacro'              , 'macro help'],
+"       \ 'o' : [':copen'                       , 'open task view'],
+"       \ 'r' : [':AsyncTask file-run'          , 'run file'],
+"       \ 'p' : [':AsyncTask project-run'       , 'run project'],
+"       \ 'x' : [':cclose'                      , 'close task view'],
+"       \ }
       " \ 'l' : [':AsyncTaskList'               , 'list tasks'],
 
 " m is for mark
-let g:which_key_map.m = {
-      \ 'name' : '+mark' ,
-      \ 'c' : [':CocCommand bookmark.clearForCurrentFile', 'clear file'],
-      \ 'C' : [':CocCommand bookmark.clearForAllFiles', 'clear project'],
-      \ 'j' : [':CocCommand bookmark.next', 'next bookmark'],
-      \ 'k' : [':CocCommand bookmark.prev', 'prev bookmark'],
-      \ 't' : [':CocCommand bookmark.toggle', 'toggle bookmark'],
-      \ }
+" let g:which_key_map.m = {
+"       \ 'name' : '+mark' ,
+"       \ 'c' : [':CocCommand bookmark.clearForCurrentFile', 'clear file'],
+"       \ 'C' : [':CocCommand bookmark.clearForAllFiles', 'clear project'],
+"       \ 'j' : [':CocCommand bookmark.next', 'next bookmark'],
+"       \ 'k' : [':CocCommand bookmark.prev', 'prev bookmark'],
+"       \ 't' : [':CocCommand bookmark.toggle', 'toggle bookmark'],
+"       \ }
       " CoC throws an error
       " \ 'a' : [':CocCommand bookmark.annotate', 'annotate bookmark'],
-
-" " s is for search
-" let g:which_key_map.s = {
-"       \ 'name' : '+search' ,
-"       \ '/' : [':History/'              , 'history'],
-"       \ ';' : [':Commands'              , 'commands'],
-"       \ 'a' : [':Ag'                    , 'text Ag'],
-"       \ 'b' : [':BLines'                , 'current buffer'],
-"       \ 'B' : [':Buffers'               , 'open buffers'],
-"       \ 'c' : [':Commits'               , 'commits'],
-"       \ 'C' : [':BCommits'              , 'buffer commits'],
-"       \ 'f' : [':Files'                 , 'files'],
-"       \ 'g' : [':GFiles'                , 'git files'],
-"       \ 'G' : [':GFiles?'               , 'modified git files'],
-"       \ 'h' : [':History'               , 'file history'],
-"       \ 'H' : [':History:'              , 'command history'],
-"       \ 'l' : [':Lines'                 , 'lines'] ,
-"       \ 'm' : [':Marks'                 , 'marks'] ,
-"       \ 'M' : [':Maps'                  , 'normal maps'] ,
-"       \ 'p' : [':Helptags'              , 'help tags'] ,
-"       \ 'P' : [':Tags'                  , 'project tags'],
-"       \ 's' : [':CocList snippets'      , 'snippets'],
-"       \ 'S' : [':Colors'                , 'color schemes'],
-"       \ 't' : [':Rg'                    , 'text Rg'],
-"       \ 'T' : [':BTags'                 , 'buffer tags'],
-"       \ 'w' : [':Windows'               , 'search windows'],
-"       \ 'y' : [':Filetypes'             , 'file types'],
-"       \ 'z' : [':FZF'                   , 'FZF'],
-"       \ }
-      " \ 's' : [':Snippets'     , 'snippets'],
 
 " s is for search
 let g:which_key_map.s = {
@@ -227,14 +221,14 @@ let g:which_key_map.s = {
 " $FZF_PREVIEW_PREVIEW_BAT_THEME = 'ansi-dark'
 " 
 
-let g:which_key_map.S = {
-      \ 'name' : '+Session' ,
-      \ 'c' : [':SClose'          , 'Close Session']  ,
-      \ 'd' : [':SDelete'         , 'Delete Session'] ,
-      \ 'l' : [':SLoad'           , 'Load Session']     ,
-      \ 's' : [':Startify'        , 'Start Page']     ,
-      \ 'S' : [':SSave'           , 'Save Session']   ,
-      \ }
+" let g:which_key_map.S = {
+"       \ 'name' : '+Session' ,
+"       \ 'c' : [':SClose'          , 'Close Session']  ,
+"       \ 'd' : [':SDelete'         , 'Delete Session'] ,
+"       \ 'l' : [':SLoad'           , 'Load Session']     ,
+"       \ 's' : [':Startify'        , 'Start Page']     ,
+"       \ 'S' : [':SSave'           , 'Save Session']   ,
+"       \ }
 
 " g is for git
 let g:which_key_map.g = {
@@ -271,18 +265,18 @@ let g:which_key_map.g = {
 " 
 " 
 
-let g:which_key_map.G = {
-      \ 'name' : '+gist' ,
-      \ 'a' : [':Gist -a'                          , 'post gist anon'],
-      \ 'b' : [':Gist -b'                          , 'post gist browser'],
-      \ 'd' : [':Gist -d'                          , 'delete gist'],
-      \ 'e' : [':Gist -e'                          , 'edit gist'],
-      \ 'l' : [':Gist -l'                          , 'list public gists'],
-      \ 's' : [':Gist -ls'                         , 'list starred gists'],
-      \ 'm' : [':Gist -m'                          , 'post gist all buffers'],
-      \ 'p' : [':Gist -P'                          , 'post public gist '],
-      \ 'P' : [':Gist -p'                          , 'post private gist '],
-      \ }
+" let g:which_key_map.G = {
+"       \ 'name' : '+gist' ,
+"       \ 'a' : [':Gist -a'                          , 'post gist anon'],
+"       \ 'b' : [':Gist -b'                          , 'post gist browser'],
+"       \ 'd' : [':Gist -d'                          , 'delete gist'],
+"       \ 'e' : [':Gist -e'                          , 'edit gist'],
+"       \ 'l' : [':Gist -l'                          , 'list public gists'],
+"       \ 's' : [':Gist -ls'                         , 'list starred gists'],
+"       \ 'm' : [':Gist -m'                          , 'post gist all buffers'],
+"       \ 'p' : [':Gist -P'                          , 'post public gist '],
+"       \ 'P' : [':Gist -p'                          , 'post private gist '],
+"       \ }
 
 " l is for language server protocol
 let g:which_key_map.l = {
@@ -324,21 +318,35 @@ let g:which_key_map.l = {
       " \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
 
 " t is for terminal
+" let g:which_key_map.t = {
+"       \ 'name' : '+terminal' ,
+"       \ ';' : [':FloatermNew --wintype=normal --height=6'        , 'terminal'],
+"       \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
+"       \ 'g' : [':FloatermNew lazygit'                           , 'git'],
+"       \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
+"       \ 'n' : [':FloatermNew node'                              , 'node'],
+"       \ 'N' : [':FloatermNew nnn'                               , 'nnn'],
+"       \ 'p' : [':FloatermNew python'                            , 'python'],
+"       \ 'm' : [':FloatermNew lazynpm'                           , 'npm'],
+"       \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
+"       \ 't' : [':FloatermToggle'                                , 'toggle'],
+"       \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
+"       \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
+"       \ }
+
 let g:which_key_map.t = {
-      \ 'name' : '+terminal' ,
-      \ ';' : [':FloatermNew --wintype=normal --height=6'        , 'terminal'],
-      \ 'f' : [':FloatermNew fzf'                               , 'fzf'],
-      \ 'g' : [':FloatermNew lazygit'                           , 'git'],
-      \ 'd' : [':FloatermNew lazydocker'                        , 'docker'],
-      \ 'n' : [':FloatermNew node'                              , 'node'],
-      \ 'N' : [':FloatermNew nnn'                               , 'nnn'],
-      \ 'p' : [':FloatermNew python'                            , 'python'],
-      \ 'm' : [':FloatermNew lazynpm'                           , 'npm'],
-      \ 'r' : [':FloatermNew ranger'                            , 'ranger'],
-      \ 't' : [':FloatermToggle'                                , 'toggle'],
-      \ 'y' : [':FloatermNew ytop'                              , 'ytop'],
-      \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
-      \ }
+			\ 'name' : '+Tabs' ,
+			\ 'c' : [':tabclose' , 'Close Tab'],
+			\ 'e' : [':tabedit' , 'New Tab'],
+			\ 'E' : [':tabedit %' , 'New Tab of Current File '],
+			\ 'o' : [':tabonly' , 'Close Other Tab'],
+			\ 'n' : [':tabnext' , 'Next Tab'],
+			\ 'p' : [':tabprevious' , 'Previous Tab'],
+			\ 't' : [':CtrlSpaceTabLabel' , 'Tab Label'],
+			\ 'r' : [':tabrewind' , 'Rewind Tab'],
+			\ 'f' : [':tabfirst' , 'First Tab'],
+			\ 'l' : [':tablast' , 'Last Tab'],
+    \ }
 
 " w is for wiki
 " let g:which_key_map.w = {

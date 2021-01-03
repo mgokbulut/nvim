@@ -3,7 +3,7 @@
 " Make Ranger replace netrw and be the file explorer
 "let g:rnvimr_ex_enable = 1
 
-nmap <space>r :RnvimrToggle<CR>
+" nmap <space>r :RnvimrToggle<CR>
 
 " Make Ranger replace Netrw and be the file explorer
 let g:rnvimr_enable_ex = 1
