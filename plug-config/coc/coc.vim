@@ -220,7 +220,10 @@ let g:coc_explorer_global_presets = {
 " nmap <space>f :CocCommand explorer --preset floating<CR> " explorer in the
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | q | endif
 
+" Commands
 command! -nargs=0 Prettier :CocCommand prettier.formatFile
+command! -nargs=0 OrganiseImports :CocCommand tsserver.organizeImports
+command! -nargs=0 FixAllImports :CocCommand tsserver.executeAutofix
 
 " enable json to use comments
 augroup JsonToJsonc

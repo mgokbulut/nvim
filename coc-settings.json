@@ -13,16 +13,22 @@
   "prettier.disableLanguages": [],*/
 
   // diagnostics
-  "diagnostic.errorSign": "ⓧ",
-  "diagnostic.warningSign": "⚠",
-  "diagnostic.infoSign": "ⓘ",
-  "diagnostic.hintSign": "☆",
+  /* "diagnostic.errorSign": " ", */
+  /* "diagnostic.warningSign": " ", */
+  /* "diagnostic.infoSign": "", */
+  /* "diagnostic.hintSign": " ", */
+  /* "diagnostic.errorSign": "❌", */
+  /* "diagnostic.errorSign": "ⓧ", */
+  /* "diagnostic.warningSign": "⚠", */
+  /* "diagnostic.infoSign": "ⓘ", */
+  /* "diagnostic.hintSign": "☆", */
 
   // codelens
   "codeLens.enable": true,
   "java.referencesCodeLens.enabled": true,
   "java.implementationsCodeLens.enabled": true,
   "java.completion.enabled": true,
+  /* "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar", */
 
   // list
   "list.indicator": ">",
@@ -66,7 +72,7 @@
   //"snippets.userSnippetsDirectory": "~/.config/nvim/snips",
 
   // explorer
-  "explorer.width": 35,
+  "explorer.width": 25,
   "explorer.file.root.template": "[icon] [git] [hidden & 1][root]",
   "explorer.icon.enableNerdfont": true,
   "explorer.previewAction.onHover": false,
@@ -100,5 +106,6 @@
     "cpp",
     "java"
   ],
-  "clangd.path": "/Users/mgokbulut/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd",
+
+  "clangd.path": "/Users/mgokbulut/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd"
 }

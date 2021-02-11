@@ -2,6 +2,9 @@
 
 let @s = 'veS"'
 
+" Open finder
+command! Finder silent exe '!open ' . expand("%:p:h")
+
 " Timeout
 let g:which_key_timeout = 100
 
@@ -36,7 +39,11 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
+" Close buffer without exitting neovim
 nnoremap Q :bp<cr>:bd #<cr>
+" automatically remove trailing whitespaces
+autocmd BufWritePre * %s/\s\+$//e
+
 " nmap <c-s-t> :vs<bar>:b#<CR>
 
 " open last closed buffer
@@ -80,24 +87,59 @@ let g:which_key_map['q'] = [ '<Plug>(coc-fix-current)'                         ,
 " let g:which_key_map['v'] = [ '<C-W>v'                                          , 'split right']
 " let g:which_key_map['W'] = [ ':call WindowSwap#EasyWindowSwap()'               , 'move window' ]
 let g:which_key_map['r'] = [ ':RnvimrToggle'                                   , 'ranger' ]
-let g:which_key_map['v'] = [ ':Vista!!'                                          , 'vista' ]
+let g:which_key_map['v'] = [ ':Vista!!'                                        , 'vista' ]
 
 " Group mappings
+
+nmap <leader>1 <Plug>AirlineSelectTab1
+let g:which_key_map.1 = 'which_key_ignore'
+nmap <leader>2 <Plug>AirlineSelectTab2
+let g:which_key_map.2 = 'which_key_ignore'
+nmap <leader>3 <Plug>AirlineSelectTab3
+let g:which_key_map.3 = 'which_key_ignore'
+nmap <leader>4 <Plug>AirlineSelectTab4
+let g:which_key_map.4 = 'which_key_ignore'
+nmap <leader>5 <Plug>AirlineSelectTab5
+let g:which_key_map.5 = 'which_key_ignore'
+nmap <leader>6 <Plug>AirlineSelectTab6
+let g:which_key_map.6 = 'which_key_ignore'
+nmap <leader>7 <Plug>AirlineSelectTab7
+let g:which_key_map.7 = 'which_key_ignore'
+nmap <leader>8 <Plug>AirlineSelectTab8
+let g:which_key_map.8 = 'which_key_ignore'
+nmap <leader>9 <Plug>AirlineSelectTab9
+let g:which_key_map.9 = 'which_key_ignore'
+
 
 " a is for actions
 let g:which_key_map.a = {
       \ 'name' : '+actions' ,
-      \ 'c' : [':ColorizerToggle'        , 'colorizer'],
-      \ 'e' : [':CocCommand explorer'    , 'explorer'],
-      \ 'h' : [':let @/ = ""'            , 'remove search highlight'],
-      \ 'l' : [':Bracey'                 , 'start live server'],
-      \ 'L' : [':BraceyStop'             , 'stop live server'],
-      \ 'm' : [':MarkdownPreview'        , 'markdown preview'],
-      \ 'M' : [':MarkdownPreviewStop'    , 'markdown preview stop'],
-      \ 'n' : [':set nonumber!'          , 'line-numbers'],
-      \ 's' : ['ysi'                     , 'surround'],
-      \ 'r' : [':set norelativenumber!'  , 'relative line nums'],
-      \ 'g' : [':SignifyToggle'          , 'signify'],
+      \ 'C' : [':ColorizerToggle'                                       , 'colorizer'],
+      \ 'f' : [':Finder'                                                , 'open in finder'],
+      \ 'o' : [':Finder'                                                , 'open in finder'],
+      \ 'e' : [':CocCommand explorer'                                   , 'explorer'],
+      \ 'h' : [':let @/ = ""'                                           , 'remove search highlight'],
+      \ 'l' : [':Bracey'                                                , 'start live server'],
+      \ 'L' : [':BraceyStop'                                            , 'stop live server'],
+      \ 'm' : [':MarkdownPreview'                                       , 'markdown preview'],
+      \ 'M' : [':MarkdownPreviewStop'                                   , 'markdown preview stop'],
+      \ 'n' : [':set nonumber!'                                         , 'line-numbers'],
+      \ 's' : ['ysi'                                                    , 'surround'],
+      \ 'r' : [':set norelativenumber!'                                 , 'relative line nums'],
+      \ 'g' : [':SignifyToggle'                                         , 'signify'],
+      \ 'w' : [':<C-u>silent! keeppatterns %substitute/\s\+$//e<CR>'    , 'remove whitespace'],
+      \ }
+
+let g:which_key_map.a.c = {
+      \ 'name' : '+Colorschemes' ,
+      \ '1' : [':call ChangeColorscheme(1) | sleep 100ms | call ChangeColorscheme(1)'       , 'gruvbox'],
+      \ '2' : [':call ChangeColorscheme(2) | sleep 100ms | call ChangeColorscheme(2)'       , 'codedark'],
+      \ '3' : [':call ChangeColorscheme(3) | sleep 100ms | call ChangeColorscheme(3)'       , 'aurora'],
+      \ '4' : [':call ChangeColorscheme(4) | sleep 100ms | call ChangeColorscheme(4)'       , 'palenight'],
+      \ '5' : [':call ChangeColorscheme(5) | sleep 100ms | call ChangeColorscheme(5)'       , 'nord'],
+      \ '6' : [':call ChangeColorscheme(6) | sleep 100ms | call ChangeColorscheme(6)'       , 'dracula'],
+      \ '7' : [':call ChangeColorscheme(7) | sleep 100ms | call ChangeColorscheme(7)'       , 'onedark'],
+      \ '8' : [':call ChangeColorscheme(8) | sleep 100ms | call ChangeColorscheme(8)'       , 'snazzy'],
       \ }
 
 " b is for buffer
@@ -209,7 +251,7 @@ let g:which_key_map.s = {
       \ 'y' : [':Filetypes'             , 'file types'],
       \ 'z' : [':FZF'                   , 'FZF'],
       \ }
-" 
+"
 " :CocCommand fzf-preview.AllBuffers
 " :CocCommand fzf-preview.Changes
 " :CocCommand fzf-preview.Yankround
@@ -219,7 +261,7 @@ let g:which_key_map.s = {
 " :CocCommand fzf-preview.CocTypeDefinitions
 " \ 'l' : [':CocCommand fzf-preview.Bookmarks', 'list bookmarks'],
 " $FZF_PREVIEW_PREVIEW_BAT_THEME = 'ansi-dark'
-" 
+"
 
 " let g:which_key_map.S = {
 "       \ 'name' : '+Session' ,
@@ -261,9 +303,9 @@ let g:which_key_map.g = {
       \ }
       " \ 'A' : [':Git add %'                        , 'add current'],
       " \ 'S' : [':!git status'                      , 'status'],
-" 
-" 
-" 
+"
+"
+"
 
 " let g:which_key_map.G = {
 "       \ 'name' : '+gist' ,
@@ -334,19 +376,19 @@ let g:which_key_map.l = {
 "       \ 's' : [':FloatermNew ncdu'                              , 'ncdu'],
 "       \ }
 
-let g:which_key_map.t = {
-			\ 'name' : '+Tabs' ,
-			\ 'c' : [':tabclose' , 'Close Tab'],
-			\ 'e' : [':tabedit' , 'New Tab'],
-			\ 'E' : [':tabedit %' , 'New Tab of Current File '],
-			\ 'o' : [':tabonly' , 'Close Other Tab'],
-			\ 'n' : [':tabnext' , 'Next Tab'],
-			\ 'p' : [':tabprevious' , 'Previous Tab'],
-			\ 't' : [':CtrlSpaceTabLabel' , 'Tab Label'],
-			\ 'r' : [':tabrewind' , 'Rewind Tab'],
-			\ 'f' : [':tabfirst' , 'First Tab'],
-			\ 'l' : [':tablast' , 'Last Tab'],
-    \ }
+" let g:which_key_map.t = {
+" 			\ 'name' : '+Tabs' ,
+" 			\ 'c' : [':tabclose' , 'Close Tab'],
+" 			\ 'e' : [':tabedit' , 'New Tab'],
+" 			\ 'E' : [':tabedit %' , 'New Tab of Current File '],
+" 			\ 'o' : [':tabonly' , 'Close Other Tab'],
+" 			\ 'n' : [':tabnext' , 'Next Tab'],
+" 			\ 'p' : [':tabprevious' , 'Previous Tab'],
+" 			\ 't' : [':CtrlSpaceTabLabel' , 'Tab Label'],
+" 			\ 'r' : [':tabrewind' , 'Rewind Tab'],
+" 			\ 'f' : [':tabfirst' , 'First Tab'],
+" 			\ 'l' : [':tablast' , 'Last Tab'],
+"     \ }
 
 " w is for wiki
 " let g:which_key_map.w = {

@@ -20,7 +20,7 @@ vnoremap > >gv
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
 
-" I hate escape more than anything else
+" Escape remaps
 inoremap jk <Esc>
 inoremap kj <Esc>
 inoremap jf <Esc>
@@ -75,20 +75,27 @@ tnoremap <Esc> <C-\><C-n>
 " nnoremap <silent> <A-l>    :vertical resize +2<CR>
 
 let g:elite_mode=1  " Disable arrows"
-" Disable arrow movement, resize splits instead.
 if get(g:, 'elite_mode')
+" Disable arrow movement, resize splits instead.
   nnoremap <C-Up>    :resize -2<CR>
   nnoremap <C-Down>  :resize +2<CR>
   nnoremap <C-Left>  :vertical resize -2<CR>
   nnoremap <C-Right> :vertical resize +2<CR>
+  " Disable arrow keys in normal mode
+  nnoremap <Left>  :echoe "Use h"<CR>
+  nnoremap <Right> :echoe "Use l"<CR>
+  nnoremap <Up>    :echoe "Use k"<CR>
+  nnoremap <Down>  :echoe "Use j"<CR>
+  " Disable arrow keys in elite mode
+  inoremap <Left>  <ESC>:echoe "Use h"<CR>
+  inoremap <Right> <ESC>:echoe "Use l"<CR>
+  inoremap <Up>    <ESC>:echoe "Use k"<CR>
+  inoremap <Down>  <ESC>:echoe "Use j"<CR>
 endif
-
 
 " Better nav for omnicomplete
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
-
-
 
 " Center when searching
 nnoremap n nzz
@@ -98,4 +105,17 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+" vv to select line to the end
 vnoremap v $h
+
+" Use backspace key for matching parens
+nmap <BS> %
+xmap <BS> %
+"
+" Allow misspellings
+cnoreabbrev qw wq
+cnoreabbrev Wq wq
+cnoreabbrev WQ wq
+cnoreabbrev Qa qa
+cnoreabbrev Bd bd
+cnoreabbrev bD bd

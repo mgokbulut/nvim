@@ -71,8 +71,8 @@ function! TermWrapper(command) abort
 endfunction
 
 command! -nargs=0 GetCompileScript call GetCompileScript()
-command! -nargs=0 CompileAndRun call TermWrapper(printf(GetCompileScript(), expand('%'))) 
-command! -nargs=1 CompileAndRunWithArguments call TermWrapper(printf(GetCompileScript()." %s", expand('%'), <args>)) 
+command! -nargs=0 CompileAndRun call TermWrapper(printf(GetCompileScript(), expand('%')))
+command! -nargs=1 CompileAndRunWithArguments call TermWrapper(printf(GetCompileScript()." %s", expand('%'), <args>))
 " command! -nargs=0 RunC call TermWrapper(printf('gcc -std=c99 %s && ./a.out', expand('%')))
 " command! -nargs=1 CompileAndRunWithFile call TermWrapper(printf('g++ -std=c++11 %s && ./a.out < %s', expand('%'), <args>))
 autocmd FileType c    nnoremap <F6> :CompileAndRun<CR>
@@ -88,5 +88,5 @@ let g:split_term_style = 'vertical'
 " add a custom command to resize the terminal window to your preference
 " (default is to split the screen equally)
 let g:split_term_resize_cmd = 'vertical resize 40'
-" (or let g:split_term_resize_cmd = 'vertical resize 40') 
+" (or let g:split_term_resize_cmd = 'vertical resize 40')
 

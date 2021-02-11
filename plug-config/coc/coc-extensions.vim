@@ -23,5 +23,6 @@ let g:coc_global_extensions = [
   \ 'coc-yaml',
   \ 'coc-yank',
   \ 'coc-json',
+  \ 'coc-metals',
   \ 'coc-marketplace',
   \ ]

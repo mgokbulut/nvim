@@ -24,6 +24,7 @@
   source  $HOME/.config/nvim/plug-config/vista.vim
   source  $HOME/.config/nvim/plug-config/signify.vim
   luafile $HOME/.config/nvim/lua/plug-colorizer.lua
+  source  $HOME/.config/nvim/plug-config/color-scheme.vim
 " luafile $HOME/.config/nvim/lua/galaxy-line.lua
 " source  $HOME/.config/nvim/plug-config/barbar.vim
 " source  $HOME/.config/nvim/plug-config/start-screen.vim
@@ -33,6 +34,6 @@
   source  $HOME/.config/nvim/run-code/compile-and-run.vim
 " source  $HOME/.config/nvim/run-code/cpp.vim
 " source  $HOME/.config/nvim/run-code/c.vim
-  
+
 " use :Startuptime to test the speed
 " currently around 22, aim -> aruond 11

@@ -4,18 +4,19 @@ set formatoptions-=cro                  " Stop newline continution of comments
 syntax enable                           " Enables syntax highlighing
 set hidden                              " Required to keep multiple buffers open multiple buffers
 set nowrap                              " Display long lines as just one line
-set whichwrap+=<,>,[,],h,l             " when you press l at the end of the line, it wont to to the next line
+" set whichwrap+=<,>,[,],h,l              " when you press l at the end of the line, it will to to the next line
 set encoding=utf-8                      " The encoding displayed
+set nohlsearch                          " Set no highlighting while searching
 " set pumheight=10                      " Makes popup menu smaller
 set fileencoding=utf-8                  " The encoding written to file
-set ruler              			            " Show the cursor position all the time
+set ruler             		            " Show the cursor position all the time
 set cmdheight=2                         " More space for displaying messages
 set mouse=a                             " Enable your mouse
 set splitbelow                          " Horizontal splits will automatically be below
 set splitright                          " Vertical splits will automatically be to the right
 set t_Co=256                            " Support 256 colors
 " set conceallevel=0                    " So that I can see `` in markdown files
-set tabstop=4 softtabstop=4             " Insert 2 spaces for a tab
+set tabstop=4 softtabstop=4             " Insert 4 spaces for a tab
 set shiftwidth=4                        " Change the number of space characters inserted for indentation
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab                           " Converts tabs to spaces
@@ -40,8 +41,10 @@ set incsearch                           " incremental search
 set termguicolors                       " makes colorizer.lua work
 set nocompatible
 " set guifont=Fira\ Code:h12
-set scrolloff=6 " Keep 3 lines below and above the cursor
+set scrolloff=10 " Keep 8 lines below and above the cursor
 " set guifont=JetBrainsMono\ Nerd\ Font
+set cursorline                          " highlights the cursor line
+"set nocursorline
 
 " New stuff
 " set notimeout nottimeout
@@ -56,8 +59,14 @@ set backspace=eol,start,indent
 " set autochdir                           " Your working directory will always be the same as your working directory
 " set foldcolumn=2                        " Folding abilities
 
+filetype on
+filetype indent on
+filetype plugin on
+
 " au! BufWritePost $MYVIMRC source %      " auto source when writing to init.vm alternatively you can run :source $MYVIMRC
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" au bufread,bufnewfile *.md setlocal textwidth=80
+au BufRead,BufNewFile *.txt setlocal textwidth=80 " to reformat visual mode + gq
 
 " You can't stop me - allows to write files with no permission (aka sudo)
-" cmap w!! w !sudo tee % 
+" cmap w!! w !sudo tee %

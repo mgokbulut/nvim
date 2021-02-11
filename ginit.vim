@@ -1,2 +1,2 @@
-" call rpcnotify(1, 'Gui', 'Font', 'Fira Code')
+call rpcnotify(1, 'Gui', 'Font', 'Fira Code')
 
