@@ -90,3 +90,22 @@ let g:split_term_style = 'vertical'
 let g:split_term_resize_cmd = 'vertical resize 40'
 " (or let g:split_term_resize_cmd = 'vertical resize 40')
 
+
+
+
+" TODO this is a better and easier way to achieve this!
+" augroup exe_code
+" 	autocmd!
+
+" 	" execute python code
+" 	autocmd FileType python nnoremap <buffer> <localleader>r
+" 				\ :sp<CR> :term python3 %<CR> :startinsert<CR>
+
+" 	" execute javascript code
+" 	autocmd FileType javascript nnoremap <buffer> <localleader>r
+" 				\ :sp<CR> :term node %<CR> :startinsert<CR>
+
+" 	" execute bash code
+" 	autocmd FileType bash,sh nnoremap <buffer> <localleader>r
+" 				\ :sp<CR> :term bash %<CR> :startinsert<CR>
+" augroup END
