@@ -71,3 +71,6 @@ au BufRead,BufNewFile *.txt setlocal textwidth=80 " to reformat visual mode + gq
 
 " You can't stop me - allows to write files with no permission (aka sudo)
 " cmap w!! w !sudo tee %
+
+" double slash gets rid of the highligting after search
+nnoremap // :noh<return>
