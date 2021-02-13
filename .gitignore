@@ -1,0 +1,7 @@
+todo.md
+.netrwhist
+*.DS_STORE
+autoload/*
+undodir/*
+session/*
+*.sh
