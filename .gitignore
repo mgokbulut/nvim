@@ -3,5 +3,6 @@ todo.md
 *.DS_STORE
 autoload/*
 undodir/*
+backupdir/*
 session/*
 *.sh
