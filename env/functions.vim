@@ -15,3 +15,22 @@ augroup highlight_yank
         autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
     endif
 augroup END
+
+" ===============================================================================
+
+" Clear cmd line message
+function! s:empty_message(timer)
+  if mode() ==# 'n'
+    echon ''
+  endif
+endfunction
+
+augroup cmd_msg_cls
+    autocmd!
+    autocmd CmdlineLeave :  call timer_start(4000, funcref('s:empty_message'))
+augroup END " Hide status line
+
+" ===============================================================================
+
+" make sure the python indenting is fixed
+autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab

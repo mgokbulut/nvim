@@ -55,6 +55,8 @@ nnoremap <leader>e :CocCommand explorer --toggle --sources=buffer+,file+<CR>
 let g:indentLine_fileTypeExclude = ['coc-explorer']
 
 " autocmd BufEnter *coc-explorer* :!ls
+autocmd BufEnter *coc-explorer* set cursorline
+autocmd BufLeave *coc-explorer* set nocursorline
 
 " quit explorer if thats the only buffer left
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | quit | endif

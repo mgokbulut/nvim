@@ -1,15 +1,23 @@
-" for f in split(glob('~/.config/nvim/env/*.vim'), '\n')
-"     exe 'source' f
-" endfor
+let g:plugins_enabled=1
+let g:lua_enabled=1
 
 source $HOME/.config/nvim/env/settings.vim
 source $HOME/.config/nvim/env/mappings.vim
 source $HOME/.config/nvim/env/functions.vim
 source $HOME/.config/nvim/env/plugins.vim
 
+" for f in split(glob('~/.config/nvim/env/*.vim'), '\n')
+"     exe 'source' f
+" endfor
 
-" /Users/mgokbulut/.local/share/nvim/rplugin.vim => plugin sync
-" currently fzf is commented to improve performance. about 10ms increase
+
+" ==========================================================
+" ========== APPLICATION - PLUGIN SYNCRONIZATION ===========
+" ==========================================================
+
+" /Users/mgokbulut/.local/share/nvim/rplugin.vim
+" currently fzf is commented to improve performance.
+" PERFORMANCE INCREASE: about 10ms increase
 
 " ==========================================================
 "  ___        __

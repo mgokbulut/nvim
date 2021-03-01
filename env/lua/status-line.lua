@@ -1,5 +1,6 @@
+-- https://www.reddit.com/r/neovim/comments/ff9m74/customize_your_status_line_using_lua/
 local api = vim.api
-local icons = require 'devicon'
+local icons = require './env/lua/devicon'
 local M = {}
 
 -- Different colors for mode

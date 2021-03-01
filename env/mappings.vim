@@ -46,8 +46,20 @@ nnoremap g# g#zz
 " autocenter when entering insert mode
 " autocmd InsertEnter * norm zz
 
-" vv to select line to the end
-vnoremap v $h
+" Close buffer without exitting neovim
+nnoremap Q :bp<cr>:bd #<cr>
+
+" Make visual mode consistent with other settings
+vnoremap v <ESC>V
+nnoremap V v$h
+
+" Y to copy till end of the line
+nnoremap Y v$hy
+
+" autoclose parenthesis
+inoremap { {}<ESC>i
+inoremap { {}<ESC>i
+inoremap { {}<ESC>i
 
 " Use backspace key for matching parens
 nmap <BS> %
@@ -72,9 +84,6 @@ nnoremap S :%s//gI<Left><Left><Left>
 " Open finder
 command! Finder silent exe '!open ' . expand("%:p:h")
 
-" Timeout
-let g:which_key_timeout = 100
-let g:which_key_display_names = {'<CR>': '?', '<TAB>': '?'}
 
 " map <silent><leader>s :setlocal spell spelllang=en_us<CR>
 

@@ -6,3 +6,4 @@ undodir/*
 backupdir/*
 session/*
 *.sh
+trash/*

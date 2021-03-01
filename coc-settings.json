@@ -17,8 +17,9 @@
   "explorer.previewAction.onHover": false,
   "explorer.keyMappings.global": {
     "s": "open:vsplit",
-    "mm": "rename",
-    "mc": "copyFile",
+    "mr": "rename",
+    "mc": "cutFile",
+    /* "mC": "cutFile", */
     "C": "copyFile",
     "md": "delete",
     "D": "delete",

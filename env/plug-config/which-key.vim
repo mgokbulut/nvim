@@ -1,7 +1,7 @@
 " Timeout
 let g:which_key_timeout = 100
-let g:which_key_display_names = {'<CR>': '?', '<TAB>': '?'}
-" let g:which_key_display_names = {'<CR>': '↵', '<TAB>': '⇆'}
+let g:which_key_display_names = {'<CR>': '↵', '<TAB>': '⇆'}
+
 let g:which_key_centered = 0
 let g:which_key_hspace = 5
 
@@ -9,11 +9,9 @@ let g:which_key_hspace = 5
 nnoremap <silent> <leader> :silent <c-u> :silent WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 
-" TODO:
-
 " map <leader><leader> :
 
-" Create map to add keys to
+" Create map to add keys to - necessary
 let g:which_key_map =  {}
 " Define a separator
 let g:which_key_sep = '→'
@@ -31,19 +29,16 @@ let g:which_key_max_size = 0
 " let g:which_key_position = 'topleft'
 " let g:which_key_vertical = 1
 
-" Change the colors if you want
-
-" Hide status line
+" autocmd! FileType which_key
+" autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+" highlight Cursor ctermbg=blue guibg=blue guifg=blue ctermfg=blue
 autocmd! FileType which_key
-autocmd  FileType which_key set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
-
-" Close buffer without exitting neovim
-nnoremap Q :bp<cr>:bd #<cr>
+autocmd  FileType which_key set laststatus=0
+  \| autocmd BufLeave <buffer> set laststatus=2
 
 " Single mappings
 let g:which_key_map['/'] = [ 'gc'                                                     , 'comment' ]
-" let g:which_key_map['.'] = [ ':e $MYVIMRC'                                            , 'open init' ]
+" let g:which_key_map['.'] = [ ':e $MYVIMRC'                                          , 'open init' ]
 let g:which_key_map[';'] = [ ':Commands'                                              , 'commands' ]
 let g:which_key_map['='] = [ '<C-W>='                                                 , 'balance windows' ]
 

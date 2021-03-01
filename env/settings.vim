@@ -19,6 +19,7 @@ set hidden                              " enable buffers to hide - prevents erro
 set encoding=utf-8                      " The encoding displayed
 set updatetime=300                      " Faster completion
 set timeoutlen=100                      " By default timeoutlen is 1000 ms
+set modifiable
 
 " set lazyredraw                        " hopefully this speeds up vim!
 " set wildmode=longest,list,full        " better auto completion in command mode
@@ -27,17 +28,17 @@ set timeoutlen=100                      " By default timeoutlen is 1000 ms
 " set fileencoding=utf-8                " The encoding written to file
 
 " ========= Indentation ========= "
-set tabstop=4 softtabstop=4             " Insert 4 spaces for a tab
-set shiftwidth=4                        " Change the number of space characters inserted for indentation
+set tabstop=2 softtabstop=2             " Insert 4 spaces for a tab
+set shiftwidth=2                        " Change the number of space characters inserted for indentation
 set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
-set copyindent                          " copy the previous indentation on autoindenting
+" set copyindent                        " copy the previous indentation on autoindenting
 "call :IndentLinesToggle " toggles the indentation line plugin
 
 " ========= Status Line ========= "
-set laststatus=2                        " Always display the status line. 0:never, 1:more than one window, 2: always
+" set laststatus=2                        " Always display the status line. 0:never, 1:more than one window, 2: always
 set showtabline=1                       " Always show tab line.           0:never, 1:more than one window, 2: always
 set shortmess+=c                        " show the messages in full format. read more :help shortmess
 " set noshowmode                        " We don't need to see things like -- INSERT -- anymore
@@ -50,9 +51,9 @@ set noruler             		        " does not shows the cursor coordinates at sta
 
 " makes only one tab have the cursor line
 augroup CursorLine
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  autocmd WinLeave * setlocal nocursorline
+  " autocmd!
+  " autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  " autocmd WinLeave * setlocal nocursorline
 augroup END
 
 " ========== Formatting ========== "
