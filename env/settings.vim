@@ -46,13 +46,14 @@ set shortmess+=c                        " show the messages in full format. read
 " set noshowmode                        " We don't need to see things like -- INSERT -- anymore
 
 set statusline=
-set statusline+=%#Pmenu#
+set statusline+=%#CursorColumn#
+"set statusline+=%#Pmenu#
 " set statusline+=%#PmenuSel#
 set statusline+=\ %f
-set statusline+=\ %#Pmenu#
+"set statusline+=\ %#Pmenu#
 set statusline+=\ %m
 set statusline+=%=
-set statusline+=%#CursorColumn#
+set statusline+=%#Pmenu#
 set statusline+=\ %y
 set statusline+=\︱
 set statusline+=%{&fileencoding?&fileencoding:&encoding}
