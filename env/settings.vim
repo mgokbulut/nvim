@@ -38,6 +38,7 @@ set autoindent                          " Good auto indent
 "call :IndentLinesToggle " toggles the indentation line plugin
 
 " ========= Status Line ========= "
+" lua status line: https://www.reddit.com/r/neovim/comments/ff9m74/customize_your_status_line_using_lua/
 " set laststatus=2                        " Always display the status line. 0:never, 1:more than one window, 2: always
 set showtabline=1                       " Always show tab line.           0:never, 1:more than one window, 2: always
 set shortmess+=c                        " show the messages in full format. read more :help shortmess
