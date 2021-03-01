@@ -38,17 +38,21 @@ if (g:plugins_enabled == 1)
         Plug 'tpope/vim-fugitive'
 
       " ========== Could Haves ========== "
-        " much much better syntax highlight
-        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
         " test vim speed
         Plug 'tweekmonster/startuptime.vim'
-        " Colorizer
-        Plug 'norcalli/nvim-colorizer.lua'
         " smooth ctrl-d, ctrl-u
         Plug 'psliwka/vim-smoothie'
         " Bunch of pre-made snippets
         Plug 'honza/vim-snippets'
         " Colorscheme
+
+      " ============== Lua ============== "
+      if (g:lua_enabled == 1)
+        " Colorizer
+        Plug 'norcalli/nvim-colorizer.lua'
+        " much much better syntax highlight
+        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+      endif
 
     call plug#end()
 
