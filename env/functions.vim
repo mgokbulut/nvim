@@ -34,3 +34,15 @@ augroup END " Hide status line
 
 " make sure the python indenting is fixed
 autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
+
+" ===============================================================================
+
+" function! GitBranch()
+"   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+" endfunction
+
+" function! StatuslineGit()
+"   let l:branchname = GitBranch()
+"   let g:git_branch = strlen(l:branchname) > 0?'  '.l:branchname.' ':''
+" endfunction
+

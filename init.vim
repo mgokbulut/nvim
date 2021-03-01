@@ -1,9 +1,9 @@
 let g:plugins_enabled=1
 let g:lua_enabled=1
 
+source $HOME/.config/nvim/env/functions.vim
 source $HOME/.config/nvim/env/settings.vim
 source $HOME/.config/nvim/env/mappings.vim
-source $HOME/.config/nvim/env/functions.vim
 source $HOME/.config/nvim/env/plugins.vim
 
 " for f in split(glob('~/.config/nvim/env/*.vim'), '\n')

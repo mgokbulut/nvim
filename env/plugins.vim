@@ -34,6 +34,8 @@ if (g:plugins_enabled == 1)
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
         " See what leader mapped keys do
         Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+        " Git plugin
+        Plug 'tpope/vim-fugitive'
 
       " ========== Could Haves ========== "
         " much much better syntax highlight

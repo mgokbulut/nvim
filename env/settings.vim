@@ -39,11 +39,29 @@ set autoindent                          " Good auto indent
 
 " ========= Status Line ========= "
 " lua status line: https://www.reddit.com/r/neovim/comments/ff9m74/customize_your_status_line_using_lua/
-" set laststatus=2                        " Always display the status line. 0:never, 1:more than one window, 2: always
+" https://shapeshed.com/vim-statuslines/
+set laststatus=2                        " Always display the status line. 0:never, 1:more than one window, 2: always
 set showtabline=1                       " Always show tab line.           0:never, 1:more than one window, 2: always
 set shortmess+=c                        " show the messages in full format. read more :help shortmess
 " set noshowmode                        " We don't need to see things like -- INSERT -- anymore
 
+set statusline=
+set statusline+=%#Pmenu#
+" set statusline+=%#PmenuSel#
+set statusline+=\ %f
+set statusline+=\ %#Pmenu#
+set statusline+=\ %m
+set statusline+=%=
+set statusline+=%#CursorColumn#
+set statusline+=\ %y
+set statusline+=\︱
+set statusline+=%{&fileencoding?&fileencoding:&encoding}
+set statusline+=[%{&fileformat}\]
+set statusline+=\︱
+set statusline+=%p%%
+set statusline+=\ \≡
+set statusline+=\ %l:%L
+set statusline+=╺
 
 " ========== Cursor Line ========== "
 set noruler             		        " does not shows the cursor coordinates at status bar
