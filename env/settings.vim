@@ -6,8 +6,7 @@ set iskeyword+=-                      	" treat dash separated words as a word te
 set cmdheight=2                         " More space for displaying messages
 set mouse=a                             " Enable your mouse
 set splitbelow splitright               " Horizontal and Vertical splits will be swaped in place
-set scrolloff=10 	            		" Keep 10 lines below and above the cursor when scrolling
-set signcolumn=number                   " Always show the signcolumn, otherwise it would shift the text each time
+set scrolloff=10 	                  		" Keep 10 lines below and above the cursor when scrolling
 set updatetime=300                      " Faster completion
 set timeoutlen=100                      " By default timeoutlen is 1000 ms
 set nobackup                            " makes no backup. Recommended by coc.vim
@@ -67,7 +66,7 @@ set statusline+=╺
 " ========== Cursor Line ========== "
 set noruler             		        " does not shows the cursor coordinates at status bar
 " set ruler             		        " shows the cursor coordinates at status bar
-" set cursorline                        " Enable highlighting of the current line
+" set cursorline                    " Enable highlighting of the current line
 
 " makes only one tab have the cursor line
 augroup CursorLine
@@ -88,3 +87,9 @@ set incsearch                           " incremental search
 set ignorecase                          " ignore cases when searching
 set smartcase                           " when you use a capital word, enables case sensitivity
 set nowrapscan                          " do not wrap after getting to end of the file
+
+
+" ============= Lua ============= "
+if g:lua_enabled == 1
+  set signcolumn=number                   " Show signs on number column
+endif
