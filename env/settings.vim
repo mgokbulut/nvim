@@ -6,7 +6,7 @@ set iskeyword+=-                      	" treat dash separated words as a word te
 set cmdheight=2                         " More space for displaying messages
 set mouse=a                             " Enable your mouse
 set splitbelow splitright               " Horizontal and Vertical splits will be swaped in place
-set scrolloff=10 	            		" Keep 10 lines below and above the cursor when scrolling
+set scrolloff=10 	            	       	" Keep 10 lines below and above the cursor when scrolling
 set signcolumn=number                   " Always show the signcolumn, otherwise it would shift the text each time
 set updatetime=300                      " Faster completion
 set timeoutlen=100                      " By default timeoutlen is 1000 ms
@@ -46,20 +46,25 @@ set shortmess+=c                        " show the messages in full format. read
 " set noshowmode                        " We don't need to see things like -- INSERT -- anymore
 
 set statusline=
-set statusline+=%#CursorColumn#
-"set statusline+=%#Pmenu#
+" set statusline+=%#CursorColumn#
+" set statusline+=%#Pmenu#
 " set statusline+=%#PmenuSel#
+set statusline+=%#Pmenu#
 set statusline+=\ %f
 "set statusline+=\ %#Pmenu#
 set statusline+=\ %m
 set statusline+=%=
-set statusline+=%#Pmenu#
-set statusline+=\ %y
-set statusline+=\︱
-set statusline+=%{&fileencoding?&fileencoding:&encoding}
-set statusline+=[%{&fileformat}\]
-set statusline+=\︱
-set statusline+=%p%%
+set statusline+=\ %r
+set statusline+=%=
+" set statusline+=\ %y
+" set statusline+=\︱
+" set statusline+=%{&fileencoding?&fileencoding:&encoding}
+" set statusline+=[%{&fileformat}\]
+" set statusline+=\︱
+set statusline+=%#CursorColumn#
+set statusline+=\ [buffer:\ %n]
+set statusline+=\ %#Pmenu#
+set statusline+=\ %p%%
 set statusline+=\ \≡
 set statusline+=\ %l:%L
 set statusline+=╺

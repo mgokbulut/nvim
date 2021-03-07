@@ -41,7 +41,7 @@ if (g:plugins_enabled == 1)
         " test vim speed
         Plug 'tweekmonster/startuptime.vim'
         " smooth ctrl-d, ctrl-u
-        Plug 'psliwka/vim-smoothie'
+        " Plug 'psliwka/vim-smoothie'
         " Bunch of pre-made snippets
         Plug 'honza/vim-snippets'
         " Colorscheme

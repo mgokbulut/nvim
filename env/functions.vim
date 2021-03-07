@@ -37,12 +37,54 @@ autocmd FileType python setlocal shiftwidth=2 softtabstop=2 expandtab
 
 " ===============================================================================
 
-" function! GitBranch()
-"   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")
+" Git branch
+" function! Statusline_git() abort
+"     let git = fugitive#head()
+"     if git != ''
+"         return ' '.fugitive#head()
+"     else
+"         return ''
+"     endif
 " endfunction
 
-" function! StatuslineGit()
-"   let l:branchname = GitBranch()
-"   let g:git_branch = strlen(l:branchname) > 0?'  '.l:branchname.' ':''
-" endfunction
+" ===============================================================================
 
+" CompileAndRun
+function! GetCompileScript() abort
+		if &filetype == 'c'
+		 return "gcc -std=c99 %s && time ./a.out"
+		elseif &filetype == 'cpp'
+			return "g++ %s && time ./a.out"
+		elseif &filetype == 'java'
+			return "javac %s && time java ".expand('%:t:r')
+		else
+		 	return "echo \"not supported file type\""
+	endif
+	return "echo \"Something went wrong!\""
+endfunction
+
+function! TermWrapper(command) abort
+	if !exists('g:split_term_style') | let g:split_term_style = 'vertical' | endif
+	if g:split_term_style ==# 'vertical'
+		let buffercmd = 'vnew'
+	elseif g:split_term_style ==# 'horizontal'
+		let buffercmd = 'new'
+	else
+		echoerr 'ERROR! g:split_term_style is not a valid value (must be ''horizontal'' or ''vertical'' but is currently set to ''' . g:split_term_style . ''')'
+		throw 'ERROR!:split_term_style is not a valid value (must be ''horizontal'' or ''vertical'')'
+	endif
+	if exists('g:split_term_resize_cmd')
+		exec g:split_term_resize_cmd
+  endif
+	exec buffercmd
+	exec 'term ' . a:command
+	exec 'startinsert'
+endfunction
+
+command! -nargs=0 GetCompileScript call GetCompileScript()
+command! -nargs=0 CompileAndRun call TermWrapper(printf(GetCompileScript(), expand('%')))
+command! -nargs=1 CompileAndRunWithArguments call TermWrapper(printf(GetCompileScript()." %s", expand('%'), <args>))
+
+autocmd FileType c    nnoremap <F6> :CompileAndRun<CR>
+autocmd FileType cpp  nnoremap <F6> :CompileAndRun<CR>
+autocmd FileType java nnoremap <F6> :CompileAndRun<CR>

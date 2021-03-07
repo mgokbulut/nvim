@@ -60,6 +60,7 @@ autocmd BufLeave *coc-explorer* set nocursorline
 
 " quit explorer if thats the only buffer left
 autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | quit | endif
+autocmd FileType coc-explorer setlocal statusline=%#CursorColumn#
 
 " If another buffer tries to replace explorer, put it in the other window, and bring back coc explorer.
 autocmd BufEnter * if bufname('#') =~ 'coc-explorer' && bufname('%') !~ 'coc-explorer' && winnr('$') > 0 |

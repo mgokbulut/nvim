@@ -50,7 +50,8 @@ let g:which_key_map['q'] = [ '<Plug>(coc-fix-current)'                          
 let g:which_key_map['r'] = [ ':CocCommand explorer --preset floating'                 , 'file manager' ]
 let g:which_key_map['S'] = [ ':set spell!'                                            , 'spelling' ]
 let g:which_key_map['b'] = [ ":call Buffers_open()"                                   , 'buffers' ]
-
+let g:which_key_map[' '] = [ ':Files'                                                 , 'files' ]
+let g:which_key_map['c'] = [ ':CompileAndRun'                                         , 'compile&run' ]
 
 " a is for actions
 let g:which_key_map.a = {
