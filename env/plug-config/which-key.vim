@@ -40,7 +40,7 @@ autocmd  FileType which_key set laststatus=0
 let g:which_key_map['/'] = [ 'gc'                                                     , 'comment' ]
 " let g:which_key_map['.'] = [ ':e $MYVIMRC'                                          , 'open init' ]
 let g:which_key_map[';'] = [ ':Commands'                                              , 'commands' ]
-let g:which_key_map['='] = [ '<C-W>='                                                 , 'balance windows' ]
+" let g:which_key_map['='] = [ '<C-W>='                                                 , 'balance windows' ]
 
 let g:which_key_map['e'] = [ ':CocCommand explorer --toggle --sources=buffer+,file+'  , 'explorer' ]
 let g:which_key_map['q'] = [ '<Plug>(coc-fix-current)'                                , 'quickfix' ]
@@ -49,8 +49,9 @@ let g:which_key_map['q'] = [ '<Plug>(coc-fix-current)'                          
 " let g:which_key_map['r'] = [ ':RnvimrToggle'                                        , 'ranger' ]
 let g:which_key_map['r'] = [ ':CocCommand explorer --preset floating'                 , 'file manager' ]
 let g:which_key_map['S'] = [ ':set spell!'                                            , 'spelling' ]
-let g:which_key_map['b'] = [ ":call Buffers_open()"                                   , 'buffers' ]
+let g:which_key_map['j'] = [ ":call Buffers_open()"                                   , 'buffers' ]
 let g:which_key_map[' '] = [ ':Files'                                                 , 'files' ]
+let g:which_key_map['f'] = [ ':Rg'                                                    , 'Ripgrep' ]
 let g:which_key_map['c'] = [ ':CompileAndRun'                                         , 'compile&run' ]
 
 " a is for actions
@@ -119,27 +120,28 @@ let g:which_key_map.g = {
       \ 'c' : [':Git commit'                       , 'commit'],
       \ 'd' : [':Git diff'                         , 'diff'],
       \ 'D' : [':Gdiffsplit'                       , 'diff split'],
-      \ 'G' : [':GGrep'                            , 'git grep'],
       \ 'g' : [':Gstatus'                          , 'status'],
-      \ 'h' : [':GitGutterLineHighlightsToggle'    , 'highlight hunks'],
-      \ 'H' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview hunk'],
-      \ 'i' : [':Gist -b'                          , 'post gist'],
-      \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next hunk'],
-      \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev hunk'],
+      \ 's' : [':Gstatus'                          , 'status'],
       \ 'l' : [':Git log'                          , 'log'],
-      \ 'm' : ['<Plug>(git-messenger)'             , 'message'],
       \ 'p' : [':Git push'                         , 'push'],
       \ 'P' : [':Git pull'                         , 'pull'],
       \ 'r' : [':GRemove'                          , 'remove'],
-      \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage hunk'],
       \ 'S' : [':CocCommand fzf-preview.GitStatus' , 'status'],
-      \ 't' : [':GitGutterSignsToggle'             , 'toggle signs'],
-      \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo hunk'],
-      \ 'v' : [':GV'                               , 'view commits'],
-      \ 'V' : [':GV!'                              , 'view buffer commits'],
       \ }
       " \ 'A' : [':Git add %'                        , 'add current'],
       " \ 'S' : [':!git status'                      , 'status'],
+      " \ 'h' : [':GitGutterLineHighlightsToggle'    , 'highlight hunks'],
+      " \ 'H' : ['<Plug>(GitGutterPreviewHunk)'      , 'preview hunk'],
+      " \ 'j' : ['<Plug>(GitGutterNextHunk)'         , 'next hunk'],
+      " \ 'k' : ['<Plug>(GitGutterPrevHunk)'         , 'prev hunk'],
+      " \ 'm' : ['<Plug>(git-messenger)'             , 'message'],
+      " \ 'i' : [':Gist -b'                          , 'post gist'],
+      " \ 'G' : [':GGrep'                            , 'git grep'],
+      " \ 'u' : ['<Plug>(GitGutterUndoHunk)'         , 'undo hunk'],
+      " \ 's' : ['<Plug>(GitGutterStageHunk)'        , 'stage hunk'],
+      " \ 'v' : [':GV'                               , 'view commits'],
+      " \ 'V' : [':GV!'                              , 'view buffer commits'],
+      " \ 't' : [':GitGutterSignsToggle'             , 'toggle signs'],
 
 " l is for language server protocol
 let g:which_key_map.l = {
