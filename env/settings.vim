@@ -7,7 +7,6 @@ set cmdheight=2                         " More space for displaying messages
 set mouse=a                             " Enable your mouse
 set splitbelow splitright               " Horizontal and Vertical splits will be swaped in place
 set scrolloff=10 	            	       	" Keep 10 lines below and above the cursor when scrolling
-set scrolloff=10 	                  		" Keep 10 lines below and above the cursor when scrolling
 set updatetime=300                      " Faster completion
 set timeoutlen=100                      " By default timeoutlen is 1000 ms
 set nobackup                            " makes no backup. Recommended by coc.vim
@@ -34,7 +33,7 @@ set smarttab                            " Makes tabbing smarter will realize you
 set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
-" set copyindent                        " copy the previous indentation on autoindenting
+set copyindent                        " copy the previous indentation on autoindenting
 "call :IndentLinesToggle " toggles the indentation line plugin
 
 " ========= Status Line ========= "

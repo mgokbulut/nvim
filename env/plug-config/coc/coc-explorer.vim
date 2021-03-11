@@ -56,10 +56,11 @@ let g:indentLine_fileTypeExclude = ['coc-explorer']
 
 " autocmd BufEnter *coc-explorer* :!ls
 autocmd BufEnter *coc-explorer* set cursorline
-autocmd BufLeave *coc-explorer* set nocursorline
+autocmd BufLeave, *coc-explorer* set nocursorline
 
 " quit explorer if thats the only buffer left
-autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') | quit | endif
+autocmd BufEnter * if (winnr("$") == 1 && &filetype == 'coc-explorer') |
+      \ if(len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1) | quit | endif | :bd | endif
 autocmd FileType coc-explorer setlocal statusline=%#CursorColumn#
 
 " If another buffer tries to replace explorer, put it in the other window, and bring back coc explorer.

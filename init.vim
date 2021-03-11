@@ -100,4 +100,4 @@ source $HOME/.config/nvim/env/plugins.vim
 "       vim-surround	0.693
 "            matchit	0.350
 " vim-tmux-navigator	0.277
-"c    startuptime.vim	0.023
+"    startuptime.vim	0.023
