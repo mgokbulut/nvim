@@ -43,6 +43,12 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 
+" Faster scrolling
+nnoremap J 4j
+nnoremap K 4k
+nnoremap L 4l
+nnoremap H 4h
+
 " autocenter when entering insert mode
 " autocmd InsertEnter * norm zz
 
