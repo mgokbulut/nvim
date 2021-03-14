@@ -1,5 +1,9 @@
-let g:plugins_enabled=1
-let g:lua_enabled=1
+let g:plugins_enabled = 1
+let g:lua_enabled = 1
+
+let g:must_have = 1
+let g:should_have = 1
+let g:could_have = 1
 
 source $HOME/.config/nvim/env/functions.vim
 source $HOME/.config/nvim/env/settings.vim
@@ -101,3 +105,20 @@ source $HOME/.config/nvim/env/plugins.vim
 "            matchit	0.350
 " vim-tmux-navigator	0.277
 "    startuptime.vim	0.023
+
+" =========================================================================
+" 11 March 2021 - Fully costumized ~ still pretty lightweight
+" =========================================================================
+" Total Time:   74.454 -- Flawless Victory
+
+" Slowest 10 plugins (out of 18)~
+"       [runtime]	29.766
+"         [vimrc]	28.570
+"        coc.nvim	6.342
+"    vim-gruvbox8	1.927
+"    vim-fugitive	1.880
+" nvim-treesitter	1.450
+"         fzf.vim	0.994
+"             fzf	0.939
+"    vim-surround	0.558
+"      indentLine	0.518

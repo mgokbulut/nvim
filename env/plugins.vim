@@ -5,46 +5,56 @@ if (g:plugins_enabled == 1)
   if empty(glob('~/.config/nvim/autoload/plug.vim'))
     silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
       \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall | source $MYVIMRC
+    autocmd VimEnter * PlugInstall
   else
 
     call plug#begin('~/.config/nvim/autoload/plugged')
 
       " ========== Must Haves ========== "
+      if(g:must_have == 1)
         " Surround (ysiw, cs etc.)
         Plug 'tpope/vim-surround'
         " Repeating plugin mappings
         Plug 'tpope/vim-repeat'
         " Easier commenting
         Plug 'tpope/vim-commentary'
+        " Better pair handling
+        " Plug 'jiangmiao/auto-pairs'
+        " Plug 'jiangmiao/auto-pairs'
         " auto close tags
         Plug 'alvan/vim-closetag'
         " vim and tmux navigation integration
         Plug 'christoomey/vim-tmux-navigator'
         " a light version of gruvbox
         Plug 'lifepillar/vim-gruvbox8'
+        " indentation line indicators around 2.5ms
+        Plug 'Yggdroot/indentLine'
+      endif
+
+      " ========== Should Haves ========== "
+      if(g:should_have == 1)
         " fuzzy file search and rg
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
         Plug 'junegunn/fzf.vim'
-
-      " ========== Should Haves ========== "
-        " indentation line indicators around 2.5ms
-        Plug 'Yggdroot/indentLine'
         " Stable version of coc
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
         " See what leader mapped keys do
         Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
         " Git plugin
         Plug 'tpope/vim-fugitive'
+        " fullscreen when in split view
+        Plug 'szw/vim-maximizer'
+      endif
 
       " ========== Could Haves ========== "
+      if (g:could_have == 1)
         " test vim speed
         Plug 'tweekmonster/startuptime.vim'
         " smooth ctrl-d, ctrl-u
         " Plug 'psliwka/vim-smoothie'
         " Bunch of pre-made snippets
         Plug 'honza/vim-snippets'
-        " Colorscheme
+      endif
 
       " ============== Lua ============== "
       if (g:lua_enabled == 1)
@@ -62,17 +72,22 @@ if (g:plugins_enabled == 1)
       \|   PlugInstall --sync | q
       \| endif
 
+    " Plugin Configuration
+    if(g:must_have == 1)
+      source $HOME/.config/nvim/env/plug-config/tmux.vim
+      source $HOME/.config/nvim/env/plug-config/colorscheme.vim
+      source $HOME/.config/nvim/env/plug-config/closetag.vim
+    endif
 
-    source $HOME/.config/nvim/env/plug-config/fzf.vim
-    source $HOME/.config/nvim/env/plug-config/tmux.vim
-    source $HOME/.config/nvim/env/plug-config/colorscheme.vim
-    source $HOME/.config/nvim/env/plug-config/closetag.vim
-    source $HOME/.config/nvim/env/plug-config/coc/coc.vim
-    source $HOME/.config/nvim/env/plug-config/coc/coc-extensions.vim
-    source $HOME/.config/nvim/env/plug-config/coc/coc-explorer.vim
-    source $HOME/.config/nvim/env/plug-config/which-key.vim
+    if(g:should_have == 1)
+      source $HOME/.config/nvim/env/plug-config/fzf.vim
+      source $HOME/.config/nvim/env/plug-config/coc/coc.vim
+      source $HOME/.config/nvim/env/plug-config/coc/coc-extensions.vim
+      source $HOME/.config/nvim/env/plug-config/coc/coc-explorer.vim
+      source $HOME/.config/nvim/env/plug-config/which-key.vim
+    endif
 
-    if (g:lua_enabled == 1)
+    if (g:lua_enabled == 1 && g:must_have == 1)
       luafile $HOME/.config/nvim/env/lua/plug-colorizer.lua
       luafile $HOME/.config/nvim/env/lua/plug-treesitter.lua
       " source $HOME/.config/nvim/env/plug-config/status-line.vim
