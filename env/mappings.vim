@@ -63,8 +63,8 @@ nnoremap V v$h
 nnoremap Y v$hy
 
 " autoclose parenthesis
-inoremap { {}<ESC>i
-inoremap [ []<ESC>i
+" inoremap { {}<ESC>i
+" inoremap [ []<ESC>i
 
 " Use backspace key for matching parens
 nmap <BS> %
