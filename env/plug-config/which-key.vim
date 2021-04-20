@@ -14,7 +14,8 @@ vnoremap <silent> <leader> :silent <c-u> :silent WhichKeyVisual '<Space>'<CR>
 " Create map to add keys to - necessary
 let g:which_key_map =  {}
 " Define a separator
-let g:which_key_sep = '→'
+let g:which_key_sep = '⇒'
+" let g:which_key_sep = '→'
 " set timeoutlen=100
 
 " Coc Search & refactor
@@ -52,7 +53,7 @@ let g:which_key_map['S'] = [ ':set spell!'                                      
 let g:which_key_map['j'] = [ ":call Buffers_open()"                                   , 'buffers' ]
 let g:which_key_map[' '] = [ ':Files'                                                 , 'files' ]
 let g:which_key_map['f'] = [ ':Rg'                                                    , 'ripgrep' ]
-let g:which_key_map['c'] = [ ':CompileAndRun'                                         , 'compile&run' ]
+" let g:which_key_map['c'] = [ ':CompileAndRun'                                         , 'compile&run' ]
 let g:which_key_map['z'] = [ ':MaximizerToggle'                                       , 'maximizer' ]
 
 " a is for actions
@@ -62,6 +63,8 @@ let g:which_key_map.a = {
       \ 'f' : [':Finder'                                 , 'open in finder'],
       \ 'o' : [':Finder'                                 , 'open in finder'],
       \ 'n' : [':set nonumber!'                          , 'line-numbers'],
+      \ 'y' : [':%y+'                                    , 'yank file'],
+      \ 'c' : [':CompileAndRun'                          , 'compile&run'],
       \ 's' : ['ysi'                                     , 'surround'],
       \ 'r' : [':set norelativenumber!'                  , 'relative line nums'],
       \ 'g' : [':SignifyToggle'                          , 'signify'],

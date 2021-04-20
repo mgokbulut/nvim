@@ -91,7 +91,7 @@ set incsearch                           " incremental search
 " set noincsearch                       " incremental search
 set ignorecase                          " ignore cases when searching
 set smartcase                           " when you use a capital word, enables case sensitivity
-set nowrapscan                          " do not wrap after getting to end of the file
+" set nowrapscan                          " do not wrap after getting to end of the file
 
 
 " ============= Lua ============= "

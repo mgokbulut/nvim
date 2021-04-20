@@ -81,6 +81,7 @@ cnoreabbrev wQ wq
 cnoreabbrev Qa qa
 cnoreabbrev Bd bd
 cnoreabbrev bD bd
+"nmap q <nop>
 
 nnoremap gl $
 nnoremap gh ^
