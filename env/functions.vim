@@ -57,6 +57,8 @@ function! GetCompileScript() abort
 			return "g++ %s && time ./a.out"
 		elseif &filetype == 'java'
 			return "javac %s && time java ".expand('%:t:r')
+		elseif &filetype == 'scala'
+			return "scala %s"
 		else
 		 	return "echo \"not supported file type\""
 	endif
@@ -88,3 +90,4 @@ command! -nargs=1 CompileAndRunWithArguments call TermWrapper(printf(GetCompileS
 autocmd FileType c    nnoremap <F6> :CompileAndRun<CR>
 autocmd FileType cpp  nnoremap <F6> :CompileAndRun<CR>
 autocmd FileType java nnoremap <F6> :CompileAndRun<CR>
+autocmd FileType scala nnoremap <F6> :CompileAndRun<CR>
