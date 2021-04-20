@@ -19,14 +19,15 @@ if (g:plugins_enabled == 1)
         " Easier commenting
         Plug 'tpope/vim-commentary'
         " Better pair handling
-        " Plug 'jiangmiao/auto-pairs'
-        " Plug 'jiangmiao/auto-pairs'
+        Plug 'jiangmiao/auto-pairs'
         " auto close tags
         Plug 'alvan/vim-closetag'
         " vim and tmux navigation integration
         Plug 'christoomey/vim-tmux-navigator'
         " a light version of gruvbox
-        Plug 'lifepillar/vim-gruvbox8'
+        " Plug 'lifepillar/vim-gruvbox8'
+        " non lightweight gruvbox
+        Plug 'morhetz/gruvbox'
         " indentation line indicators around 2.5ms
         Plug 'Yggdroot/indentLine'
       endif

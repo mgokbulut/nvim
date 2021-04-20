@@ -7,7 +7,7 @@ set background=dark                     " tell vim what the background color loo
 " set t_Co=256                          " Support 256 colors
 " let g:gruvbox_italic=1
 " colorscheme gruvbox8
-colorscheme gruvbox8
+colorscheme gruvbox
 " Plug 'joshdick/onedark.vim'
 " Plug 'ghifarit53/tokyonight-vim'
 " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
