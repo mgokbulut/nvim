@@ -41,6 +41,7 @@ autocmd  FileType which_key set laststatus=0
 let g:which_key_map['/'] = [ 'gc'                                                     , 'comment' ]
 " let g:which_key_map['.'] = [ ':e $MYVIMRC'                                          , 'open init' ]
 let g:which_key_map[';'] = [ ':Commands'                                              , 'commands' ]
+let g:which_key_map['c'] = [ ':CocCommand'                                            , 'Lsp commands' ]
 " let g:which_key_map['='] = [ '<C-W>='                                               , 'balance windows' ]
 
 let g:which_key_map['e'] = [ ':CocCommand explorer --toggle --sources=buffer+,file+'  , 'explorer' ]
