@@ -45,6 +45,8 @@ if (g:plugins_enabled == 1)
         Plug 'tpope/vim-fugitive'
         " fullscreen when in split view
         Plug 'szw/vim-maximizer'
+        " Airline status-line
+        Plug 'vim-airline/vim-airline'
       endif
 
       " ========== Could Haves ========== "
@@ -86,6 +88,7 @@ if (g:plugins_enabled == 1)
       source $HOME/.config/nvim/env/plug-config/coc/coc-extensions.vim
       source $HOME/.config/nvim/env/plug-config/coc/coc-explorer.vim
       source $HOME/.config/nvim/env/plug-config/which-key.vim
+      source $HOME/.config/nvim/env/plug-config/airline.vim
     endif
 
     if (g:lua_enabled == 1 && g:must_have == 1)
