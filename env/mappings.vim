@@ -82,6 +82,7 @@ cnoreabbrev Qa qa
 cnoreabbrev Bd bd
 cnoreabbrev bD bd
 "nmap q <nop>
+map <C-z> <nop>
 
 nnoremap gl $
 nnoremap gh ^
@@ -89,7 +90,6 @@ nnoremap S :%s//gI<Left><Left><Left>
 
 " Open finder
 command! Finder silent exe '!open ' . expand("%:p:h")
-
 
 " map <silent><leader>s :setlocal spell spelllang=en_us<CR>
 

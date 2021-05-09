@@ -50,12 +50,13 @@ let g:which_key_map['q'] = [ '<Plug>(coc-fix-current)'                          
 " let g:which_key_map['u'] = [ ':UndotreeToggle'                                      , 'undo tree']
 " let g:which_key_map['r'] = [ ':RnvimrToggle'                                        , 'ranger' ]
 let g:which_key_map['r'] = [ ':CocCommand explorer --preset floating'                 , 'file manager' ]
-let g:which_key_map['S'] = [ ':set spell!'                                            , 'spelling' ]
+" let g:which_key_map['S'] = [ ':set spell!'                                            , 'spelling' ]
 let g:which_key_map['j'] = [ ":call Buffers_open()"                                   , 'buffers' ]
 let g:which_key_map[' '] = [ ':Files'                                                 , 'files' ]
 let g:which_key_map['f'] = [ ':Rg'                                                    , 'ripgrep' ]
 " let g:which_key_map['c'] = [ ':CompileAndRun'                                         , 'compile&run' ]
 let g:which_key_map['z'] = [ ':MaximizerToggle'                                       , 'maximizer' ]
+let g:which_key_map['n'] = [ '<Plug>(coc-diagnostic-next)'                            , 'next diagnostic' ]
 
 " a is for actions
 let g:which_key_map.a = {
@@ -67,9 +68,11 @@ let g:which_key_map.a = {
       \ 'y' : [':%y+'                                    , 'yank file'],
       \ 'c' : [':CompileAndRun'                          , 'compile&run'],
       \ 's' : ['ysi'                                     , 'surround'],
+      \ 'S' : [':set spell!'                             , 'spelling'],
       \ 'r' : [':set norelativenumber!'                  , 'relative line nums'],
       \ 'g' : [':SignifyToggle'                          , 'signify'],
-      \ 't' : [':call Toggle_transparent_background()'   , 'transparent background'],
+      \ 'T' : [':call Toggle_transparent_background()'   , 'transparent background'],
+      \ 't' : [':call TrimWhitespace()'                  , 'trim whitespaces'],
       \ }
 
 " let g:which_key_map.a.c = {
@@ -123,8 +126,8 @@ let g:which_key_map.g = {
       \ 'b' : [':Git blame'                        , 'blame'],
       \ 'B' : [':GBrowse'                          , 'browse'],
       \ 'c' : [':Git commit'                       , 'commit'],
-      \ 'd' : [':Git diff'                         , 'diff'],
-      \ 'D' : [':Gdiffsplit'                       , 'diff split'],
+      \ 'D' : [':Git diff'                         , 'diff'],
+      \ 'd' : [':Gdiffsplit'                       , 'diff split'],
       \ 'g' : [':Gstatus'                          , 'status'],
       \ 's' : [':Gstatus'                          , 'status'],
       \ 'l' : [':Git log'                          , 'log'],

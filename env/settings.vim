@@ -3,7 +3,7 @@ syntax on                               " Enables syntax highlighting
 set number                              " Line numbers
 set clipboard=unnamedplus               " Sync system clipboard with vim
 set iskeyword+=-                      	" treat dash separated words as a word text object"
-set cmdheight=2                         " More space for displaying messages
+set cmdheight=1                         " More space for displaying messages
 set mouse=a                             " Enable your mouse
 set splitbelow splitright               " Horizontal and Vertical splits will be swaped in place
 set scrolloff=10 	            	       	" Keep 10 lines below and above the cursor when scrolling
@@ -13,13 +13,13 @@ set nobackup                            " makes no backup. Recommended by coc.vi
 set undofile
 set undodir=~/.config/nvim/undodir      " saves the history of changes even when closed.
 set backupdir=~/.config/nvim/backupdir
-set nowrap                              " Display long lines as just one line
 set hidden                              " enable buffers to hide - prevents error: "E37: No write since last change ...
 set encoding=utf-8                      " The encoding displayed
 set updatetime=300                      " Faster completion
 set timeoutlen=100                      " By default timeoutlen is 1000 ms
 set modifiable
 
+" set nowrap                              " Display long lines as just one line
 " set lazyredraw                        " hopefully this speeds up vim!
 " set wildmode=longest,list,full        " better auto completion in command mode
 " set backspace=eol,start,indent        " looks like backspace behaviour is fine in neovim, if not, enable this command
@@ -40,33 +40,9 @@ set copyindent                        " copy the previous indentation on autoind
 " lua status line: https://www.reddit.com/r/neovim/comments/ff9m74/customize_your_status_line_using_lua/
 " https://shapeshed.com/vim-statuslines/
 set laststatus=2                        " Always display the status line. 0:never, 1:more than one window, 2: always
-set showtabline=1                       " Always show tab line.           0:never, 1:more than one window, 2: always
-set shortmess+=c                        " show the messages in full format. read more :help shortmess
+set showtabline=2                       " Always show tab line.           0:never, 1:more than one window, 2: always
+" set shortmess+=c                        " show the messages in full format. read more :help shortmess
 " set noshowmode                        " We don't need to see things like -- INSERT -- anymore
-
-set statusline=
-" set statusline+=%#CursorColumn#
-" set statusline+=%#Pmenu#
-" set statusline+=%#PmenuSel#
-set statusline+=%#Pmenu#
-set statusline+=\ %f
-"set statusline+=\ %#Pmenu#
-set statusline+=\ %m
-set statusline+=%=
-set statusline+=\ %r
-set statusline+=%=
-" set statusline+=\ %y
-" set statusline+=\︱
-" set statusline+=%{&fileencoding?&fileencoding:&encoding}
-" set statusline+=[%{&fileformat}\]
-" set statusline+=\︱
-set statusline+=%#CursorColumn#
-set statusline+=\ [buffer:\ %n]
-set statusline+=\ %#Pmenu#
-set statusline+=\ %p%%
-set statusline+=\ \≡
-set statusline+=\ %l:%L
-set statusline+=╺
 
 " ========== Cursor Line ========== "
 set noruler             		        " does not shows the cursor coordinates at status bar
@@ -83,8 +59,8 @@ augroup END
 " ========== Formatting ========== "
 " Stop newline continuation of comments. cro: c=insert, r=wrap, o=normal mode
 autocmd BufEnter * setlocal formatoptions-=cro
-" fix textlimit of .txt files
-" autocmd BufRead,BufNewFile *.txt setlocal textwidth=80
+" autocmd BufRead,BufNewFile *.md setlocal textwidth=120 " to reformat visual mode + gq
+" autocmd BufRead,BufNewFile *.txt setlocal textwidth=120 " to reformat visual mode + gq
 
 " ========== Searching ========== "
 set incsearch                           " incremental search
