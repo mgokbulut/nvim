@@ -9,22 +9,21 @@ set splitbelow splitright               " Horizontal and Vertical splits will be
 set scrolloff=10 	            	       	" Keep 10 lines below and above the cursor when scrolling
 set updatetime=300                      " Faster completion
 set timeoutlen=100                      " By default timeoutlen is 1000 ms
-set nobackup                            " makes no backup. Recommended by coc.vim
-set undofile
-set undodir=~/.config/nvim/undodir      " saves the history of changes even when closed.
-set backupdir=~/.config/nvim/backupdir
 set hidden                              " enable buffers to hide - prevents error: "E37: No write since last change ...
 set encoding=utf-8                      " The encoding displayed
 set updatetime=300                      " Faster completion
 set timeoutlen=100                      " By default timeoutlen is 1000 ms
 set modifiable
 
-" set nowrap                              " Display long lines as just one line
-" set lazyredraw                        " hopefully this speeds up vim!
-" set wildmode=longest,list,full        " better auto completion in command mode
-" set backspace=eol,start,indent        " looks like backspace behaviour is fine in neovim, if not, enable this command
-" set whichwrap+=<,>,[,],h,l            " when you press l at the end of the line, it will to to the next line
-" set fileencoding=utf-8                " The encoding written to file
+
+" ======== File Settings ======== "
+set nobackup                            " makes no backup. Recommended by coc.vim
+set undofile
+set noswapfile
+set undodir=~/.config/nvim/undodir//    " saves the history of changes even when closed.
+set backupdir=~/.config/nvim/backupdir//
+set directory=~/.config/nvim/swap//
+
 
 " ========= Indentation ========= "
 set tabstop=2 softtabstop=2             " Insert 4 spaces for a tab
@@ -33,7 +32,7 @@ set smarttab                            " Makes tabbing smarter will realize you
 set expandtab                           " Converts tabs to spaces
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
-set copyindent                        " copy the previous indentation on autoindenting
+set copyindent                          " copy the previous indentation on autoindenting
 "call :IndentLinesToggle " toggles the indentation line plugin
 
 " ========= Status Line ========= "
@@ -45,9 +44,9 @@ set showtabline=2                       " Always show tab line.           0:neve
 " set noshowmode                        " We don't need to see things like -- INSERT -- anymore
 
 " ========== Cursor Line ========== "
-set noruler             		        " does not shows the cursor coordinates at status bar
+" set noruler            		        " does not shows the cursor coordinates at status bar
 " set ruler             		        " shows the cursor coordinates at status bar
-" set cursorline                    " Enable highlighting of the current line
+set cursorline                      " Enable highlighting of the current line
 
 " makes only one tab have the cursor line
 augroup CursorLine
@@ -67,10 +66,19 @@ set incsearch                           " incremental search
 " set noincsearch                       " incremental search
 set ignorecase                          " ignore cases when searching
 set smartcase                           " when you use a capital word, enables case sensitivity
-" set nowrapscan                          " do not wrap after getting to end of the file
+" set nowrapscan                        " do not wrap after getting to end of the file
 
 
 " ============= Lua ============= "
 if g:lua_enabled == 1
-  set signcolumn=number                   " Show signs on number column
+  set signcolumn=number                 " Show signs on number column
 endif
+
+" ======== deprecated =========== "
+" set nowrap                            " Display long lines as just one line
+" set lazyredraw                        " hopefully this speeds up vim!
+" set wildmode=longest,list,full        " better auto completion in command mode
+" set backspace=eol,start,indent        " looks like backspace behaviour is fine in neovim, if not, enable this command
+" set whichwrap+=<,>,[,],h,l            " when you press l at the end of the line, it will to to the next line
+" set fileencoding=utf-8                " The encoding written to file
+

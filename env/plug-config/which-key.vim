@@ -130,7 +130,9 @@ let g:which_key_map.g = {
       \ 'd' : [':Gdiffsplit'                       , 'diff split'],
       \ 'g' : [':Gstatus'                          , 'status'],
       \ 's' : [':Gstatus'                          , 'status'],
-      \ 'l' : [':Git log'                          , 'log'],
+      \ 'l' : [':diffget //3'                      , 'get right'],
+      \ 'h' : [':diffget //2'                      , 'get left'],
+      \ 'L' : [':Git log'                          , 'log'],
       \ 'p' : [':Git push'                         , 'push'],
       \ 'P' : [':Git pull'                         , 'pull'],
       \ 'r' : [':GRemove'                          , 'remove'],
@@ -167,10 +169,9 @@ let g:which_key_map.l = {
       \ 'f' : ['<Plug>(coc-format-selected)'         , 'format selected'],
       \ 'F' : ['<Plug>(coc-format)'                  , 'format'],
       \ 'h' : ['<Plug>(coc-float-hide)'              , 'hide'],
-      \ 'i' : ['<Plug>(coc-implementation)'          , 'implementation'],
-      \ 'I' : [':CocList diagnostics'                , 'diagnostics'],
       \ 'j' : ['<Plug>(coc-float-jump)'              , 'float jump'],
-      \ 'l' : ['<Plug>(coc-codelens-action)'         , 'code lens'],
+      \ 'i' : [':CocList diagnostics'                , 'diagnostics'],
+      \ 'I' : [':CocList diagnostics'                , 'diagnostics'],
       \ 'n' : ['<Plug>(coc-diagnostic-next)'         , 'next diagnostic'],
       \ 'N' : ['<Plug>(coc-diagnostic-next-error)'   , 'next error'],
       \ 'O' : [':CocList outline'                    , 'search outline'],
@@ -186,8 +187,15 @@ let g:which_key_map.l = {
       \ 'U' : [':CocUpdate'                          , 'update CoC'],
       \ 'z' : [':CocDisable'                         , 'disable CoC'],
       \ 'Z' : [':CocEnable'                          , 'enable CoC'],
+      \ 'l' : [':!genhtml coverage/lcov.info --output-directory out && open ./out/index.html'   , 'Lcov'],
       \ }
       " \ 'o' : ['<Plug>(coc-openlink)'                , 'open link'],
+
+" let g:which_key_map.l.l = {
+"       \ 'name' : '+lsp' ,
+"       \ 'b' : [':GcovBuild'                          , 'Lcov build'],
+"       \ 'c' : [':GcovClear'                          , 'Lcov clear'],
+"       \ }
 
 " Register which key map
 autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map')

@@ -28,6 +28,8 @@ if (g:plugins_enabled == 1)
         " Plug 'lifepillar/vim-gruvbox8'
         " non lightweight gruvbox
         Plug 'morhetz/gruvbox'
+        " Dracula theme
+        Plug 'dracula/vim', { 'as': 'dracula' }
         " indentation line indicators around 2.5ms
         Plug 'Yggdroot/indentLine'
       endif
@@ -57,6 +59,8 @@ if (g:plugins_enabled == 1)
         " Plug 'psliwka/vim-smoothie'
         " Bunch of pre-made snippets
         Plug 'honza/vim-snippets'
+        " Lazy git integration
+        Plug 'kdheepak/lazygit.nvim'
       endif
 
       " ============== Lua ============== "

@@ -9,6 +9,7 @@ source $HOME/.config/nvim/env/functions.vim
 source $HOME/.config/nvim/env/settings.vim
 source $HOME/.config/nvim/env/mappings.vim
 source $HOME/.config/nvim/env/plugins.vim
+" set colorcolumn=80
 
 " for f in split(glob('~/.config/nvim/env/*.vim'), '\n')
 "     exe 'source' f

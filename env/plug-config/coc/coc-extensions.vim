@@ -25,7 +25,8 @@ let g:coc_global_extensions = [
   \ 'coc-json',
   \ 'coc-metals',
   \ 'coc-marketplace',
-  \ 'coc-flutter',
   \ 'coc-sh',
   \ ]
+  "\ 'coc-flutter-tools',
+  "\ 'coc-flutter',
 " \ 'coc-fzf-preview', " read the documentation to implement this

@@ -8,6 +8,7 @@ set background=dark                     " tell vim what the background color loo
 " let g:gruvbox_italic=1
 " colorscheme gruvbox8
 colorscheme gruvbox
+" colorscheme dracula
 " Plug 'joshdick/onedark.vim'
 " Plug 'ghifarit53/tokyonight-vim'
 " Plug 'kaicataldo/material.vim', { 'branch': 'main' }
@@ -16,7 +17,7 @@ colorscheme gruvbox
 let t:is_transparent = 1
 function! Toggle_transparent_background()
   if t:is_transparent == 0
-    colorscheme gruvbox8
+    colorscheme gruvbox
     " highlight LineNr ctermbg=none guibg=NONE guifg=NONE ctermfg=NONE
     " autocmd VimEnter,WinEnter,BufWinEnter * setlocal cursorline
     " autocmd WinLeave * setlocal nocursorline

@@ -70,6 +70,12 @@ nnoremap Y v$hy
 nmap <BS> %
 xmap <BS> %
 
+" Undo break points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ? ?<c-g>u
+inoremap ! !<c-g>u
+
 " Allow misspellings
 cnoreabbrev qq q!
 cnoreabbrev Q q
@@ -82,14 +88,21 @@ cnoreabbrev Qa qa
 cnoreabbrev Bd bd
 cnoreabbrev bD bd
 "nmap q <nop>
-map <C-z> <nop>
+"map <C-z> <nop>
 
-nnoremap gl $
-nnoremap gh ^
+" nnoremap gl $
+" nnoremap gh ^
 nnoremap S :%s//gI<Left><Left><Left>
+" vnoremap S :'<,'>%s//gI<Left><Left><Left>
+
+" Jumplist mutations (when C-o, C-i), add more points to the jump list
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+
 
 " Open finder
 command! Finder silent exe '!open ' . expand("%:p:h")
+
 
 " map <silent><leader>s :setlocal spell spelllang=en_us<CR>
 
