@@ -5,14 +5,12 @@ set clipboard=unnamedplus               " Sync system clipboard with vim
 set iskeyword+=-                      	" treat dash separated words as a word text object"
 set cmdheight=1                         " More space for displaying messages
 set mouse=a                             " Enable your mouse
-set splitbelow splitright               " Horizontal and Vertical splits will be swaped in place
+set splitbelow splitright               " Horizontal and Vertical splits will be swaped in place.
 set scrolloff=10 	            	       	" Keep 10 lines below and above the cursor when scrolling
 set updatetime=300                      " Faster completion
 set timeoutlen=100                      " By default timeoutlen is 1000 ms
 set hidden                              " enable buffers to hide - prevents error: "E37: No write since last change ...
 set encoding=utf-8                      " The encoding displayed
-set updatetime=300                      " Faster completion
-set timeoutlen=100                      " By default timeoutlen is 1000 ms
 set modifiable
 
 

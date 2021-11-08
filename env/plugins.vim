@@ -32,6 +32,8 @@ if (g:plugins_enabled == 1)
         Plug 'dracula/vim', { 'as': 'dracula' }
         " indentation line indicators around 2.5ms
         Plug 'Yggdroot/indentLine'
+        " To disable highlighting after the search is done
+        Plug 'romainl/vim-cool'
       endif
 
       " ========== Should Haves ========== "
@@ -68,7 +70,7 @@ if (g:plugins_enabled == 1)
         " Colorizer
         Plug 'norcalli/nvim-colorizer.lua'
         " much much better syntax highlight
-        Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+        Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
       endif
 
     call plug#end()
