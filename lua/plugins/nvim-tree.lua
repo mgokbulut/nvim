@@ -1,42 +1,27 @@
--- -----------------------------------------------------------
--- -- File manager configuration file
--- -----------------------------------------------------------
---
--- -- Plugin: nvim-tree
--- -- https://github.com/kyazdani42/nvim-tree.lua
-
 local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-local g = vim.g
 
-vim.o.termguicolors = true
-
-g.nvim_tree_add_trailing = 0 -- append a trailing slash to folder names
-g.nvim_tree_git_hl = 1
-g.nvim_tree_highlight_opened_files = 0
-g.nvim_tree_indent_markers = 1
-g.nvim_tree_quit_on_open = 0 -- closes tree when file's opened
-g.nvim_tree_window_picker_exclude = {
+vim.g.nvim_tree_add_trailing = 0 -- append a trailing slash to folder names
+vim.g.nvim_tree_git_hl = 0 -- git files colored ~ gets confusing for me
+vim.g.nvim_tree_highlight_opened_files = 0
+vim.g.nvim_tree_indent_markers = 1
+vim.g.nvim_tree_quit_on_open = 0 -- closes tree when file's opened
+vim.g.nvim_tree_refresh_wait = 200 -- faster refresh
+vim.g.nvim_tree_window_picker_exclude = {
    filetype = { 'notify', 'packer', 'qf' },
    buftype = {'terminal' },
 }
 
-g.nvim_tree_show_icons = {
-   folders = 1,
-   files = 1,
-   git = 1,
-}
-
-g.nvim_tree_icons = {
+vim.g.nvim_tree_icons = {
    default = "",
    symlink = "",
    git = {
       deleted = "",
       ignored = "◌",
       renamed = "➜",
-      staged = "✓",
+      staged = "",
+      unstaged = "",
+      untracked = "",
       unmerged = "",
-      unstaged = "✗",
-      untracked = "★",
    },
 --    folder = {
 --       -- arrow_open = "",
@@ -51,23 +36,17 @@ g.nvim_tree_icons = {
 }
 
 require('nvim-tree').setup {
-
-  git = {
-    ignore = false,
-  },
-
-  diagnostics = {
-    enable = false,
-    icons = {
-      hint = "",
-      info = "",
-      warning = "",
-      error = "",
-    },
-  },
   disable_netrw = true,
   hijack_netrw = true,
-  ignore_ft_on_setup = { "dashboard" },
+  ignore_ft_on_setup = {
+    "startify",
+    "dashboard",
+    "alpha",
+  },
+  update_to_buf_dir = {
+    enable = true,
+    auto_open = true,
+  },
   auto_close = true,
   open_on_tab = false,
   hijack_cursor = true,
@@ -76,17 +55,33 @@ require('nvim-tree').setup {
     enable = true,
     update_cwd = false,
   },
+  git = {
+    ignore = false,
+  },
+  diagnostics = {
+    enable = true,
+  },
   filters = {
     dotfiles = false,
     custom = { '.git', 'node_modules', '.cache', '.bin' },
   },
+  trash = {
+    cmd = "trash",
+    require_confirm = true,
+  },
+  show_icons = {
+    git = 1,
+    folders = 1,
+    files = 1,
+    folder_arrows = 1,
+    tree_width = 30,
+  },
   view = {
     allow_resize = true,
+    auto_resize = true,
     side = "left",
-    width = 25,
+    width = 35,
     mappings = {
-      -- custom only false will merge the list with the default mappings
-      -- if true, it will only use your list to set the mappings
       custom_only = true,
       list = {
         { key = {"o", "<2-LeftMouse>"},         cb = tree_cb("edit") },
@@ -114,18 +109,6 @@ require('nvim-tree').setup {
         { key = "q",                            cb = tree_cb("close") },
         { key = "e",                            cb = tree_cb("close") },
         { key = "f",                            cb = ":!open .<cr>"},
-        -- { key = "<C-v>",                        cb = tree_cb("vsplit") },
-        -- { key = "<C-x>",                        cb = tree_cb("split") },
-        -- { key = "<C-t>",                        cb = tree_cb("tabnew") },
-        -- { key = "<",                            cb = tree_cb("prev_sibling") },
-        -- { key = ">",                            cb = tree_cb("next_sibling") },
-        -- { key = "<Tab>",                        cb = tree_cb("preview") },
-        -- { key = "K",                            cb = tree_cb("first_sibling") },
-        -- { key = "J",                            cb = tree_cb("last_sibling") },
-        -- { key = "I",                            cb = tree_cb("toggle_ignored") },
-        -- { key = "[c",                           cb = tree_cb("prev_git_item") },
-        -- { key = "]c",                           cb = tree_cb("next_git_item") },
-        -- { key = "-",                            cb = tree_cb("dir_up") },
       }
     }
   },

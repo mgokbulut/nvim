@@ -1,21 +1,21 @@
-local map = vim.api.nvim_set_keymap
-local default_opts = { noremap = true, silent = true }
-local cmd = vim.cmd
-
-local wk = require('which-key')
+local status_ok, which_key = pcall(require, "which-key")
+if not status_ok then
+  return
+end
 
 local mappings = {
   ['/'] = { ':CommentToggle<cr>'                                     , 'comment' },
   [';'] = { ':Commands'                                              , 'commands' },
   ['='] = { '<C-W>='                                                 , 'balance windows' },
-  [' '] = { '<cmd>lua require("telescope.builtin").find_files()<cr>' , 'files' },
-  f     = { '<cmd>lua require("telescope.builtin").live_grep()<cr>'  , 'ripgrep' },
+  [' '] = { '<cmd>lua require("telescope.builtin").find_files()<cr>' , 'find files' },
+  f     = { '<cmd>lua require("telescope.builtin").live_grep()<cr>'  , 'find text' },
   b     = { '<cmd>lua require("telescope.builtin").buffers()<cr>'    , 'buffers' },
   h     = { '<cmd>lua require("telescope.builtin").help_tags()<cr>'  , 'help' },
   z     = { ':MaximizerToggle<cr>'                                   , 'maximizer' },
   e     = { ':NvimTreeToggle<cr>'                                    , 'file tree' },
-  t     = { ':Term<cr>'                                              , 'terminal'},
   n     = { '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>'            , 'next diagnostic'},
+  P     = { '<cmd>Telescope projects<cr>'                            , "Projects" },
+  -- t     = { ':Term<cr>'                                              , 'terminal'},
   -- q     = { '<Plug>(coc-fix-current)'                                , 'quickfix' },
   --n     = { '<Plug>(coc-diagnostic-next)'                            , 'next diagnostic' },
   -- j     = { ':join'                                                  , 'join' },
@@ -70,6 +70,38 @@ mappings.l = {
   f = {'<cmd>lua vim.lsp.buf.formatting()<CR>'                           , 'formatting'},
 }
 
+-- l = {
+--   name = "LSP",
+--   a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" },
+--   d = {
+--     "<cmd>Telescope lsp_document_diagnostics<cr>",
+--     "Document Diagnostics",
+--   },
+--   w = {
+--     "<cmd>Telescope lsp_workspace_diagnostics<cr>",
+--     "Workspace Diagnostics",
+--   },
+--   f = { "<cmd>lua vim.lsp.buf.formatting()<cr>", "Format" },
+--   i = { "<cmd>LspInfo<cr>", "Info" },
+--   I = { "<cmd>LspInstallInfo<cr>", "Installer Info" },
+--   j = {
+--     "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
+--     "Next Diagnostic",
+--   },
+--   k = {
+--     "<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>",
+--     "Prev Diagnostic",
+--   },
+--   l = { "<cmd>lua vim.lsp.codelens.run()<cr>", "CodeLens Action" },
+--   q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<cr>", "Quickfix" },
+--   r = { "<cmd>lua vim.lsp.buf.rename()<cr>", "Rename" },
+--   s = { "<cmd>Telescope lsp_document_symbols<cr>", "Document Symbols" },
+--   S = {
+--     "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+--     "Workspace Symbols",
+--   },
+-- },
+
 mappings.t = {
   name = '+test',
   n = {':TestNearest<cr>'                , 'nearest Ultest'},
@@ -79,6 +111,18 @@ mappings.t = {
   s = {':TestSuite<cr>'                  , 'Suite'},
   l = {':TestLast<cr>'                   , 'last'},
   v = {':TestVisit<cr>'                  , 'visit'},
+}
+
+mappings.s = {
+  name = "Search",
+  b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+  c = { "<cmd>Telescope colorscheme<cr>", "Colorscheme" },
+  h = { "<cmd>Telescope help_tags<cr>", "Find Help" },
+  M = { "<cmd>Telescope man_pages<cr>", "Man Pages" },
+  r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+  R = { "<cmd>Telescope registers<cr>", "Registers" },
+  k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
+  C = { "<cmd>Telescope commands<cr>", "Commands" },
 }
 
 local settings = {
@@ -95,6 +139,14 @@ local settings = {
     spacing = 2, -- spacing between columns
     align = "left", -- align columns left, center or right
   },
+  spelling = {
+    enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+    suggestions = 20, -- how many suggestions should be shown in the list?
+  },
+  presets = {
+    z = true, -- bindings for folds, spelling and others prefixed with z
+    g = true, -- bindings for prefixed with g
+  },
   show_help = false, -- show help message on the command line when the popup is visible
 }
 
@@ -102,5 +154,6 @@ local opts = {
   prefix = "<leader>"
 }
 
-wk.setup(settings)
-wk.register(mappings, opts)
+--vim.cmd[[highlight WhichKeyFloat guifg=NONE guibg=NONE ctermbg=NONE ctermfg=NONE]]
+which_key.setup(settings)
+which_key.register(mappings, opts)

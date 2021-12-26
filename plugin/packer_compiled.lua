@@ -57,7 +57,7 @@ end
 time([[Luarocks path setup]], false)
 time([[try_loadstring definition]], true)
 local function try_loadstring(s, component, name)
-  local success, result = pcall(loadstring(s))
+  local success, result = pcall(loadstring(s), name, _G.packer_plugins[name])
   if not success then
     vim.schedule(function()
       vim.api.nvim_notify('packer.nvim: Error running ' .. component .. ' for ' .. name .. ': ' .. result, vim.log.levels.ERROR, {})
@@ -119,6 +119,16 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["dracula.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/dracula.nvim",
+    url = "https://github.com/Mofiqul/dracula.nvim"
+  },
+  ["flutter-tools.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
+    url = "https://github.com/akinsho/flutter-tools.nvim"
+  },
   ["gitsigns.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
@@ -138,6 +148,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
+  },
+  ["lspsaga.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
+    url = "https://github.com/glepnir/lspsaga.nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -174,6 +189,11 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
+  ["nvim-transparent"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-transparent",
+    url = "https://github.com/xiyaowong/nvim-transparent"
+  },
   ["nvim-tree.lua"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-tree.lua",
@@ -204,6 +224,11 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/rose-pine",
     url = "https://github.com/rose-pine/neovim"
   },
+  ["tabout.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/tabout.nvim",
+    url = "https://github.com/abecodes/tabout.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -228,6 +253,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-sandwich",
     url = "https://github.com/machakann/vim-sandwich"
+  },
+  ["vim-test"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-test",
+    url = "https://github.com/vim-test/vim-test"
+  },
+  ["vim-ultest"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-ultest",
+    url = "https://github.com/rcarriga/vim-ultest"
   },
   ["which-key.nvim"] = {
     loaded = true,

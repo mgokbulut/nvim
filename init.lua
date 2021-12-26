@@ -18,7 +18,7 @@ https://github.com/brainfucksec/neovim-lua
 -- Import Lua modules
 -----------------------------------------------------------
 require('plugins/packer')
-require('settings')
+require('options')
 require('keymaps')
 require('colorscheme')
 
@@ -38,7 +38,7 @@ require('plugins/nvim-bufferline')
 require('plugins/nvim-gitsigns')
 
 require('plugins/nvim-flutter-tools')
-require('plugins/nvim-lspconfig')
+require('plugins/lsp_config/nvim-lspconfig')
 require('plugins/nvim-cmp')
 -- require('plugins/nvim-lspsaga')
 require('plugins/nvim-which-key')

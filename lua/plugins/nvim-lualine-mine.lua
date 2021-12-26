@@ -103,7 +103,6 @@ local components = {
   },
   diff = {
     "diff",
-    source = diff_source,
     symbols = { added = "  ", modified = "柳", removed = " " },
     diff_color = {
       added = { fg = colors.green },
@@ -115,7 +114,6 @@ local components = {
   },
   python_env = {
     function()
-      local utils = require "lvim.core.lualine.utils"
       if vim.bo.filetype == "python" then
         local venv = os.getenv "CONDA_DEFAULT_ENV"
         if venv then

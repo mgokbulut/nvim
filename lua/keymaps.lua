@@ -1,11 +1,14 @@
 -----------------------------------------------------------
--- Keymaps configuration file: keymaps of neovim
--- and plugins.
+-- Keymaps configuration file: keymaps of neovim and plugins.
 -----------------------------------------------------------
 
 local map = vim.api.nvim_set_keymap
 local default_opts = { noremap = true, silent = true }
-local cmd = vim.cmd
+
+-- Change leader key and disable space
+map('n', '<space>', '<nop>', {noremap = true})
+vim.g.mapleader = ' '
+vim.g.maplocalleader = " "
 
 -----------------------------------------------------------
 -- Neovim shortcuts:
@@ -20,14 +23,16 @@ map('v', '<TAB>', '>gv', default_opts)
 map('v', '<S-TAB>', '<gv', default_opts)
 
 -- Move selected line / block of text in visual mode
-map('x', 'K', ':move \'<-2<CR>gv-gv', default_opts)
-map('x', 'J', ':move \'>+1<CR>gv-gv', default_opts)
-map('x', 'L', '>gv', default_opts)
-map('x', 'H', '<gv', default_opts)
+map('x', '<A-k>', ':move \'<-2<CR>gv-gv', default_opts)
+map('x', '<A-j>', ':move \'>+1<CR>gv-gv', default_opts)
+map('x', '<A-l>', '>gv', default_opts)
+map('x', '<A-h>', '<gv', default_opts)
 
--- Change leader key and disable space
-vim.g.mapleader = ' '
-map('n', '<space>', '<nop>', {noremap = true})
+-- Move selected line / block of text in visual mode
+map('x', 'K', '4k', default_opts)
+map('x', 'J', '4j', default_opts)
+map('x', 'L', '4l', default_opts)
+map('x', 'H', '4h', default_opts)
 
 -- don't use arrow keys
 map('n', '<up>', ':echoe "Use k"<cr>', { noremap = true })
@@ -76,6 +81,9 @@ map('c', 'Qa', 'qa', default_opts)
 map('c', 'Bd', 'bd', default_opts)
 map('c', 'bD', 'bd', default_opts)
 
+-- don't copy when pasted
+map('v', 'p', '"_dP', default_opts)
+
 -- don't open command history
 map('n', 'q:', '<nop>', default_opts)
 
@@ -108,3 +116,16 @@ map('n', 'j', [[(v:count > 1 ? "m'" . v:count : '') . 'j'"]], { expr = true })
 -- Bufdelete
 map('c', 'bd', 'Bdelete', default_opts)
 map('n', 'W', ':Bdelete<cr>', default_opts)
+
+--
+-- vim.cmd[[let g:camelcasemotion_key = '<leader>']]
+vim.cmd[[
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+map <silent> ge <Plug>CamelCaseMotion_ge
+sunmap w
+sunmap b
+sunmap e
+sunmap ge
+]]
