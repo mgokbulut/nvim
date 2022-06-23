@@ -1,0 +1,12 @@
+-- local servers = { "metals" }
+-- for _, lsp in pairs(servers) do
+-- 	require("lspconfig")[lsp].setup({
+-- 		on_attach = require("plugins.lsp.handlers").on_attach,
+-- 		capabilities = require("plugins.lsp.handlers").capabilities,
+-- 		autostart = true,
+-- 		-- flags = {
+-- 		-- 	-- This will be the default in neovim 0.7+
+-- 		-- 	debounce_text_changes = 150,
+-- 		-- },
+-- 	})
+-- end

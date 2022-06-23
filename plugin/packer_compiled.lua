@@ -69,15 +69,40 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  CamelCaseMotion = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/CamelCaseMotion",
+    url = "https://github.com/bkad/CamelCaseMotion"
+  },
   ["Comment.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  ["FixCursorHold.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/FixCursorHold.nvim",
+    url = "https://github.com/antoinemadec/FixCursorHold.nvim"
+  },
   LuaSnip = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  Ultisnips = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/Ultisnips",
+    url = "https://github.com/SirVer/Ultisnips"
+  },
+  ["alpha-nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/alpha-nvim",
+    url = "https://github.com/goolord/alpha-nvim"
+  },
+  ["awesome-flutter-snippets"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/awesome-flutter-snippets",
+    url = "https://github.com/Neevash/awesome-flutter-snippets"
   },
   ["bufdelete.nvim"] = {
     loaded = true,
@@ -119,15 +144,40 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["dart-snippets"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/dart-snippets",
+    url = "https://github.com/mgokbulut/dart-snippets"
+  },
+  ["dartlang-snippets"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/dartlang-snippets",
+    url = "https://github.com/natebosch/dartlang-snippets"
+  },
   ["dracula.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/dracula.nvim",
     url = "https://github.com/Mofiqul/dracula.nvim"
   },
+  firenvim = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/firenvim",
+    url = "https://github.com/glacambre/firenvim"
+  },
   ["flutter-tools.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/flutter-tools.nvim",
     url = "https://github.com/akinsho/flutter-tools.nvim"
+  },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
+  },
+  ["git-worktree.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/git-worktree.nvim",
+    url = "https://github.com/ThePrimeagen/git-worktree.nvim"
   },
   ["gitsigns.nvim"] = {
     loaded = true,
@@ -137,27 +187,32 @@ _G.packer_plugins = {
   ["gruvbox.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
-    url = "https://github.com/ellisonleao/gruvbox.nvim"
+    url = "https://github.com/mgokbulut/gruvbox.nvim"
+  },
+  ["impatient.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/impatient.nvim",
+    url = "https://github.com/lewis6991/impatient.nvim"
   },
   ["indent-blankline.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
+  ["lsp-fastaction.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lsp-fastaction.nvim",
+    url = "https://github.com/windwp/lsp-fastaction.nvim"
+  },
+  ["lsp_signature.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
+    url = "https://github.com/ray-x/lsp_signature.nvim"
+  },
   ["lspkind-nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
-  },
-  ["lspsaga.nvim"] = {
-    loaded = true,
-    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lspsaga.nvim",
-    url = "https://github.com/glepnir/lspsaga.nvim"
-  },
-  ["lualine.nvim"] = {
-    loaded = true,
-    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lualine.nvim",
-    url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["lush.nvim"] = {
     loaded = true,
@@ -169,6 +224,16 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/monokai.nvim",
     url = "https://github.com/tanvirtin/monokai.nvim"
   },
+  ["nlsp-settings.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nlsp-settings.nvim",
+    url = "https://github.com/tamago324/nlsp-settings.nvim"
+  },
+  ["null-ls.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/null-ls.nvim",
+    url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
+  },
   ["nvim-autopairs"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-autopairs",
@@ -179,10 +244,20 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-cokeline"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-cokeline",
+    url = "https://github.com/noib3/nvim-cokeline"
+  },
   ["nvim-colorizer.lua"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua",
     url = "https://github.com/norcalli/nvim-colorizer.lua"
+  },
+  ["nvim-lsp-installer"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-lsp-installer",
+    url = "https://github.com/williamboman/nvim-lsp-installer"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -204,6 +279,11 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-ts-context-commentstring"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-ts-context-commentstring",
+    url = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
@@ -219,6 +299,11 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
+  ["project.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/project.nvim",
+    url = "https://github.com/ahmedkhalf/project.nvim"
+  },
   ["rose-pine"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/rose-pine",
@@ -228,6 +313,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/tabout.nvim",
     url = "https://github.com/abecodes/tabout.nvim"
+  },
+  ["telescope-fzy-native.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzy-native.nvim"
   },
   ["telescope.nvim"] = {
     loaded = true,
@@ -239,6 +329,16 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/tmux.nvim",
     url = "https://github.com/aserowy/tmux.nvim"
   },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
+  },
+  ["vim-FIGlet"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-FIGlet",
+    url = "https://github.com/fadein/vim-FIGlet"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-fugitive",
@@ -248,6 +348,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-maximizer",
     url = "https://github.com/szw/vim-maximizer"
+  },
+  ["vim-obsession"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-obsession",
+    url = "https://github.com/tpope/vim-obsession"
   },
   ["vim-sandwich"] = {
     loaded = true,
@@ -268,6 +373,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/which-key.nvim",
     url = "https://github.com/folke/which-key.nvim"
+  },
+  ["windline.nvim"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/windline.nvim",
+    url = "https://github.com/windwp/windline.nvim"
   }
 }
 

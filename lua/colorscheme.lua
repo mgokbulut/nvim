@@ -1,13 +1,16 @@
 -----------------------------------------------------------
 -- Colorscheme
 -----------------------------------------------------------
+-- get colors for highlight groups
+-- :so $VIMRUNTIME/syntax/hitest.vim
 
--- local map = vim.api.nvim_set_keymap  -- set global keymap
--- local exec = vim.api.nvim_exec 	-- execute Vimscript
--- local fn = vim.fn       				-- call Vim functions
-local g = vim.g         				-- global variables
-local cmd = vim.cmd     				-- execute Vim commands
-local opt = vim.opt         		-- global/buffer/windows-scoped options
+vim.opt.termguicolors = true      -- enable 24-bit RGB colors
 
-opt.termguicolors = true      -- enable 24-bit RGB colors
-cmd [[colorscheme gruvbox]]
+vim.cmd [[
+try
+  colorscheme gruvbox
+catch /^Vim\%((\a\+)\)\=:E185/
+  colorscheme default
+  set background=dark
+endtry
+]]
