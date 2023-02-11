@@ -79,8 +79,8 @@ require("nvim-tree").setup({
 		enable = true,
 	},
 	filters = {
-		dotfiles = false,
-		custom = { ".git", "node_modules", ".cache", ".bin" },
+		dotfiles = true,
+		custom = { ".git" },
 	},
 	trash = {
 		cmd = "trash",
@@ -135,7 +135,7 @@ require("nvim-tree").setup({
 				{ key = "v", cb = tree_cb("vsplit") },
 				{ key = "s", cb = tree_cb("split") },
 				{ key = "P", cb = tree_cb("parent_node") },
-				{ key = "i", cb = tree_cb("toggle_dotfiles") },
+				{ key = ".", cb = tree_cb("toggle_dotfiles") },
 				{ key = "H", cb = tree_cb("toggle_help") },
 				{ key = "R", cb = tree_cb("refresh") },
 				{ key = "a", cb = tree_cb("create") },

@@ -77,7 +77,8 @@ return require("packer").startup(function(use)
 
 	-- Colorschemes
 	-- use {"ellisonleao/gruvbox.nvim", requires = {"rktjmp/lush.nvim"}}
-	use({ "mgokbulut/gruvbox.nvim", requires = { "rktjmp/lush.nvim" } })
+	--[[ use({ "mgokbulut/gruvbox.nvim", requires = { "rktjmp/lush.nvim" } }) ]]
+	use("ellisonleao/gruvbox.nvim")
 	use("Mofiqul/dracula.nvim")
 	use("tanvirtin/monokai.nvim")
 	use({ "rose-pine/neovim", as = "rose-pine" })
@@ -119,7 +120,7 @@ return require("packer").startup(function(use)
 	use("tpope/vim-fugitive")
 
 	-- use("abecodes/tabout.nvim") -- allows tab in insert mode to move outside brackets
-	use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
+	-- use({ "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" })
 
 	-- Dependencies
 	use("nvim-lua/plenary.nvim")

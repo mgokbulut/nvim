@@ -25,8 +25,8 @@ map("v", ">", ">gv", default_opts)
 -- map('x', '<S-TAB>', '<gv', default_opts)
 
 -- Move selected line / block of text in visual mode
-map("x", "K", ":move '<-2<CR>gv-gv", default_opts)
 map("x", "J", ":move '>+1<CR>gv-gv", default_opts)
+map("x", "K", ":move '<-2<CR>gv-gv", default_opts)
 map("x", "L", ">gv", default_opts)
 map("x", "H", "<gv", default_opts)
 
@@ -120,6 +120,9 @@ map("n", "j", [[(v:count > 1 ? "m'" . v:count : '') . 'j'"]], { expr = true })
 map("n", "[q", ":cprev<cr>", default_opts)
 map("n", "]q", ":cnext<cr>", default_opts)
 
+-- Ctrl + Space termianl
+-- map("n", "<C-Enter>", ":!ls", default_opts)
+
 -----------------------------------------------------------
 -- Applications & Plugins shortcuts:
 -----------------------------------------------------------
@@ -157,6 +160,7 @@ vim.cmd([[
   augroup _alpha
     autocmd!
     autocmd User AlphaReady set showtabline=0 | autocmd BufUnload <buffer> set showtabline=2
+
   augroup end
 
   command -nargs=* Vsearch vimgrep! /\v<args>/gj **/*
@@ -164,3 +168,18 @@ vim.cmd([[
 
 -- Figlet
 map("v", "<leader>f", ":FIGlet<cr>", default_opts)
+
+-- upgraded 'a'
+function UpgradeInsert(cmd)
+	return ":lua require('functions').upgradedStart(function() vim.cmd([[:call feedkeys('"
+		.. cmd
+		.. "','n')]]) end)<CR>"
+end
+map("n", "a", UpgradeInsert("a"), { noremap = true, silent = false })
+-- map("n", "A", upgradeInsert("A"), default_opts)
+map("n", "i", UpgradeInsert("i"), { noremap = true, silent = false })
+-- map("n", "I", upgradeInsert("I"), default_opts)
+
+-- vim.cmd([[
+--   command! -nargs=0 UpgradedA call UpgradededA()
+-- ]])

@@ -5,7 +5,7 @@ end
 
 -- hello
 local mappings = {
-	["/"] = { ":CommentToggle<cr>", "comment" },
+	["/"] = { ":ToggleTerm<cr>", "comment" },
 	[";"] = { ":Commands", "commands" },
 	["="] = { "<C-W>=", "balance windows" },
 	[" "] = { '<cmd>lua require("telescope.builtin").find_files()<cr>', "find files" },
@@ -17,7 +17,9 @@ local mappings = {
 	n = { "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", "next diagnostic" },
 	P = { "<cmd>Telescope projects<cr>", "Projects" },
 	-- r = { ":!open -a 'google chrome' ./index.html<CR><CR>", "run" },
-	r = { ":!tsc --build & open -a 'google chrome' ./src/index.html<CR><CR>", "run" },
+	-- r = { ":!tsc --build & open -a 'google chrome' ./src/index.html<CR><CR>", "run" },
+	-- r = { "<C-\\><C-c>npm run start<CR><C->", "run" },
+	-- r = { ":silent exec '!runscript.sh'<CR>", "run" },
 	-- t     = { ':Term<cr>'                                              , 'terminal'},
 	-- q     = { '<Plug>(coc-fix-current)'                                , 'quickfix' },
 	--n     = { '<Plug>(coc-diagnostic-next)'                            , 'next diagnostic' },
@@ -97,7 +99,8 @@ mappings.a = {
 
 mappings.g = {
 	name = "Git",
-	g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+	--[[ g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" }, ]]
+	g = { ":Git<cr>", "Git" },
 	-- j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
 	-- k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
 	-- b = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },

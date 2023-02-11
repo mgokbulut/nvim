@@ -9,23 +9,26 @@ vim.api.nvim_command('packadd packer.nvim')
 
 local no_errors, error_msg = pcall(function()
 
-  local time
-  local profile_info
-  local should_profile = false
-  if should_profile then
-    local hrtime = vim.loop.hrtime
-    profile_info = {}
-    time = function(chunk, start)
-      if start then
-        profile_info[chunk] = hrtime()
-      else
-        profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
-      end
+_G._packer = _G._packer or {}
+_G._packer.inside_compile = true
+
+local time
+local profile_info
+local should_profile = false
+if should_profile then
+  local hrtime = vim.loop.hrtime
+  profile_info = {}
+  time = function(chunk, start)
+    if start then
+      profile_info[chunk] = hrtime()
+    else
+      profile_info[chunk] = (hrtime() - profile_info[chunk]) / 1e6
     end
-  else
-    time = function(chunk, start) end
   end
-  
+else
+  time = function(chunk, start) end
+end
+
 local function save_profiles(threshold)
   local sorted_times = {}
   for chunk_name, time_taken in pairs(profile_info) do
@@ -38,8 +41,10 @@ local function save_profiles(threshold)
       results[i] = elem[1] .. ' took ' .. elem[2] .. 'ms'
     end
   end
+  if threshold then
+    table.insert(results, '(Only showing plugins that took longer than ' .. threshold .. ' ms ' .. 'to load)')
+  end
 
-  _G._packer = _G._packer or {}
   _G._packer.profile_output = results
 end
 
@@ -159,6 +164,11 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/dracula.nvim",
     url = "https://github.com/Mofiqul/dracula.nvim"
   },
+  ["ejs-syntax"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/ejs-syntax",
+    url = "https://github.com/nikvdp/ejs-syntax"
+  },
   firenvim = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/firenvim",
@@ -187,7 +197,7 @@ _G.packer_plugins = {
   ["gruvbox.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/gruvbox.nvim",
-    url = "https://github.com/mgokbulut/gruvbox.nvim"
+    url = "https://github.com/ellisonleao/gruvbox.nvim"
   },
   ["impatient.nvim"] = {
     loaded = true,
@@ -199,11 +209,6 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
     url = "https://github.com/lukas-reineke/indent-blankline.nvim"
   },
-  ["lsp-fastaction.nvim"] = {
-    loaded = true,
-    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lsp-fastaction.nvim",
-    url = "https://github.com/windwp/lsp-fastaction.nvim"
-  },
   ["lsp_signature.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lsp_signature.nvim",
@@ -213,11 +218,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lspkind-nvim",
     url = "https://github.com/onsails/lspkind-nvim"
-  },
-  ["lush.nvim"] = {
-    loaded = true,
-    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/lush.nvim",
-    url = "https://github.com/rktjmp/lush.nvim"
   },
   ["monokai.nvim"] = {
     loaded = true,
@@ -244,6 +244,11 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-cmp",
     url = "https://github.com/hrsh7th/nvim-cmp"
   },
+  ["nvim-code-action-menu"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-code-action-menu",
+    url = "https://github.com/weilbith/nvim-code-action-menu"
+  },
   ["nvim-cokeline"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-cokeline",
@@ -263,6 +268,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
+  },
+  ["nvim-metals"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/nvim-metals",
+    url = "https://github.com/scalameta/nvim-metals"
   },
   ["nvim-transparent"] = {
     loaded = true,
@@ -309,11 +319,6 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/rose-pine",
     url = "https://github.com/rose-pine/neovim"
   },
-  ["tabout.nvim"] = {
-    loaded = true,
-    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/tabout.nvim",
-    url = "https://github.com/abecodes/tabout.nvim"
-  },
   ["telescope-fzy-native.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/telescope-fzy-native.nvim",
@@ -344,6 +349,11 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-fugitive",
     url = "https://github.com/tpope/vim-fugitive"
   },
+  ["vim-ghost"] = {
+    loaded = true,
+    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-ghost",
+    url = "https://github.com/raghur/vim-ghost"
+  },
   ["vim-maximizer"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-maximizer",
@@ -359,16 +369,6 @@ _G.packer_plugins = {
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-sandwich",
     url = "https://github.com/machakann/vim-sandwich"
   },
-  ["vim-test"] = {
-    loaded = true,
-    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-test",
-    url = "https://github.com/vim-test/vim-test"
-  },
-  ["vim-ultest"] = {
-    loaded = true,
-    path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/vim-ultest",
-    url = "https://github.com/rcarriga/vim-ultest"
-  },
   ["which-key.nvim"] = {
     loaded = true,
     path = "/Users/mgokbulut/.local/share/nvim/site/pack/packer/start/which-key.nvim",
@@ -382,10 +382,18 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+
+_G._packer.inside_compile = false
+if _G._packer.needs_bufread == true then
+  vim.cmd("doautocmd BufRead")
+end
+_G._packer.needs_bufread = false
+
 if should_profile then save_profiles() end
 
 end)
 
 if not no_errors then
+  error_msg = error_msg:gsub('"', '\\"')
   vim.api.nvim_command('echohl ErrorMsg | echom "Error in packer_compiled: '..error_msg..'" | echom "Please check your config for correctness" | echohl None')
 end
