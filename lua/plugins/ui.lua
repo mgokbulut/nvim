@@ -5,35 +5,35 @@ return {
 			vim.cmd.colorscheme("gruvbox")
 		end,
 	},
-	-- {
-	-- 	"rcarriga/nvim-notify",
-	-- 	keys = {
-	-- 		{
-	-- 			"\\",
-	-- 			function()
-	-- 				require("notify").dismiss({ silent = true, pending = true })
-	-- 				vim.api.nvim_feedkeys("<c-\\>", "n", true)
-	-- 			end,
-	-- 			silent = true,
-	-- 			desc = "Delete all Notifications",
-	-- 		},
-	-- 	},
-	-- 	opts = {
-	-- 		fps = 30,
-	-- 		-- minimum_width = 50,
-	-- 		-- max_width = 50,
-	-- 		max_height = function()
-	-- 			return math.floor(vim.o.lines * 0.75)
-	-- 		end,
-	-- 		max_width = function()
-	-- 			return math.floor(vim.o.columns * 0.25)
-	-- 		end,
-	-- 		min_width = function()
-	-- 			return math.floor(vim.o.columns * 0.25)
-	-- 		end,
-	-- 		stages = "fade",
-	-- 	},
-	-- },
+	{
+		"rcarriga/nvim-notify",
+		keys = {
+			{
+				"\\",
+				function()
+					require("notify").dismiss({ silent = true, pending = true })
+					vim.api.nvim_feedkeys("<c-\\>", "n", true)
+				end,
+				silent = true,
+				desc = "Delete all Notifications",
+			},
+		},
+		opts = {
+			fps = 30,
+			-- minimum_width = 50,
+			-- max_width = 50,
+			max_height = function()
+				return math.floor(vim.o.lines * 0.75)
+			end,
+			max_width = function()
+				return math.floor(vim.o.columns * 0.25)
+			end,
+			min_width = function()
+				return math.floor(vim.o.columns * 0.25)
+			end,
+			stages = "fade",
+		},
+	},
 	{
 		-- Colorizer
 		"uga-rosa/ccc.nvim",

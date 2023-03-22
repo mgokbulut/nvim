@@ -96,7 +96,7 @@ return {
 		lazy = false,
 		keys = {
 			{ "<leader>e", ":NeoTreeFocus<CR>", desc = "File tree focus", silent = true },
-			{ "E", ":NeoTreeShowToggle<CR>", desc = "File tree toggle", silent = true },
+			-- { "E", ":NeoTreeShowToggle<CR>", desc = "File tree toggle", silent = true },
 		},
 		opts = {
 			close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
@@ -133,7 +133,7 @@ return {
 				},
 			},
 			window = {
-				position = "left", -- left, right, top, bottom, float, current
+				position = "right", -- left, right, top, bottom, float, current
 				width = 40, -- applies to left and right positions
 				height = 15, -- applies to top and bottom positions
 				auto_expand_width = false, -- expand the window when file exceeds the window width. does not work with position = "float"

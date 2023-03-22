@@ -134,7 +134,8 @@ map("x", "*", "*Nzz", default_opts)
 
 -- but blank line below
 -- map("n", "<cr>", "o<esc>k", default_opts)
-map("n", "<cr>", "i<cr><esc><c-o>", default_opts)
+-- map("n", "<cr>", "i<cr><esc><c-o>", default_opts)
+map("n", "<cr>", "<nop>", default_opts)
 
 -- Auto indentation on empty lines
 function autoIndent(key)
@@ -194,17 +195,6 @@ end
 
 vim.keymap.set("i", "<TAB>", smart_tab, { expr = true, noremap = true })
 
-function smart_j()
-	local line = vim.api.nvim_get_current_line()
-	local col = vim.fn.col(".")
-
-	if string.sub(line, 1, col - 1):match("[^%s]") then
-		return "j"
-	else
-		return "j^"
-	end
-end
-
 -- local prev_line_num = 0
 --
 -- function on_cursor_moved()
@@ -228,19 +218,231 @@ function get_mark_line(mark)
 	end
 end
 
-_G.removeWhitespacePos = {}
-_G.removeWhitespace = false
+-- _G.removeWhitespacePos = {}
+_G.last_cursor_pos = {}
+_G.prev_extmark_id = -1
+_G.prev_bufnr = 0
+_G.ns_id = vim.api.nvim_create_namespace("color_under_cursor_red")
 
-vim.api.nvim_create_autocmd("CursorMoved", {
+function exclude_filetype(filetype)
+	local filetype_exclude = {
+		"dashboard",
+		"neo-tree",
+		"Trouble",
+		"lazy",
+		"help",
+		"git",
+		"markdown",
+		"text",
+		"terminal",
+		"lspinfo",
+		"packer",
+		"TelescopePrompt",
+	}
+
+	-- check each one, if the filetype is matched, return false, if not return true
+	for _, excluded_type in ipairs(filetype_exclude) do
+		if filetype == excluded_type then
+			return false -- exclude this filetype
+		end
+	end
+
+	return true -- do not exclude this filetype
+end
+
+vim.api.nvim_create_autocmd({ "CursorMovedI" }, {
 	pattern = "*",
 	callback = function()
-		-- vim.notify("eventtt", "info", { title = "yarrak" })
-		if _G.removeWhitespace then
-			_G.removeWhitespace = false
-			-- vim.api.nvim_buf_set_lines(0, _G.removeWhitespacePos[1] - 1, _G.removeWhitespacePos[1], false, { "" })
-			-- local blank_space = string.rep(" ", _G.removeWhitespacePos[1] - 1)
-			-- vim.api.nvim_put({ blank_space }, "", true, true)
+		-- vim.notify("inset")
+		vim.api.nvim_buf_del_extmark(_G.prev_bufnr, _G.ns_id, _G.prev_extmark_id)
+	end,
+})
+
+-- vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+vim.api.nvim_create_autocmd({ "CursorMoved" }, {
+	pattern = "*",
+	callback = function()
+		local cursor_pos = vim.api.nvim_win_get_cursor(vim.api.nvim_get_current_win())
+
+		-- get rid of the previous mark if previous buffer exists
+		if vim.api.nvim_buf_is_loaded(_G.prev_bufnr) then
+			vim.api.nvim_buf_del_extmark(_G.prev_bufnr, _G.ns_id, _G.prev_extmark_id)
 		end
+
+		-- check if the cursor has moved vertically
+		if
+			vim.bo.buftype ~= "nofile"
+			and cursor_pos[1] ~= 0
+			and cursor_pos[1] ~= _G.last_cursor_pos
+			and exclude_filetype(vim.bo.filetype)
+		then
+			local line = vim.api.nvim_get_current_line()
+			local bufnr = vim.api.nvim_get_current_buf()
+
+			-- if the line isn't empty and cursor is behind the first word, then ^
+			if not string.sub(line, 1, vim.fn.col(".") - 1):match("[^%s]") then
+				vim.api.nvim_feedkeys(vim.api.nvim_eval('"^"'), "n", true)
+			end
+
+			-- vim.api.nvim_buf_set_extmark(bufnr, _G.ns_id, cursor_pos[1] - 1, cursor_pos[2], {
+			-- 	virt_text = { { "\t", "Cursor" }, { ">", "Error" } },
+			-- 	-- virt_text_pos = "overlay",
+			-- 	-- hl_group = "Error",
+			-- 	-- end_col = cursor_pos[2] + 1,
+			-- })
+
+			-- TODO: if buffer exists, take it outside
+			-- vim.notify(_G.prev_bufnr .. " ~ " .. _G.ns_id .. " ~ " .. _G.prev_extmark_id)
+
+			-- print(vim.api.nvim_get_current_line())
+			if cursor_pos[2] == 0 and (#line == 0) then
+				-- find the previous non-empty line
+				local prev_line_num = cursor_pos[1] - 1
+				while prev_line_num > 0 do
+					local prev_line = vim.api.nvim_buf_get_lines(bufnr, prev_line_num - 1, prev_line_num, false)[1]
+					if prev_line:match("%S") then -- if the line is not empty or all whitespace
+						local indent_level = vim.fn.indent(prev_line_num)
+						if indent_level ~= 0 and string.match(prev_line, "[({[]%s*$") then
+							indent_level = (indent_level + vim.api.nvim_get_option("shiftwidth"))
+						end
+
+						local extmark_id =
+							vim.api.nvim_buf_set_extmark(bufnr, _G.ns_id, cursor_pos[1] - 1, cursor_pos[2], {
+								-- virt_text = { { "\t", "Cursor" }, { ">", "Error" } },
+								-- print(string.rep("\t", indent_level)),
+								-- virt_text = { { string.rep(" ", indent_level - 1), "Cursor" }, { ">", "Error" } },
+								virt_text = {
+									{ string.rep(" ", indent_level - 1), "" },
+									{ " ", "HighlighterColor" },
+								},
+							})
+						-- set current value to be deleted
+						_G.prev_extmark_id = extmark_id
+						_G.prev_bufnr = bufnr
+						return
+					end
+					prev_line_num = prev_line_num - 1
+				end
+			end
+
+			-- Under DEV --
+
+			-- local prev_line = vim.api.nvim_buf_get_lines(bufnr, cursor_pos[1] - 2, cursor_pos[1] - 1, false)[1]
+			-- -- print(prev_line)
+			-- local indent_level = vim.fn.indent(cursor_pos[1] - 1)
+			-- if indent_level ~= 0 and string.match(prev_line, "[({[]%s*$") then
+			-- 	print(indent_level + vim.api.nvim_get_option("shiftwidth"))
+			-- 	-- expected_indent_level = expected_indent_level + vim.api.nvim_get_option("shiftwidth")
+			-- else
+			-- 	print(indent_level)
+			-- end
+
+			-- print(bufnr .. " - " .. ns_id .. " - " .. extmark_id)
+
+			-- TODO: Uncomment for line start functionality
+			-- if not string.sub(line, 1, cursor_pos[1] - 1):match("[^%s]") then
+			-- 	vim.notify("yarrak")
+			-- 	-- vim.api.nvim_feedkeys(vim.api.nvim_eval("^"), "m", true)
+			-- end
+
+			---------------------------------------------
+			-- vim.notify("yarrak")
+			-- vim.cmd("set undolevels=-1")
+			-- vim.cmd("silent undojoin")
+			-- vim.api.nvim_feedkeys(vim.api.nvim_eval('"cc \\<esc>"'), "n", true)
+			-- print(#vim.api.nvim_get_current_line())
+			-- -- vim.api.nvim_feedkeys(vim.api.nvim_eval('"0D"'), "m", true)
+
+			-- vim.fn.feedkeys("i\\<esc>", "m")
+			-- vim.api.nvim_feedkeys(vim.api.nvim_eval('"i"'), "m", true)
+			-- vim.notify("heyya")
+			-- vim.api.nvim_feedkeys(vim.api.nvim_eval('"\\<esc>"'), "m", true)
+
+			-- vim.cmd("silent undojoin")
+			-- vim.cmd("set undolevels=1000")
+			-- vim.cmd("undojoin")
+
+			-- Todo: just highlight the correct cell instead of moving the cursor
+			-- print(_G.last_cursor_pos)
+			-- vim.api.nvim_buf_add_highlight(0, -1, "Error", cursor_pos[1] - 1, cursor_pos[2] + 1, cursor_pos[2] + 2)
+			-- vim.api.nvim_buf_clear_highlight(0, -1, cursor_pos[1] - 1, cursor_pos[1])
+			-- local extmark_id = vim.api.nvim_buf_set_extmark(bufnr, -1, cursor_pos[2], {
+			-- 	end_line = cursor_pos[1],
+			-- 	hl_group = "Error",
+			-- })
+
+			-- ---------------------------------------------------------
+
+			-- print(cursor_pos[1])
+			-- local extmark_id = vim.api.nvim_buf_set_extmark(bufnr, ns_id, cursor_pos[1], cursor_pos[2] - 1, {
+			-- 	end_col = cursor_pos[2] - 1,
+			-- 	hl_group = "Error",
+			-- })
+
+			-- Remove whitespace from previous line
+			-- if vim.tbl_isempty(_G.last_cursor_pos) then
+
+			-- if next(_G.last_cursor_pos) == nil then
+			-- 	-- vim.api.nvim_feedkeys(vim.api.nvim_eval('"gg"'), "m", true)
+			-- end
+			-- if not vim.tbl_isempty(_G.last_cursor_pos) then
+			-- 	print(_G.last_cursor_pos)
+			-- 	-- vim.api.nvim_feedkeys(vim.api.nvim_eval('"gg"'), "m", true)
+			-- end
+			-- if vim.api.nvim_buf_get_lines(0, _G.last_cursor_pos - 1, _G.last_cursor_pos, false)[1]:match("[^%s]") then
+			-- 	vim.notify("yarrak")
+			-- end
+
+			-- sets last cursor position
+			_G.last_cursor_pos = cursor_pos[1]
+		end
+
+		-- vim.notify(string.format("%d", cursor_pos))
+
+		-- local buftype = vim.bo.buftype
+		-- if buftype ~= "nofile" and cursor_pos[2] == 0 and (#line == 0) then
+		-- 	-- vim.cmd("set undolevels=-1")
+		-- 	-- -- vim.cmd("silent undojoin")
+		-- 	-- -- vim.api.nvim_feedkeys(vim.api.nvim_eval('"i \\<esc>"'), "m", true)
+		-- 	-- -- vim.cmd("silent undojoin")
+		-- 	-- vim.cmd("set undolevels=1000")
+		-- 	-- vim.cmd("undojoin")
+		--
+		-- 	-- vim.notify("yarrak")
+		-- 	-- if not vim.api.nvim_get_current_line():match("[^%s]") then
+		-- 	-- vim.api.nvim_feedkeys('"_cc \\<esc>', "n", true)
+		-- 	-- vim.api.nvim_input("<esc>")
+		--
+		-- 	-- local buf = vim.api.nvim_get_current_buf()
+		-- 	-- vim.api.nvim_buf_set_option(0, "undo", false) -- disable undo
+		-- 	--
+		-- 	-- vim.api.nvim_exec([[i asdf]])
+		--
+		-- 	-- vim.cmd("normal! i \\<esc>")
+		-- 	-- vim.cmd(":undojoin")
+		--
+		-- 	--
+		-- 	-- vim.api.nvim_buf_set_option(0, "undo", true)
+		--
+		-- 	-- vim.api.nvim_input('"_cc <esc>')
+		-- 	-- vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+		-- 	-- vim.api.nvim_feedkeys("<esc>", "n", true)
+		-- end
+
+		-- if not string.sub(line, 1, col - 1):match("[^%s]") then
+		-- 	vim.notify("yarrak")
+		-- 	-- return "^"
+		-- 	-- vim.api.nvim_feedkeys(vim.api.nvim_eval("^"), "m", true)
+		-- end
+
+		-- if vim.api.nvim_get_current_line():match("[^%s]") then
+		-- 	-- vim.notify("heyy")
+		-- else
+		-- 	-- vim.notify("neyyy")
+		-- 	-- vim.api.nvim_buf_set_lines(0, _G.removeWhitespacePos[1] - 1, _G.removeWhitespacePos[1], false, { "" })
+		-- 	-- vim.api.nvim_feedkeys('"_cc <esc>', "n", true)
+		-- 	-- vim.cmd([["_cc <esc>]])
+		-- end
 	end,
 })
 
@@ -313,41 +515,46 @@ vim.api.nvim_create_autocmd("CursorMoved", {
 -- })
 
 function smart_k()
-	-- get the current buffer handle
 	local bufnr = vim.api.nvim_get_current_buf()
 	local cursor = vim.api.nvim_win_get_cursor(0)
-	local lines_above = vim.api.nvim_buf_get_lines(bufnr, cursor[1] - 1 - 1, cursor[1] - 1, false)
-	-- string.match(vim.fn.getline("."), "%S") == nil
-	if lines_above[1]:match("[^%s]") then
-		return "k"
-	else
-		_G.removeWhitespace = true
-		_G.removeWhitespacePos = cursor
-		return 'k"_cc <esc>mz'
-		-- return "k"
-		-- vim.api.nvim_win_set_cursor(0, {327, 3})
-	end
+	local line = vim.api.nvim_buf_get_lines(bufnr, cursor[1] - 1 - 1, cursor[1] - 1, false)[1]
 
-	-- local line = vim.api.nvim_get_current_line()
-	-- local col = vim.fn.col(".")
-	--
-	-- -- if string.match(vim.fn.getline("."), "%S") == nil then
-	-- -- 	return '"_cc <esc>$k'
-	-- -- end
-	--
-	-- if string.sub(line, 1, col - 1):match("[^%s]") then
-	-- 	print(string.sub(line, 1, col - 1))
-	-- 	-- print("yarrak")
-	-- 	return "k"
-	-- else
-	-- 	print("amcik")
-	-- 	return "k^"
-	-- 	-- return string.match(vim.fn.getline("."), "%S") == nil and '"_cc <esc>$' or "k^"
-	-- end
+	if line:match("[^%s]") then
+		local col = vim.fn.col(".")
+		if string.sub(line, 1, col - 1):match("[^%s]") then
+			return "k"
+		else
+			return "k^"
+		end
+	else
+		-- local buf = vim.api.nvim_get_current_buf()
+		-- vim.api.nvim_buf_set_option(buf, 'undo', false)  -- disable undo
+		-- -- do something
+		-- vim.api.nvim_buf_set_option(buf, 'undo', true)  -- enable undo
+
+		return 'k"_cc <esc>'
+	end
 end
 
-vim.keymap.set("n", "j", smart_j, { expr = true, noremap = true })
-vim.keymap.set("n", "k", smart_k, { expr = true, noremap = true })
+function smart_j()
+	local bufnr = vim.api.nvim_get_current_buf()
+	local cursor = vim.api.nvim_win_get_cursor(0)
+	local line = vim.api.nvim_buf_get_lines(bufnr, cursor[1], cursor[1] + 1, false)[1]
+
+	if line:match("[^%s]") then
+		local col = vim.fn.col(".")
+		if string.sub(line, 1, col - 1):match("[^%s]") then
+			return "j"
+		else
+			return "j^"
+		end
+	else
+		return 'j"_cc <esc>'
+	end
+end
+
+-- vim.keymap.set("n", "j", smart_j, { expr = true, noremap = true })
+-- vim.keymap.set("n", "k", smart_k, { expr = true, noremap = true })
 
 function move_cursor_right()
 	-- return string.match(vim.fn.getline("."), "%S") == nil and '"_cc <esc>' or "j"

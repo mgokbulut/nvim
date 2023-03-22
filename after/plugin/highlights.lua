@@ -194,6 +194,65 @@ vim.cmd(":hi GitConflictIncoming  guibg=#3c3a07")
 vim.cmd(":hi GitConflictCurrentLabel guibg=#fb4934")
 vim.cmd(":hi GitConflictIncomingLabel guibg=#fb4934")
 
+vim.cmd(":hi NeoTreeNormal guibg=#3c3836")
+vim.cmd(":hi NeoTreeNormalNC guibg=#3c3836")
+vim.cmd(":hi NeoTreeStatusLine guibg=#3c3836")
+vim.cmd(":hi NeoTreeStatusLineNC guibg=#3c3836")
+-- vim.cmd(":hi HighlighterColor guibg=#988474") -- My creation for virtual space
+vim.cmd(":hi HighlighterColor guibg=#948474") -- My creation for virtual space
+-- vim.cmd(":hi HighlighterColor guibg=#9c8474") -- My creation for virtual space
+
+-- NeoTreeStatusLinexxx links to StatusLine
+-- NeoTreeStatusLineNCxxx links to StatusLineNC
+
+-- NeoTreeNormalNCxxx links to NormalNC
+-- NeoTreeNormalxxx links to Normal
+-- NeoTreeNormalNCxxx links to NormalNC
+-- NeoTreeSignColumnxxx links to SignColumn
+-- NeoTreeStatusLinexxx links to StatusLine
+-- NeoTreeStatusLineNCxxx links to StatusLineNC
+-- NeoTreeVertSplitxxx links to VertSplit
+-- NeoTreeWinSeparatorxxx links to WinSeparator
+-- NeoTreeEndOfBufferxxx links to EndOfBuffer
+-- NeoTreeFloatBorderxxx links to FloatBorder
+-- NeoTreeFloatNormalxxx links to NormalFloat
+-- NeoTreeFloatTitlexxx guifg=#ebdbb2 guibg=#282828
+-- NeoTreeTitleBarxxx guifg=#282828 guibg=#665c54
+-- NeoTreeBufferNumberxxx links to SpecialChar
+-- NeoTreeDimTextxxx guifg=#505050
+-- NeoTreeMessagexxx gui=italic guifg=#505050
+-- NeoTreeFadeText1xxx guifg=#626262
+-- NeoTreeFadeText2xxx guifg=#444444
+-- NeoTreeDotfilexxx guifg=#626262
+-- NeoTreeHiddenByNamexxx links to NeoTreeDotfile
+-- NeoTreeCursorLinexxx guifg=#e76868
+-- NeoTreeDirectoryNamexxx links to Directory
+-- NeoTreeDirectoryIconxxx links to Directory
+-- NeoTreeFileIconxxx links to NeoTreeDirectoryIcon
+-- NeoTreeFileNamexxx cleared
+-- NeoTreeFileNameOpenedxxx gui=bold
+-- NeoTreeSymbolicLinkTargetxxx links to NeoTreeFileName
+-- NeoTreeFilterTermxxx links to SpecialChar
+-- NeoTreeRootNamexxx gui=bold,italic
+-- NeoTreeIndentMarkerxxx links to NeoTreeDimText
+-- NeoTreeExpanderxxx links to NeoTreeDimText
+-- NeoTreeModifiedxxx guifg=#d7d787
+-- NeoTreeWindowsHiddenxxx links to NeoTreeDotfile
+-- NeoTreePreviewxxx links to Search
+-- NeoTreeGitAddedxxx links to GitSignsAdd
+-- NeoTreeGitDeletedxxx links to GitSignsDelete
+-- NeoTreeGitModifiedxxx links to GitSignsChange
+-- NeoTreeGitConflictxxx gui=bold,italic guifg=#ff8700
+-- NeoTreeGitIgnoredxxx links to NeoTreeDotfile
+-- NeoTreeGitRenamedxxx links to NeoTreeGitModified
+-- NeoTreeGitStagedxxx links to NeoTreeGitAdded
+-- NeoTreeGitUnstagedxxx links to NeoTreeGitConflict
+-- NeoTreeGitUntrackedxxx gui=italic guifg=#ff8700
+-- NeoTreeTabActivexxx gui=bold
+-- NeoTreeTabInactivexxx guifg=#777777 guibg=#141414
+-- NeoTreeTabSeparatorActivexxx guifg=#0a0a0a
+-- NeoTreeTabSeparatorInactivexxx guifg=#101010 guibg=#141414
+
 -- GitConflictAncestorxxx cterm=bold gui=bold guibg=#68217a
 -- GitConflictCurrentLabelxxx guibg=#404040
 -- GitConflictIncomingLabelxxx guibg=#404040
