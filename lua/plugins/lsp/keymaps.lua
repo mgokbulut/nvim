@@ -12,6 +12,7 @@ function M.get()
     -- { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
     -- { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
     { "gd", vim.lsp.buf.definition, desc = "Goto Definition" },
+    { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
     -- { "gr", vim.lsp.buf.references, desc = "References" },
     -- { "<leader>lR", vim.lsp.buf.references, desc = "References" },
     { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },

@@ -22,6 +22,15 @@ Todos:
 * incorparate paranthesis evaluators correctly
 
 Projects:
+* better surround a section with paranthesis where you know the start end don't know the end yet. just a single ( is hard
+so maybe use sneak nvim to jump to end of the parenthesis or nvim surround to select the end charcter.
+* neo tree to rm -rfi into trash.
+* fix delete_until_start_of_line
+* ctrl-o ctrl-o to delete the previous buffer while you trace back
+* get previous clipboard item and swap with current keymap
+* find a way to change the color of the cursor
+* terminal emoji support
+* use harpoon to create temporary buffer implementation and using buff edited autocommand
 * vim grep via telescope the primeogen 
 * kickstart.nvim tjs defaults
 * remove all plugins and start from zero
@@ -29,6 +38,8 @@ Projects:
 * flutter specific config
 * react specific config
 * see if (organize imports) or other suggestions can be keymapped
+* better delete register so that previous deletions can be used
+* COPILOT
 
  
 To Test:

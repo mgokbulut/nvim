@@ -200,6 +200,8 @@ vim.cmd(":hi NeoTreeStatusLine guibg=#3c3836")
 vim.cmd(":hi NeoTreeStatusLineNC guibg=#3c3836")
 -- vim.cmd(":hi HighlighterColor guibg=#988474") -- My creation for virtual space
 vim.cmd(":hi HighlighterColor guibg=#948474") -- My creation for virtual space
+-- #282828
+-- vim.cmd(":hi Cursor gui=NONE guibg=#282828 guifg=NONE") -- My creation for virtual space
 -- vim.cmd(":hi HighlighterColor guibg=#9c8474") -- My creation for virtual space
 
 -- NeoTreeStatusLinexxx links to StatusLine

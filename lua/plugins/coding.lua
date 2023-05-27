@@ -23,14 +23,14 @@ return {
 			end,
 		},
 	},
-	-- {
-	-- 	-- auto pairs
-	-- 	"echasnovski/mini.pairs",
-	-- 	event = "VeryLazy",
-	-- 	config = function(_, opts)
-	-- 		require("mini.pairs").setup(opts)
-	-- 	end,
-	-- },
+	{
+		-- auto pairs
+		"echasnovski/mini.pairs",
+		event = "VeryLazy",
+		config = function(_, opts)
+			require("mini.pairs").setup(opts)
+		end,
+	},
 	{
 		-- snippets
 		"L3MON4D3/LuaSnip",
@@ -46,14 +46,14 @@ return {
 		},
     -- stylua: ignore
     keys = {
-      {
-        "<c-l>",
-        function()
-          return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
-        end,
-        expr = true, silent = true, mode = "i",
-      },
-      { "<c-l>", function() require("luasnip").jump(1) end, mode = "s" },
+      -- {
+      --   "<c-l>",
+      --   function()
+      --     return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next" or "<tab>"
+      --   end,
+      --   expr = true, silent = true, mode = "i",
+      -- },
+      { "<c-l>", function() require("luasnip").jump(1) end, mode = { "i", "s" } },
       { "<c-h>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
     },
 	},
@@ -89,10 +89,10 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
 				}),
 				sources = cmp.config.sources({
-					{ name = "nvim_lsp", keyword_length = 1 },
-					{ name = "luasnip", keyword_length = 1 },
-					{ name = "buffer", keyword_length = 1 },
-					{ name = "path", keyword_length = 1 },
+					{ name = "nvim_lsp", keyword_length = 3 },
+					{ name = "luasnip", keyword_length = 3 },
+					{ name = "buffer", keyword_length = 3 },
+					{ name = "path", keyword_length = 3 },
 				}),
 
 				formatting = {
@@ -124,12 +124,12 @@ return {
 				--     return item
 				--   end,
 				-- },
-				experimental = {
-					ghost_text = {
-						hl_group = "LspCodeLens",
-						ghost_text = true,
-					},
-				},
+				-- experimental = {
+				-- 	ghost_text = {
+				-- 		hl_group = "LspCodeLens",
+				-- 		ghost_text = true,
+				-- 	},
+				-- },
 			}
 		end,
 	},
@@ -246,8 +246,22 @@ return {
 			require("telescope").load_extension("refactoring")
 		end,
     -- stylua: ignore
-    keys = { 
+    keys = {
       { "<leader>lf", function() require("telescope").extensions.refactoring.refactors() end, mode = { "v" }, desc = "Refactor", },
     },
+	},
+	{
+		"github/copilot.vim",
+		config = function()
+			-- instead of tab key to complete copilot suggestions, use CR (enter) key to accept
+			-- vim.g.copilot_complete_key = "<CR>"
+			vim.cmd([[imap <silent><script><expr> <C-f> copilot#Accept("\<CR>")]])
+			-- vim.api.nvim_set_keymap("i", "<C-f>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+			-- vim.api.nvim_set_keymap("i", "<C-H>", "copilot#Previous()", { silent = true, expr = true })
+			-- vim.api.nvim_set_keymap("i", "<C-K>", "copilot#Next()", { silent = true, expr = true })
+			-- vim.g.copilot_no_tab_map = true -- TODO: THIS DOESN'T WORK
+			-- vim.api.nvim_set_keymap("i", "<TAB>", "<TAB>", { noremap = true, silent = true })
+			-- vim.cmd([[let g:copilot_no_tab_map = v:true]])
+		end,
 	},
 }
