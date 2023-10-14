@@ -77,6 +77,15 @@ vim.api.nvim_create_autocmd("User", {
 	end,
 })
 
+-- For removing neo-tree before saving session
+vim.api.nvim_create_autocmd("User", {
+	pattern = "PersistedSavePre",
+	group = group,
+	callback = function()
+		pcall(vim.cmd, "bw neo-tree")
+	end,
+})
+
 -- KEYMAPS FOR BLANK LINE AND STUFF
 
 -- -- local prev_line_num = 0

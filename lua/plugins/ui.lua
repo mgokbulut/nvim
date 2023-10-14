@@ -541,186 +541,187 @@ return {
 			},
 		},
 	},
-	{
-		"goolord/alpha-nvim",
-		event = "VimEnter",
-		opts = function()
-			local leader = "SPC "
-
-			local function button(sc, txt, leader_txt, keybind, keybind_opts)
-				local sc_after = sc:gsub("%s", ""):gsub(leader_txt, "<leader>")
-
-				local opts = {
-					position = "center",
-					shortcut = sc,
-					cursor = 5,
-					width = 50,
-					align_shortcut = "right",
-					hl_shortcut = "Keyword",
-				}
-
-				if nil == keybind then
-					keybind = sc_after
-				end
-				keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
-				opts.keymap = { "n", sc_after, keybind, keybind_opts }
-
-				local function on_press()
-					-- local key = vim.api.nvim_replace_termcodes(keybind .. '<Ignore>', true, false, true)
-					local key = vim.api.nvim_replace_termcodes(sc_after .. "<Ignore>", true, false, true)
-					vim.api.nvim_feedkeys(key, "t", false)
-				end
-
-				return {
-					type = "button",
-					val = txt,
-					on_press = on_press,
-					opts = opts,
-				}
-			end
-
-			local dashboard = require("alpha.themes.dashboard")
-
-			-- terminal
-			dashboard.section.cmatrix = {
-				type = "terminal",
-				-- command = "tty-clock -sc",
-				command = "cmatrix",
-				-- width = 100,
-				-- height = 8,
-				opts = {
-					redraw = true,
-					window_config = {
-						zindex = 6,
-						relative = "win",
-						anchor = "NW",
-					},
-				},
-			}
-
-			dashboard.section.clock = {
-				type = "terminal",
-				command = "tty-clock -s",
-				-- command = "cmatrix",
-				width = 57,
-				height = 8,
-				opts = {
-					redraw = true,
-					window_config = {
-						zindex = 7,
-						relative = "win",
-						anchor = "NW",
-					},
-				},
-			}
-
-			-- greeting
-			local userName = "Mr.Gokbulut"
-			local greeting = require("util.functions").getGreeting(userName)
-
-			dashboard.section.greetHeading =
-				{ type = "text", val = greeting, opts = { position = "center", hl = "String" } }
-			-- dashboard.section.header.val = vim.split(logo, "\n")
-			dashboard.section.buttons.val = {
-				button(leader .. "r r", "  Restore Session", leader, ':lua require("persistence").load() <cr>'),
-				button(leader .. "f f", "  Find file", leader, ":Telescope find_files <CR>"),
-				button(leader .. "f s", "  Find text", leader, ":Telescope live_grep <CR>"),
-				button(leader .. "f p", "  Find project", leader, ":Telescope projects <CR>"),
-				button(leader .. "f r", "  Recent files", leader, ":Telescope oldfiles <CR>"),
-				button("n  ", "ﱐ  New file", leader, ":ene <BAR> startinsert <CR>"),
-				button("c  ", "  Config", leader, ":e ~/.config/nvim/init.lua <CR>"),
-				button("q  ", " " .. " Quit", leader, ":qa<CR>"),
-			}
-			for _, button in ipairs(dashboard.section.buttons.val) do
-				button.opts.hl = "AlphaButtons"
-				button.opts.hl_shortcut = "AlphaShortcut"
-			end
-			dashboard.section.footer.opts.hl = "Type"
-			-- dashboard.section.header.opts.hl = "AlphaHeader"
-			dashboard.section.clock.opts.hl = "AlphaHeader"
-			dashboard.section.buttons.opts.hl = "AlphaButtons"
-			dashboard.opts.layout[1].val = 8
-
-			-- ┌──────────────────────────────────────────────────────────┐
-			-- │                  /                                       │
-			-- │    header_padding                                        │
-			-- │                  \  ┌──────────────┐ ____                │
-			-- │                     │    header    │     \               │
-			-- │                  /  └──────────────┘      \              │
-			-- │ head_butt_padding                          \             │
-			-- │                  \                          occu_        │
-			-- │                  ┌────────────────────┐     height       │
-			-- │                  │       button       │    /             │
-			-- │                  │       button       │   /              │
-			-- │                  │       button       │  /               │
-			-- │                  └────────────────────┘‾‾                │
-			-- │                  /                                       │
-			-- │ foot_butt_padding                                        │
-			-- │                  \  ┌──────────────┐                     │
-			-- │                     │    footer    │                     │
-			-- │                     └──────────────┘                     │
-			-- │                                                          │
-			-- └──────────────────────────────────────────────────────────┘
-
-			local head_butt_padding = 4
-			local occu_height = #dashboard.section.header.val + 2 * #dashboard.section.buttons.val + head_butt_padding
-			local header_padding = math.max(0, math.ceil((vim.fn.winheight("$") - occu_height) * 0.75))
-			local foot_butt_padding_ub = vim.o.lines - header_padding - occu_height - #dashboard.section.footer.val - 3
-			local foot_butt_padding = math.floor((vim.fn.winheight("$") - 2 * header_padding - occu_height))
-			foot_butt_padding = math.max(
-				0,
-				math.max(math.min(0, foot_butt_padding), math.min(math.max(0, foot_butt_padding), foot_butt_padding_ub))
-			) + 1
-
-			local stats = vim.api.nvim_list_uis()[1]
-			local width = stats.width
-			-- local height = stats.height
-			dashboard.section.cmatrix.opts.window_config.row = 2
-			dashboard.section.cmatrix.height = header_padding
-			dashboard.section.cmatrix.width = math.floor(width * 0.6)
-			dashboard.section.clock.opts.window_config.row = (header_padding / 2) - 4 + 2
-
-			dashboard.config.layout = {
-				-- { type = "padding", val = header_padding },
-				-- dashboard.section.header,
-				{ type = "padding", val = header_padding },
-				-- dashboard.section.clock,
-				-- dashboard.section.cmatrix,
-				{ type = "padding", val = head_butt_padding },
-				dashboard.section.greetHeading,
-				{ type = "padding", val = 2 },
-				dashboard.section.buttons,
-				{ type = "padding", val = foot_butt_padding },
-				dashboard.section.footer,
-			}
-
-			-- alpha.setup(dashboard.opts)
-			require("alpha.term")
-			return dashboard
-		end,
-		config = function(_, dashboard)
-			-- close Lazy and re-open when the dashboard is ready
-			if vim.o.filetype == "lazy" then
-				vim.cmd.close()
-				vim.api.nvim_create_autocmd("User", {
-					pattern = "AlphaReady",
-					callback = function()
-						require("lazy").show()
-					end,
-				})
-			end
-
-			require("alpha").setup(dashboard.opts)
-
-			vim.api.nvim_create_autocmd("User", {
-				pattern = "LazyVimStarted",
-				callback = function()
-					local stats = require("lazy").stats()
-					local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-					dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-					pcall(vim.cmd.AlphaRedraw)
-				end,
-			})
-		end,
-	},
+	-- {
+	-- 	"goolord/alpha-nvim",
+	-- 	event = "VimEnter",
+	-- 	opts = function()
+	-- 		local leader = "SPC "
+	--
+	-- 		local function button(sc, txt, leader_txt, keybind, keybind_opts)
+	-- 			local sc_after = sc:gsub("%s", ""):gsub(leader_txt, "<leader>")
+	--
+	-- 			local opts = {
+	-- 				position = "center",
+	-- 				shortcut = sc,
+	-- 				cursor = 5,
+	-- 				width = 50,
+	-- 				align_shortcut = "right",
+	-- 				hl_shortcut = "Keyword",
+	-- 			}
+	--
+	-- 			if nil == keybind then
+	-- 				keybind = sc_after
+	-- 			end
+	-- 			keybind_opts = vim.F.if_nil(keybind_opts, { noremap = true, silent = true, nowait = true })
+	-- 			opts.keymap = { "n", sc_after, keybind, keybind_opts }
+	--
+	-- 			local function on_press()
+	-- 				-- local key = vim.api.nvim_replace_termcodes(keybind .. '<Ignore>', true, false, true)
+	-- 				local key = vim.api.nvim_replace_termcodes(sc_after .. "<Ignore>", true, false, true)
+	-- 				vim.api.nvim_feedkeys(key, "t", false)
+	-- 			end
+	--
+	-- 			return {
+	-- 				type = "button",
+	-- 				val = txt,
+	-- 				on_press = on_press,
+	-- 				opts = opts,
+	-- 			}
+	-- 		end
+	--
+	-- 		local dashboard = require("alpha.themes.dashboard")
+	--
+	-- 		-- terminal
+	-- 		dashboard.section.cmatrix = {
+	-- 			type = "terminal",
+	-- 			-- command = "tty-clock -sc",
+	-- 			command = "cmatrix",
+	-- 			-- width = 100,
+	-- 			-- height = 8,
+	-- 			opts = {
+	-- 				redraw = true,
+	-- 				window_config = {
+	-- 					zindex = 6,
+	-- 					relative = "win",
+	-- 					anchor = "NW",
+	-- 				},
+	-- 			},
+	-- 		}
+	--
+	-- 		dashboard.section.clock = {
+	-- 			type = "terminal",
+	-- 			command = "tty-clock -s",
+	-- 			-- command = "cmatrix",
+	-- 			width = 57,
+	-- 			height = 8,
+	-- 			opts = {
+	-- 				redraw = true,
+	-- 				window_config = {
+	-- 					zindex = 7,
+	-- 					relative = "win",
+	-- 					anchor = "NW",
+	-- 				},
+	-- 			},
+	-- 		}
+	--
+	-- 		-- greeting
+	-- 		local userName = "Mr.Gokbulut"
+	-- 		local greeting = require("util.functions").getGreeting(userName)
+	--
+	-- 		dashboard.section.greetHeading =
+	-- 			{ type = "text", val = greeting, opts = { position = "center", hl = "String" } }
+	-- 		-- dashboard.section.header.val = vim.split(logo, "\n")
+	-- 		dashboard.section.buttons.val = {
+	-- 			-- button(leader .. "r r", "  Restore Session", leader, ':lua require("persistence").load() <cr>'),
+	-- 			button(leader .. "r r", "  Restore Session", leader, ":SessionLoad <cr>"),
+	-- 			button(leader .. "f f", "  Find file", leader, ":Telescope find_files <CR>"),
+	-- 			button(leader .. "f s", "  Find text", leader, ":Telescope live_grep <CR>"),
+	-- 			button(leader .. "f p", "  Find project", leader, ":Telescope projects <CR>"),
+	-- 			button(leader .. "f r", "  Recent files", leader, ":Telescope oldfiles <CR>"),
+	-- 			button("n  ", "ﱐ  New file", leader, ":ene <BAR> startinsert <CR>"),
+	-- 			button("c  ", "  Config", leader, ":e ~/.config/nvim/init.lua <CR>"),
+	-- 			button("q  ", " " .. " Quit", leader, ":qa<CR>"),
+	-- 		}
+	-- 		for _, button in ipairs(dashboard.section.buttons.val) do
+	-- 			button.opts.hl = "AlphaButtons"
+	-- 			button.opts.hl_shortcut = "AlphaShortcut"
+	-- 		end
+	-- 		dashboard.section.footer.opts.hl = "Type"
+	-- 		-- dashboard.section.header.opts.hl = "AlphaHeader"
+	-- 		dashboard.section.clock.opts.hl = "AlphaHeader"
+	-- 		dashboard.section.buttons.opts.hl = "AlphaButtons"
+	-- 		dashboard.opts.layout[1].val = 8
+	--
+	-- 		-- ┌──────────────────────────────────────────────────────────┐
+	-- 		-- │                  /                                       │
+	-- 		-- │    header_padding                                        │
+	-- 		-- │                  \  ┌──────────────┐ ____                │
+	-- 		-- │                     │    header    │     \               │
+	-- 		-- │                  /  └──────────────┘      \              │
+	-- 		-- │ head_butt_padding                          \             │
+	-- 		-- │                  \                          occu_        │
+	-- 		-- │                  ┌────────────────────┐     height       │
+	-- 		-- │                  │       button       │    /             │
+	-- 		-- │                  │       button       │   /              │
+	-- 		-- │                  │       button       │  /               │
+	-- 		-- │                  └────────────────────┘‾‾                │
+	-- 		-- │                  /                                       │
+	-- 		-- │ foot_butt_padding                                        │
+	-- 		-- │                  \  ┌──────────────┐                     │
+	-- 		-- │                     │    footer    │                     │
+	-- 		-- │                     └──────────────┘                     │
+	-- 		-- │                                                          │
+	-- 		-- └──────────────────────────────────────────────────────────┘
+	--
+	-- 		local head_butt_padding = 4
+	-- 		local occu_height = #dashboard.section.header.val + 2 * #dashboard.section.buttons.val + head_butt_padding
+	-- 		local header_padding = math.max(0, math.ceil((vim.fn.winheight("$") - occu_height) * 0.75))
+	-- 		local foot_butt_padding_ub = vim.o.lines - header_padding - occu_height - #dashboard.section.footer.val - 3
+	-- 		local foot_butt_padding = math.floor((vim.fn.winheight("$") - 2 * header_padding - occu_height))
+	-- 		foot_butt_padding = math.max(
+	-- 			0,
+	-- 			math.max(math.min(0, foot_butt_padding), math.min(math.max(0, foot_butt_padding), foot_butt_padding_ub))
+	-- 		) + 1
+	--
+	-- 		local stats = vim.api.nvim_list_uis()[1]
+	-- 		local width = stats.width
+	-- 		-- local height = stats.height
+	-- 		dashboard.section.cmatrix.opts.window_config.row = 2
+	-- 		dashboard.section.cmatrix.height = header_padding
+	-- 		dashboard.section.cmatrix.width = math.floor(width * 0.6)
+	-- 		dashboard.section.clock.opts.window_config.row = (header_padding / 2) - 4 + 2
+	--
+	-- 		dashboard.config.layout = {
+	-- 			-- { type = "padding", val = header_padding },
+	-- 			-- dashboard.section.header,
+	-- 			{ type = "padding", val = header_padding },
+	-- 			-- dashboard.section.clock,
+	-- 			-- dashboard.section.cmatrix,
+	-- 			{ type = "padding", val = head_butt_padding },
+	-- 			dashboard.section.greetHeading,
+	-- 			{ type = "padding", val = 2 },
+	-- 			dashboard.section.buttons,
+	-- 			{ type = "padding", val = foot_butt_padding },
+	-- 			dashboard.section.footer,
+	-- 		}
+	--
+	-- 		-- alpha.setup(dashboard.opts)
+	-- 		require("alpha.term")
+	-- 		return dashboard
+	-- 	end,
+	-- 	config = function(_, dashboard)
+	-- 		-- close Lazy and re-open when the dashboard is ready
+	-- 		if vim.o.filetype == "lazy" then
+	-- 			vim.cmd.close()
+	-- 			vim.api.nvim_create_autocmd("User", {
+	-- 				pattern = "AlphaReady",
+	-- 				callback = function()
+	-- 					require("lazy").show()
+	-- 				end,
+	-- 			})
+	-- 		end
+	--
+	-- 		require("alpha").setup(dashboard.opts)
+	--
+	-- 		vim.api.nvim_create_autocmd("User", {
+	-- 			pattern = "LazyVimStarted",
+	-- 			callback = function()
+	-- 				local stats = require("lazy").stats()
+	-- 				local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+	-- 				dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
+	-- 				pcall(vim.cmd.AlphaRedraw)
+	-- 			end,
+	-- 		})
+	-- 	end,
+	-- },
 }

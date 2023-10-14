@@ -58,6 +58,9 @@ return {
 	},
 	{
 		"tpope/vim-fugitive",
+		config = function()
+			vim.cmd("set diffopt+=vertical")
+		end,
 		keys = {
 			{ "<leader>gg", ":Git<cr>", silent = true, desc = "Git" },
 			{ "<leader>gb", ":Git blame<cr>", silent = true, desc = "blame" },
