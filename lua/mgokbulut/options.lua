@@ -1,6 +1,20 @@
 vim.opt.termguicolors = true -- enable 24-bit RGB colors
 vim.opt.mouse = "" -- enable mouse support
 vim.opt.clipboard = "unnamedplus" -- copy/paste to system clipboard
+
+-- vim.opt.clipboard = {
+-- 	name = "WslClipboard",
+-- 	copy = {
+-- 		["+"] = "clip.exe",
+-- 		["*"] = "clip.exe",
+-- 	},
+-- 	paste = {
+-- 		["+"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring():gsub("\\r", ""))',
+-- 		["*"] = 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring():gsub("\\r", ""))',
+-- 	},
+-- 	cache_enabled = 0,
+-- }
+
 vim.opt.swapfile = false -- don't use swapfile
 vim.opt.undofile = true -- undofile
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
@@ -113,3 +127,18 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
 	vim.g["loaded_" .. plugin] = 1
 end
+
+vim.cmd([[
+  let g:clipboard = {
+              \   'name': 'WslClipboard',
+              \   'copy': {
+              \      '+': '/mnt/c/Windows/System32/clip.exe',
+              \      '*': '/mnt/c/Windows/System32/clip.exe',
+              \    },
+              \   'paste': {
+              \      '+': '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+              \      '*': '/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+              \   },
+              \   'cache_enabled': 0,
+              \ }
+]])
