@@ -20,35 +20,17 @@ return {
 			},
 			-- Automatically format on save
 			autoformat = true,
-			-- options for vim.lsp.buf.format
-			-- `bufnr` and `filter` is handled by the LazyVim formatter,
-			-- but can be also overriden when specified
-			-- format = {
-			-- 	formatting_options = nil,
-			-- 	timeout_ms = nil,
-			-- },
+			-- servers = {},
+			-- setup = {},
 			-- LSP Server Settings
 			servers = {
 				jsonls = {},
-				-- sumneko_lua = {
-				-- 	-- mason = false, -- set to false if you don't want this server to be installed with mason
-				-- 	settings = {
-				-- 		Lua = {
-				-- 			workspace = {
-				-- 				checkThirdParty = false,
-				-- 			},
-				-- 			completion = {
-				-- 				callSnippet = "Replace",
-				-- 			},
-				-- 		},
-				-- 	},
-				-- },
 			},
 			setup = {
 				-- example to setup with typescript.nvim
 				tsserver = function(_, opts)
-					return require("plugins.lsp.extras.setup").typescript(opts)
-					-- require("typescript").setup({ server = opts })
+					-- return require("plugins.lsp.extras.setup").typescript(opts)
+					require("typescript").setup({ server = opts })
 					-- return true
 				end,
 				-- Specify * to use this function as a fallback for any server
@@ -104,24 +86,25 @@ return {
 			end
 		end,
 	},
-	-- Extras
-	{
-		"akinsho/flutter-tools.nvim",
-		-- keys = {
-		-- 	{ "<leader>ll", "<cmd>Telescope flutter commands<cr>", desc = "Flutter", silent = true },
-		-- },
-		-- keys = require("plugins.lsp.keymaps").get(),
-		dependencies = { "nvim-lua/plenary.nvim" },
-		config = function()
-			require("flutter-tools").setup({})
-			require("telescope").load_extension("flutter")
-		end,
-	},
-	{
-		"jose-elias-alvarez/typescript.nvim",
-		dependencies = { "neovim/nvim-lspconfig" },
-		config = function()
-			require("typescript").setup({})
-		end,
-	},
+
+	-- -- Extras
+	-- {
+	-- 	"akinsho/flutter-tools.nvim",
+	-- 	-- keys = {
+	-- 	-- 	{ "<leader>ll", "<cmd>Telescope flutter commands<cr>", desc = "Flutter", silent = true },
+	-- 	-- },
+	-- 	-- keys = require("plugins.lsp.keymaps").get(),
+	-- 	dependencies = { "nvim-lua/plenary.nvim" },
+	-- 	config = function()
+	-- 		require("flutter-tools").setup({})
+	-- 		require("telescope").load_extension("flutter")
+	-- 	end,
+	-- },
+	-- {
+	-- 	"jose-elias-alvarez/typescript.nvim",
+	-- 	dependencies = { "neovim/nvim-lspconfig" },
+	-- 	config = function()
+	-- 		require("typescript").setup({})
+	-- 	end,
+	-- },
 }

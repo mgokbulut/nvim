@@ -1,6 +1,0 @@
--- function SetupColorScheme(color)
--- 	color = color or "gruvbox"
--- 	vim.cmd.colorscheme(color)
--- end
---
--- SetupColorScheme()

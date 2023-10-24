@@ -17,7 +17,7 @@ function M.on_attach(opts)
 			local client = vim.lsp.get_client_by_id(args.data.client_id)
 			require("plugins.lsp.format").on_attach(client, buffer)
 			require("plugins.lsp.keymaps").on_attach(client, buffer)
-			require("plugins.lsp.extras.config").on_attach(client, buffer)
+			-- require("plugins.lsp.extras.config").on_attach(client, buffer)
 		end,
 	})
 	return opts
@@ -78,34 +78,6 @@ function M.mason_setup(opts)
 	require("mason-lspconfig").setup({ ensure_installed = M.ensure_installed })
 	require("mason-lspconfig").setup_handlers({ server_setup })
 end
-
--- function M.filterNotifications()
--- 	local null_ls_token = nil
---
--- 	vim.lsp.handlers["$/progress"] = function(_, result, ctx)
--- 		local value = result.value
--- 		if not value.kind then
--- 			return
--- 		end
---
--- 		local client_id = ctx.client_id
--- 		local name = vim.lsp.get_client_by_id(client_id).name
---
--- 		if name == "null-ls" then
--- 			if result.token == null_ls_token then
--- 				return
--- 			end
--- 			if value.title == "formatting" then
--- 				null_ls_token = result.token
--- 				return
--- 			end
--- 		end
---
--- 		-- vim.notify(value.message, "info", {
--- 		-- 	title = value.title,
--- 		-- })
--- 	end
--- end
 
 function M.setup(opts)
 	M.on_attach(opts)

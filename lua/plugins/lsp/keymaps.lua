@@ -5,35 +5,31 @@ M._keys = nil
 
 ---@return (LazyKeys|{has?:string})[]
 function M.get()
-	-- local format = require("plugins.lsp.format").format
-  ---@class PluginLspKeys
-  -- stylua: ignore
-  M._keys = M._keys or {
-    -- { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-    -- { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
-    { "gd", vim.lsp.buf.definition, desc = "Goto Definition" },
-    { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
-    -- { "gr", vim.lsp.buf.references, desc = "References" },
-    -- { "<leader>lR", vim.lsp.buf.references, desc = "References" },
-    { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-    -- { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation" },
-    -- { "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto Type Definition" },
-    { "gK", vim.lsp.buf.hover, desc = "Hover" },
-    -- { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-    -- { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-    { "]d", M.diagnostic_goto(true), desc = "Next Diagnostic" },
-    { "<leader>n", M.diagnostic_goto(true), desc = "Next Diagnostic" },
-    { "[d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },
-    { "]e", M.diagnostic_goto(true, "ERROR"), desc = "Next Error" },
-    { "[e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
-    { "]w", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
-    { "[w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
-    { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-    -- { "<leader>lf", format, desc = "Format Document", has = "documentFormatting" },
-    -- { "<leader>lf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
-    { "gR", M.rename, expr = true, desc = "Rename", has = "rename" },
-    { "<leader>lr", M.rename, expr = true, desc = "Rename", has = "rename" },
-  }
+	M._keys = M._keys
+		or {
+			-- { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
+			-- { "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+			{ "gd", vim.lsp.buf.definition, desc = "Goto Definition" },
+			{ "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
+			-- { "gr", vim.lsp.buf.references, desc = "References" },
+			-- { "<leader>lR", vim.lsp.buf.references, desc = "References" },
+			{ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+			-- { "gI", "<cmd>Telescope lsp_implementations<cr>", desc = "Goto Implementation" },
+			-- { "gt", "<cmd>Telescope lsp_type_definitions<cr>", desc = "Goto Type Definition" },
+			{ "gK", vim.lsp.buf.hover, desc = "Hover" },
+			-- { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
+			-- { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
+			{ "]d", M.diagnostic_goto(true), desc = "Next Diagnostic" },
+			{ "<leader>n", M.diagnostic_goto(true), desc = "Next Diagnostic" },
+			{ "[d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },
+			{ "]e", M.diagnostic_goto(true, "ERROR"), desc = "Next Error" },
+			{ "[e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
+			{ "]w", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
+			{ "[w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
+			{ "<leader>la", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+			{ "gR", M.rename, expr = true, desc = "Rename", has = "rename" },
+			{ "<leader>lr", M.rename, expr = true, desc = "Rename", has = "rename" },
+		}
 	return M._keys
 end
 

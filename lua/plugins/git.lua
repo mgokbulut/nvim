@@ -35,28 +35,6 @@ return {
 		},
 	},
 	{
-		"akinsho/git-conflict.nvim",
-		lazy = false,
-		version = "*",
-		keys = {
-			{
-				"<leader>gl",
-				function()
-					-- vim.api.nvim_feedkeys(":", "t", false)
-					vim.cmd(":GitConflictListQf")
-					vim.cmd(":TroubleToggle quickfix")
-					-- vim.cmd(":cclose")
-					-- :cclose<cr>
-					-- TroubleToggle quickfix<cr>
-				end,
-				desc = "Conflicts",
-			},
-		},
-		config = function()
-			require("git-conflict").setup({})
-		end,
-	},
-	{
 		"tpope/vim-fugitive",
 		config = function()
 			vim.cmd("set diffopt+=vertical")
@@ -65,17 +43,5 @@ return {
 			{ "<leader>gg", ":Git<cr>", silent = true, desc = "Git" },
 			{ "<leader>gb", ":Git blame<cr>", silent = true, desc = "blame" },
 		},
-	},
-	{
-		"windwp/nvim-ts-autotag",
-		dependencies = { "nvim-treesitter" },
-		config = function()
-			require("nvim-ts-autotag").setup()
-			require("nvim-treesitter.configs").setup({
-				autotag = {
-					enable = true,
-				},
-			})
-		end,
 	},
 }

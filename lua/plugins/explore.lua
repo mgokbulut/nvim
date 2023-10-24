@@ -1,13 +1,8 @@
 return {
 	{
-		"nvim-telescope/telescope-ui-select.nvim",
-		dependencies = { "nvim-telescope/telescope.nvim" },
-	},
-	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
 		keys = {
-			-- <cmd>lua require("telescope.builtin").find_files()<cr>
 			{
 				"<leader>ff",
 				"<cmd>Telescope find_files hidden=true<cr>",
@@ -29,13 +24,6 @@ return {
 				silent = true,
 				desc = "Find grep",
 			},
-			-- {
-			-- 	"<leader>fs",
-			-- 	"<cmd>Telescope grep_string hidden=true<cr>",
-			-- 	noremap = true,
-			-- 	silent = true,
-			-- 	desc = "Find grep",
-			-- },
 			{ "<leader>fb", "<cmd>Telescope buffers<cr>", noremap = true, silent = true, desc = "Find buffer" },
 			{ "<leader>fh", "<cmd>Telescope help_tags<cr>", noremap = true, silent = true, desc = "Find help" },
 			{ "<leader>fr", "<cmd>Telescope resume<cr>", noremap = true, silent = true, desc = "Find resume" },
@@ -56,10 +44,6 @@ return {
 							["<esc>"] = require("telescope.actions").close,
 							["<C-j>"] = require("telescope.actions").move_selection_next,
 							["<C-k>"] = require("telescope.actions").move_selection_previous,
-							["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
-						},
-						n = {
-							["<C-t>"] = require("trouble.providers.telescope").open_with_trouble,
 						},
 					},
 					file_ignore_patterns = {
@@ -85,8 +69,6 @@ return {
 					},
 				},
 			})
-
-			require("telescope").load_extension("ui-select")
 		end,
 	},
 	{
@@ -163,29 +145,5 @@ return {
 				group_empty_dirs = false, -- when true, empty directories will be grouped together
 			},
 		},
-	},
-	{
-		-- edit file and folder names
-		"elihunter173/dirbuf.nvim",
-		lazy = true,
-		keys = {
-			{ "<leader>ae", ":lua require('util.functions').popup('Dirbuf')<cr>", noremap = true, desc = "Bulk edit" },
-		},
-		config = function()
-			require("dirbuf").setup({
-				hash_padding = 2,
-				show_hidden = true,
-				sort_order = "default",
-				write_cmd = "DirbufSync -confirm",
-			})
-		end,
-	},
-	{
-		-- search/replace in multiple files
-		"windwp/nvim-spectre",
-    -- stylua: ignore
-    keys = {
-      { "<leader>sr", function() require("spectre").open() end, desc = "Find and Replace (Spectre)" },
-    },
 	},
 }
