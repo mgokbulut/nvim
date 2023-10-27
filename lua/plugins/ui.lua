@@ -192,6 +192,7 @@ return {
 			return config
 		end,
 	},
+	-- TODO: Bufferline fix
 	{
 		"akinsho/bufferline.nvim",
 		event = "VeryLazy",
