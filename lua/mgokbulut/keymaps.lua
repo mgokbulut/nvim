@@ -2,7 +2,8 @@ local map = vim.api.nvim_set_keymap
 local default_opts = { noremap = true, silent = true }
 
 -- Change leader key and disable space
-map("n", "<space>", "<nop>", { noremap = true })
+map('n', '<Space>', '<Nop>', { silent = true })
+map('v', '<Space>', '<Nop>', { silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
@@ -14,10 +15,10 @@ map("v", ">", ">gv", default_opts)
 map("v", "y", "ygv", default_opts)
 
 -- Visual mode, Move selected line / block of text in visual mode
-map("x", "K", ":move '<-2<CR>gv-gv", default_opts)
-map("x", "J", ":move '>+1<CR>gv-gv", default_opts)
-map("x", "L", ">gv", default_opts)
-map("x", "H", "<gv", default_opts)
+map("x", "<c-k>", ":move '<-2<CR>gv-gv", default_opts)
+map("x", "<c-j>", ":move '>+1<CR>gv-gv", default_opts)
+map("x", "<c-l>", ">gv", default_opts)
+map("x", "<c-h>", "<gv", default_opts)
 
 -- Don't use arrow keys
 -- map("n", "<up>", ':echoe "Use k"<cr>', { noremap = true })
@@ -43,6 +44,11 @@ map("n", "J", "v:count == 0 ? '4gj' : 'j'", { expr = true, silent = true })
 map("n", "K", "v:count == 0 ? '4gk' : '4k'", { expr = true, silent = true })
 map("n", "L", "w", default_opts)
 map("n", "H", "b", default_opts)
+
+map("x", "J", "v:count == 0 ? '4gj' : 'j'", { expr = true, silent = true })
+map("x", "K", "v:count == 0 ? '4gk' : '4k'", { expr = true, silent = true })
+map("x", "L", "w", default_opts)
+map("x", "H", "b", default_opts)
 
 -- Make visual mode consistent with other settings
 map("v", "v", "<esc>V", default_opts)
@@ -158,42 +164,44 @@ vim.keymap.set("n", "dd", betterDelete, { expr = true, noremap = true })
 
 map("n", "0", "^", default_opts)
 map("n", "^", "0", default_opts)
+map("v", "0", "^", default_opts)
+map("v", "^", "0", default_opts)
 
-function delete_until_start_of_line()
-	-- Get the current line and cursor position
-	local line = vim.api.nvim_get_current_line()
-	local col = vim.fn.col(".")
-
-	-- Check if there is anything before the cursor on the current line
-	if string.sub(line, 1, col - 1):match("[^%s]") then
-		-- If there is, just delete one character with backspace
-		-- vim.api.nvim_feedkeys("<BS>", "n", true)
-		return "<BS>"
-	else
-		-- If there isn't, delete all characters until the start of the line
-		-- vim.api.nvim_feedkeys("<C-u>", "n", true)
-		return "<esc>^i<C-u>"
-	end
-end
-
--- TODO: fix
--- vim.keymap.set("i", "<BS>", delete_until_start_of_line, { expr = true, noremap = true })
-
--- TODO: if you decided to use tab for completion, get rid of it
-function smart_tab()
-	-- Get the current line and cursor position
-	local line = vim.api.nvim_get_current_line()
-	local col = vim.fn.col(".")
-
-	-- Check if there is anything before the cursor on the current line
-	if string.sub(line, 1, col - 1):match("[^%s]") then
-		return "\t"
-	else
-		-- return '<esc>^D"_cc <esc>vP^i'
-		-- return "<esc>==I"
-		return string.match(vim.fn.getline("."), "%S") == nil and '<esc>"_cc' or "<esc>==I"
-	end
-end
+-- function delete_until_start_of_line()
+-- 	-- Get the current line and cursor position
+-- 	local line = vim.api.nvim_get_current_line()
+-- 	local col = vim.fn.col(".")
+--
+-- 	-- Check if there is anything before the cursor on the current line
+-- 	if string.sub(line, 1, col - 1):match("[^%s]") then
+-- 		-- If there is, just delete one character with backspace
+-- 		-- vim.api.nvim_feedkeys("<BS>", "n", true)
+-- 		return "<BS>"
+-- 	else
+-- 		-- If there isn't, delete all characters until the start of the line
+-- 		-- vim.api.nvim_feedkeys("<C-u>", "n", true)
+-- 		return "<esc>^i<C-u>"
+-- 	end
+-- end
+--
+-- -- TODO: fix
+-- -- vim.keymap.set("i", "<BS>", delete_until_start_of_line, { expr = true, noremap = true })
+--
+-- -- TODO: if you decided to use tab for completion, get rid of it
+-- function smart_tab()
+-- 	-- Get the current line and cursor position
+-- 	local line = vim.api.nvim_get_current_line()
+-- 	local col = vim.fn.col(".")
+--
+-- 	-- Check if there is anything before the cursor on the current line
+-- 	if string.sub(line, 1, col - 1):match("[^%s]") then
+-- 		return "\t"
+-- 	else
+-- 		-- return '<esc>^D"_cc <esc>vP^i'
+-- 		-- return "<esc>==I"
+-- 		return string.match(vim.fn.getline("."), "%S") == nil and '<esc>"_cc' or "<esc>==I"
+-- 	end
+-- end
 
 -- vim.keymap.set("i", "<TAB>", smart_tab, { expr = true, noremap = true })
 -- map("i", "<TAB><TAB>", "<TAB>", default_opts)
@@ -205,3 +213,4 @@ map("n", "AA", "$", default_opts)
 map("n", "Aa", "$", default_opts)
 
 -- gc when visual mode
+-- map("v", "gc", ":<c-u>lua require('ts_context_commentstring.internal').update_commentstring()<cr>", default_opts)
