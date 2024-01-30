@@ -1,36 +1,104 @@
 return {
+	-- {
+	-- 	"Mofiqul/dracula.nvim",
+	-- 	config = function()
+	-- 		-- vim.cmd.colorscheme("dracula")
+	-- 	end,
+	-- },
+	{
+		"briones-gabriel/darcula-solid.nvim",
+		dependencies = { 'rktjmp/lush.nvim' },
+		config = function()
+			vim.cmd.colorscheme("darcula-solid")
+		end,
+	},
+	{
+		'lukas-reineke/indent-blankline.nvim',
+		main = 'ibl',
+		opts = {},
+	},
+	{
+		-- Highlight, edit, and navigate code
+		'nvim-treesitter/nvim-treesitter',
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter-textobjects',
+		},
+		build = ':TSUpdate',
+		opts = {
+			auto_install = false,
+			highlight = { enable = true },
+			indent = { enable = true },
+			-- context_commentstring = { enable = true, enable_autocmd = false },
+			ensure_installed = {
+				"help",
+				"vim",
+				"query",
+				"regex",
+				"markdown",
+				"markdown_inline",
+				"yaml",
+				"bash",
+				"html",
+				"javascript",
+				"typescript",
+				"tsx",
+				"css",
+				"json",
+				"lua",
+				"python",
+				"go",
+			},
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+					keymaps = {
+						-- You can use the capture groups defined in textobjects.scm
+						['aa'] = '@parameter.outer',
+						['ia'] = '@parameter.inner',
+						['af'] = '@function.outer',
+						['if'] = '@function.inner',
+						['ac'] = '@class.outer',
+						['ic'] = '@class.inner',
+					},
+				},
+			},
+		},
+		---@param opts TSConfig
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+		end,
+	},
 	{
 		-- statusline
 		"nvim-lualine/lualine.nvim",
 		event = "VeryLazy",
-		dependencies = {
-			"Mofiqul/dracula.nvim",
-		},
-		opts = function(plugin)
-			local colors = require("dracula").colors()
-			-- local colors = require("util.colors")
-			--
+		opts = function()
+			local function get_highlight_fg_color(group_name)
+				local hl = vim.api.nvim_get_hl_by_name(group_name, true)
+				if hl and hl.foreground then
+					local color = string.format("#%06x", hl.foreground)
+					return color
+				else
+					return "#000000"
+				end
+			end
+
+			local colors = {
+				yellow = get_highlight_fg_color("@function"),
+				orange = get_highlight_fg_color("@annotation"),
+				red = get_highlight_fg_color("@error"),
+				green = get_highlight_fg_color("@symbol"),
+				purple = get_highlight_fg_color("@field"),
+				blue = get_highlight_fg_color("@float"),
+			}
+
 			local mode_color = {
-				n = colors.bright_blue,
-				i = colors.bright_green,
-				v = colors.cyan, -- blue
-				V = colors.cyan, -- blue
-				[""] = colors.cyan, -- blue
-				-- c = colors.red,
-				-- no = colors.red,
-				-- s = colors.orange,
-				-- S = colors.orange,
-				-- [""] = colors.orange,
-				-- ic = colors.yellow,
-				-- R = colors.gray,
-				-- Rv = colors.gray,
-				-- cv = colors.red,
-				-- ce = colors.red,
-				-- r = colors.aqua,
-				-- rm = colors.aqua,
-				-- ["r?"] = colors.aqua,
-				-- ["!"] = colors.red,
-				-- t = colors.red,
+				n = colors.purple,
+				i = colors.green,
+				v = colors.blue,
+				V = colors.yellow,
+				["^V"] = colors.yellow,
 			}
 
 			local conditions = {
@@ -51,12 +119,7 @@ return {
 				-- Disable sections and component separators
 				component_separators = "",
 				section_separators = "",
-				theme = "dracula",
-				-- theme = {
-				-- 	normal = { c = { fg = colors.fg, bg = colors.bg } },
-				-- 	inactive = { c = { fg = colors.fg, bg = colors.bg } },
-				-- 	active = { c = { fg = colors.fg, bg = colors.bg } },
-				-- },
+				-- theme = "dracula-solid",
 			}
 
 			local defaultConfig = {
@@ -121,7 +184,8 @@ return {
 			end
 
 			-- Left side
-			ins_left({ insertText("▊    "), color = get_mode_color(), padding = { left = 0 } })
+			-- ins_left({ insertText("▊   ⬤ ◯ ❂ ✪ ⦿  ◍ ⚫ ⚪"), color = get_mode_color(), padding = { left = 0 } })
+			ins_left({ insertText("▊ ⬤ "), color = get_mode_color(), padding = { left = 0 } })
 			ins_left({ "filesize", cond = conditions.buffer_not_empty })
 			ins_left({ "branch", icon = "", color = { fg = colors.orange, gui = "italic" } })
 			ins_left({ "filetype", icon_only = true, separator = "" })
@@ -140,18 +204,9 @@ return {
 				diagnostics_color = {
 					color_error = { fg = colors.red },
 					color_warn = { fg = colors.yellow },
-					color_info = { fg = colors.aqua },
+					color_info = { fg = colors.blue },
 				},
 			})
-			-- ins_left({
-			-- 	function()
-			-- 		return require("nvim-navic").get_location()
-			-- 	end,
-			-- 	cond = function()
-			-- 		return package.loaded["nvim-navic"] and require("nvim-navic").is_available()
-			-- 	end,
-			-- 	padding = { left = 6 },
-			-- })
 
 			-- Right side
 			ins_right({
@@ -192,14 +247,13 @@ return {
 			return config
 		end,
 	},
-	-- TODO: Bufferline fix
 	{
 		"akinsho/bufferline.nvim",
 		event = "VeryLazy",
 		keys = {
-			{ "<A-L>", ":BufferLineMoveNext<cr>", silent = true },
-			{ "<A-H>", ":BufferLineMovePrev<cr>", silent = true },
-			{ "<leader><tab>", ":BufferLineCycleNext<cr>", silent = true, desc = "Next buffer" },
+			{ "<A-L>",           ":BufferLineMoveNext<cr>",  silent = true },
+			{ "<A-H>",           ":BufferLineMovePrev<cr>",  silent = true },
+			{ "<leader><tab>",   ":BufferLineCycleNext<cr>", silent = true, desc = "Next buffer" },
 			{ "<leader><s-tab>", ":BufferLineCyclePrev<cr>", silent = true, desc = "Prev buffer" },
 		},
 		opts = {
@@ -209,7 +263,7 @@ return {
 				diagnostics_indicator = function(_, _, diag)
 					local icons = require("util.icons").diagnostics
 					local ret = (diag.error and icons.Error .. diag.error .. " " or "")
-						.. (diag.warning and icons.Warn .. diag.warning or "")
+							.. (diag.warning and icons.Warn .. diag.warning or "")
 					return vim.trim(ret)
 				end,
 				offsets = {

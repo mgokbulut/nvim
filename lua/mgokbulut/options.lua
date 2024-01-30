@@ -1,30 +1,30 @@
-vim.opt.termguicolors = true -- enable 24-bit RGB colors
-vim.opt.mouse = "" -- enable mouse support
+vim.opt.termguicolors = true      -- enable 24-bit RGB colors
+vim.opt.mouse = ""                -- enable mouse support
 vim.opt.clipboard = "unnamedplus" -- copy/paste to system clipboard
-vim.opt.swapfile = false -- don't use swapfile
-vim.opt.undofile = true -- undofile
+vim.opt.swapfile = false          -- don't use swapfile
+vim.opt.undofile = true           -- undofile
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 
-vim.opt.number = true -- show line number
-vim.opt.showmatch = true -- highlight matching parenthesis
+vim.opt.number = true                   -- show line number
+vim.opt.showmatch = true                -- highlight matching parenthesis
 -- vim.opt.foldmethod = "marker" -- enable folding (default 'foldmarker')
-vim.opt.splitright = true -- vertical split to the right
-vim.opt.splitbelow = true -- orizontal split to the bottom
-vim.opt.ignorecase = true -- ignore cases when searching
-vim.opt.smartcase = true -- ignore lowercase for the whole pattern
-vim.opt.linebreak = true -- wrap on word boundary
+vim.opt.splitright = true               -- vertical split to the right
+vim.opt.splitbelow = true               -- orizontal split to the bottom
+vim.opt.ignorecase = true               -- ignore cases when searching
+vim.opt.smartcase = true                -- ignore lowercase for the whole pattern
+vim.opt.linebreak = true                -- wrap on word boundary
 -- vim.opt.cursorline = true -- highlights cursor line
-vim.opt.scrolloff = 10 -- Keep 10 lines below and above the cursor when scrolling
-vim.opt.updatetime = 50 -- Faster completion
-vim.opt.timeoutlen = 500 -- By default timeoutlen is 1000 ms
-vim.opt.signcolumn = "yes" -- always show the sign column, otherwise it would shift the text each time
-vim.opt.shortmess:append("csI") -- disable nvim intro
+vim.opt.scrolloff = 10                  -- Keep 10 lines below and above the cursor when scrolling
+vim.opt.updatetime = 50                 -- Faster completion
+vim.opt.timeoutlen = 500                -- By default timeoutlen is 1000 ms
+vim.opt.signcolumn = "yes"              -- always show the sign column, otherwise it would shift the text each time
+vim.opt.shortmess:append("csI")         -- disable nvim intro
 vim.opt.fillchars:append({ eob = " " }) -- removes ~ symbols on blank lines
 
-vim.opt.hidden = true -- enable background buffers
-vim.opt.history = 100 -- remember n lines in history
+vim.opt.hidden = true                   -- enable background buffers
+vim.opt.history = 100                   -- remember n lines in history
 -- vim.opt.lazyredraw = true -- faster scrolling
-vim.opt.synmaxcol = 240 -- max column for syntax highlight
+vim.opt.synmaxcol = 240                 -- max column for syntax highlight
 
 -- vim.opt.iskeyword:append("-") -- treat dash separated words as a word
 -- vim.opt.expandtab = false -- use spaces instead of tabs
@@ -34,25 +34,24 @@ vim.opt.synmaxcol = 240 -- max column for syntax highlight
 
 -- Editing -------------------------------------------------------------------
 vim.opt.expandtab = true -- Convert tabs to spaces
-vim.opt.tabstop = 2 -- Insert 2 spaces for a tab
-vim.opt.smarttab = true -- Make tabbing smarter (will realize you have 2 vs 4)
-vim.opt.shiftwidth = 2 -- Use this number of spaces for indentation
-vim.opt.smartindent = true -- Make indenting smart
-vim.opt.autoindent = true -- Use auto indent
+vim.opt.tabstop = 2      -- Insert 2 spaces for a tab
+vim.opt.smarttab = true  -- Make tabbing smarter (will realize you have 2 vs 4)
+vim.opt.shiftwidth = 2   -- Use this number of spaces for indentation
+-- TODO: check if necessary -- vim.opt.smartindent = true -- Make indenting smart
+-- TODO: check if necessary -- vim.opt.autoindent = true -- Use auto indent
 vim.opt.iskeyword:append("-") -- Treat dash separated words as a word text object
-vim.opt.virtualedit = "block" -- Allow going past the end of line in visual block mode
-vim.opt.startofline = false -- Don't position cursor on line start after certain operations
-vim.opt.breakindent = true -- Indent wrapped lines to match line start
+-- TODO: check if necessary -- vim.opt.virtualedit = "block" -- Allow going past the end of line in visual block mode
+-- TODO: check if necessary -- vim.opt.startofline = false -- Don't position cursor on line start after certain operations
+-- TODO: check if necessary -- vim.opt.breakindent = true -- Indent wrapped lines to match line start
 
-vim.opt.completeopt = { "menu", "noinsert", "noselect" } -- Customize completions
+-- TODO: check if necessary -- vim.opt.completeopt = { "menu", "noinsert", "noselect" } -- Customize completions
+vim.o.completeopt = 'menuone,noselect'
 
 -- Spelling -------------------------------------------------------------------
-vim.opt.spelllang = "en_us" -- Define spelling dictionaries
-vim.opt.complete:append("kspell") -- Add spellcheck options for autocomplete
-vim.opt.complete:remove("t") -- Don't use tags for completion
+-- TODO: check if necessary -- vim.opt.spelllang = "en_us" -- Define spelling dictionaries
+-- TODO: check if necessary -- vim.opt.complete:append("kspell") -- Add spellcheck options for autocomplete
+-- TODO: check if necessary -- vim.opt.complete:remove("t") -- Don't use tags for completion
 -- vim.opt.spelloptions = 'camel'    -- Treat parts of camelCase words as seprate words
-
-vim.opt.completeopt = "menuone,noselect"
 
 vim.cmd("set noshowmode") -- removes the insert, visual text at the console
 
