@@ -3,6 +3,7 @@ local default_opts = { noremap = true, silent = true }
 
 -- Change leader key and disable space
 map('n', '<Space>', '<Nop>', { silent = true })
+
 map('v', '<Space>', '<Nop>', { silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -116,12 +117,12 @@ map("n", "[q", ":cprev<cr>", default_opts)
 -- map("v", "P", ":<BS>%s/<C-R><C-W>/<C-R>0/gI<CR><C-o>", default_opts)
 -- map("n", "p", "p`[v`]o", default_opts)
 -- map("n", "P", "P`[v`]o", default_opts)
-map("n", "p", "p`[v`]", default_opts)
-map("n", "P", "P`[v`]", default_opts)
+map("n", "p", "p`[v`]=`[v`]", default_opts)
+map("n", "P", "P`[v`]=`[v`]", default_opts)
 
 -- Don't copy when pasted
 -- map("v", "p", '"_dP`[v`]o', default_opts)
-map("v", "p", '"_dP`[v`]', default_opts)
+map("v", "p", '"_dP`[v`]=`[v`]', default_opts)
 
 -- Better undo/redo
 map("n", "R", "<c-r>", default_opts)
