@@ -44,14 +44,6 @@ local function setup_mason()
   require('mason').setup()
   require('mason-lspconfig').setup()
 
-  -- Enable the following language servers
-  --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-  --
-  --  Add any additional override configuration in the following tables. They will be passed to
-  --  the `settings` field of the server config. You must look up that documentation yourself.
-  --
-  --  If you want to override the default filetypes that your language server will attach to you can
-  --  define the property 'filetypes' to the map in question.
   local servers = {
     -- clangd = {},
     -- gopls = {},
@@ -64,14 +56,9 @@ local function setup_mason()
       Lua = {
         workspace = { checkThirdParty = false },
         telemetry = { enable = false },
-        -- NOTE: toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-        -- diagnostics = { disable = { 'missing-fields' } },
       },
     },
   }
-
-  -- Setup neovim lua configuration
-  require('neodev').setup()
 
   -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -165,7 +152,9 @@ end
 
 local function setup_diagnostics()
   -- Set up cool signs for diagnostics
-  local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+  -- local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+  local signs = require("util.icons").diagnostics
+
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })

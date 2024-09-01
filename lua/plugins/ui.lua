@@ -30,7 +30,6 @@ return {
 			indent = { enable = true },
 			-- context_commentstring = { enable = true, enable_autocmd = false },
 			ensure_installed = {
-				"help",
 				"vim",
 				"query",
 				"regex",
@@ -47,6 +46,7 @@ return {
 				"lua",
 				"python",
 				"go",
+				"java"
 			},
 			textobjects = {
 				select = {
@@ -194,13 +194,13 @@ return {
 				cond = conditions.buffer_not_empty,
 				color = { fg = colors.purple, gui = "italic" },
 				path = 1,
-				symbols = { modified = " ", readonly = " ", unnamed = " " },
+				symbols = { modified = " ", readonly = " ", unnamed = " " },
 				padding = { right = 2 },
 			})
 			ins_left({
 				"diagnostics",
 				sources = { "nvim_diagnostic" },
-				symbols = { error = " ", warn = " ", info = " " },
+				symbols = require("util.icons").diagnostics,
 				diagnostics_color = {
 					color_error = { fg = colors.red },
 					color_warn = { fg = colors.yellow },
@@ -211,7 +211,7 @@ return {
 			-- Right side
 			ins_right({
 				"diff",
-				symbols = { added = " ", modified = "柳 ", removed = " " },
+				symbols = require("util.icons").git,
 				diff_color = {
 					added = { fg = colors.green },
 					modified = { fg = colors.orange },

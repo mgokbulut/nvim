@@ -29,9 +29,22 @@ end
 
 return {
 	{
-		"github/copilot.vim",
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
+		event = "CursorMoved",
 		config = function()
-			vim.cmd([[imap <silent><script><expr> <C-f> copilot#Accept("\<CR>")]])
+			require("copilot").setup({
+				panel = {
+					enabled = false,
+				},
+				suggestion = {
+					enabled = true,
+					auto_trigger = true,
+					keymap = {
+						accept = "<C-f>",
+					},
+				},
+			})
 		end,
 	},
 	{

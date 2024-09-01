@@ -1,9 +1,11 @@
 return {
 	diagnostics = {
-		Error = " ",
+		-- Error = " ",
+		Error = "🧯",
 		Warn = " ",
-		Hint = " ",
+		Hint = "💡",
 		Info = " ",
+		Question = " ",
 	},
 	git = {
 		added = " ",

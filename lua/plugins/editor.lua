@@ -1,6 +1,6 @@
 return {
 	{
-		-- Detect tabstop and shiftwidth automatically
+		-- Detect tabstop and shiftwidth automatically for different filetypes
 		'tpope/vim-sleuth'
 	},
 	{
@@ -82,7 +82,6 @@ return {
 	{
 		"rmagatti/auto-session",
 		opts = {
-			log_level = 'error',
 			auto_session_enable_last_session = false,
 			auto_session_enabled = true,
 			auto_save_enabled = true,
@@ -101,9 +100,9 @@ return {
 			-- 	require("neo-tree.command").execute({ action = "close" })
 			-- end
 			--
-			-- local function open_neo_tree()
-			-- 	require("neo-tree.command").execute({ action = "close" })
-			-- end
+			local function open_neo_tree()
+				require("neo-tree.command").execute({ action = "show" })
+			end
 
 			-- local function open_neo_tree()
 			-- 	-- require("neo-tree.command").execute({ action = "show" })
@@ -134,6 +133,7 @@ return {
 
 			vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 			vim.g.auto_session_pre_save_cmds = { "tabdo NeoTreeClose" }
+
 			-- vim.g.auto_session_pre_save_cmds = { close_neo_tree }
 			-- vim.g.auto_session_post_save_cmds = { open_neo_tree }
 			-- vim.g.auto_session_post_open_cmds = { open_neo_tree }
@@ -156,7 +156,7 @@ return {
 			},
 			layout = {
 				height = { min = 4, max = 4 }, -- min and max height of the columns
-				width = { min = 20, max = 50 }, -- min and max width of the columns
+				width = { min = 20, max = 70 }, -- min and max width of the columns
 				spacing = 4,                -- spacing between columns
 				align = "center",           -- align columns left, center or right
 			},
